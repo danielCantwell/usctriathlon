@@ -1,0 +1,43 @@
+#dashboard {
+	position: fixed;
+	top: 100px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+#dashboard > #tabs {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100px;
+	background-color: #FFF;
+}
+
+#dashboard > #tabs > section {
+	display: inline-block;
+	width: 33%;
+	height: 100px;
+	margin: 0px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+	transition: border-width 0.5s;
+	transition: border-color 0.5s;
+}
+
+#dashboard > #tabs > section.active {
+	border-bottom: 4px solid #c41e3a;
+	transition: border-width 0.5s;
+	transition: border-color 0.5s;
+}
+
+#dashboard > #tabs > section > input {
+	display: block;
+	height: 80px;
+	width: 80px;
+	margin: 0 auto;
+	position: relative;
+	top: 10px;
+	outline: none;
+	border: none;
+}

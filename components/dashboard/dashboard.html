@@ -1,0 +1,20 @@
+<section id="dashboard">
+	<section id="tabs">
+		<section id="tab-main" class="active">
+			<input type="image" src="assets/bike.png" ng-click="ctrl.activateTab('main')">
+		</section>
+		<section id="tab-chat">
+			<input type="image" src="assets/chat.png" ng-click="ctrl.activateTab('chat')">
+		</section>
+		<section id="tab-settings">
+			<input type="image" src="assets/settings.png" ng-click="ctrl.activateTab('settings')">
+		</section>
+	</section>
+
+	<section id="main" ng-if="ctrl.activeTab == 'main'">
+		<event-list mainCtrl=ctrl></event-list>
+	</section>
+
+	<chat ng-if="ctrl.activeTab == 'chat'" mainCtrl=ctrl></chat>
+	<settings ng-if="ctrl.activeTab == 'settings'" mainCtrl=ctrl></settings>
+</section>

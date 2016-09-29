@@ -1,0 +1,30 @@
+<section id="login-page">
+
+	<img src="assets/usctri.png" alt="USC TRI">
+
+	<section id="login">
+		<section class="row">
+			<p ng-class="{required: ctrl.flagEmail}">EMAIL</p>
+			<input type="text" ng-model="user.email" placeholder="ttrojan@usc.edu">
+		</section>
+		<section class="row">
+			<p ng-class="{required: ctrl.flagPassword}">PASSWORD</p>
+			<input type="password" ng-model="user.password" placeholder="password">
+		</section>
+		<input id="login-button" type="button" value="Login" ng-click="ctrl.login(user)" ng-if="!ctrl.registering">
+		<input id="or-register-button" type="button" value="or Register" ng-if="!ctrl.registering" ng-click="ctrl.toggleRegistering()">
+
+		<section id="register" ng-if="ctrl.registering">
+			<section class="row">
+				<p ng-class="{required: ctrl.flagName}">NAME</p>
+				<input type="text" ng-model="user.name" placeholder="Tommy Trojan">
+			</section>
+			<section class="row">
+				<p ng-class="{required: ctrl.flagPhone}">PHONE</p>
+				<input type="phone" ng-model="user.phone" placeholder="phone">
+			</section>
+			<input id="register-button" type="button" value="Register" ng-click="ctrl.register(user)">
+			<input id="or-login-button" type="button" value="or Login" ng-click="ctrl.toggleRegistering()">
+		</section>
+	</section>
+</section>
