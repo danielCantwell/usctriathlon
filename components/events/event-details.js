@@ -63,6 +63,42 @@ function EventDetailsCtrl() {
 		{
 			name: 'Other Person',
 			message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
+		},
+		{
+			name: 'Christina Yang',
+			message: 'This comment is much better though'
+		},
+		{
+			name: 'Daniel Cantwell',
+			message: 'Oh you are right.  I should have known.'
+		},
+		{
+			name: 'Other Person',
+			message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
+		},
+		{
+			name: 'Christina Yang',
+			message: 'This comment is much better though'
+		},
+		{
+			name: 'Daniel Cantwell',
+			message: 'Oh you are right.  I should have known.'
+		},
+		{
+			name: 'Other Person',
+			message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
+		},
+		{
+			name: 'Christina Yang',
+			message: 'This comment is much better though'
+		},
+		{
+			name: 'Daniel Cantwell',
+			message: 'Oh you are right.  I should have known.'
+		},
+		{
+			name: 'Other Person',
+			message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
 		}
 	];
 
@@ -106,6 +142,21 @@ EventDetailsCtrl.prototype.viewRsvpForm = function() {
 
 EventDetailsCtrl.prototype.hideRSVP = function() {
 	this.view.rsvp = false;
+};
+
+EventDetailsCtrl.prototype.initials = function(name) {
+	var matches = name.match(/\b(\w)/g);
+	var acronym = matches.join('');
+	return acronym;
+};
+
+EventDetailsCtrl.prototype.sendComment = function() {
+	console.log(this.newComment);
+	this.comments.push({
+		name: 'First Last',
+		message: this.newComment
+	});
+	this.newComment = '';
 };
 
 })();

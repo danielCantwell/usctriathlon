@@ -13,10 +13,21 @@
 		</section>
 		<ul ng-show="ctrl.view.comments">
 			<li ng-repeat="c in ctrl.comments">
-				<p class="c-name">{{c.name}}</p>
-				<p class="c-message">{{c.message}}</p>
+				<section id="initials">
+					<p>{{ctrl.initials(c.name)}}</p>
+				</section>
+				<section id="comment-content">
+					<p class="c-name">{{c.name}}</p>
+					<p class="c-message">{{c.message}}</p>
+				</section>
 			</li>
 		</ul>
+		<section ng-show="ctrl.view.comments">
+			<section>
+				<input type="text" placeholder="Add Comment" ng-model="ctrl.newComment">
+				<input type="button" value="Send" ng-click="ctrl.sendComment()">
+			</section>
+		</section>
 		<rsvpform ng-show="ctrl.view.rsvp" eventctrl="ctrl" event="ctrl.event"></rsvpform>
 	</section>
 </section>

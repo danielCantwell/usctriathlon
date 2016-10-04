@@ -33,7 +33,7 @@
 	box-shadow: 0px 0px 20px #AAA;
 }
 
-#eventdetails > #eventinfo > #details  > pre {
+#eventdetails > #eventinfo > #details > pre {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 200;
 	font-size: 30px;
@@ -50,21 +50,95 @@
 #eventdetails > #eventinfo > ul {
 	list-style: none;
 	padding: 0px;
+	position: absolute;
+	top: 120px;
+	bottom: 90px;
+	overflow-y: scroll;
 }
 
 #eventdetails > #eventinfo > ul > li {
 	border-top: 1px solid #AAA;
 }
 
-#eventdetails > #eventinfo > ul > li > .c-message {
+#eventdetails > #eventinfo > ul > li > #initials {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	border: 1px solid black;
+	border-radius: 4px;
+	vertical-align: top;
+	margin-top: 15px;
+	position: relative;
+}
+
+#eventdetails > #eventinfo > ul > li > #initials > p {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	font-size: 40px;
+	font-weight: 600;
+	padding: 0px;
+	margin: 0px;
+	color: #c41e3a;
+}
+
+#eventdetails > #eventinfo > ul > li > #comment-content {
+	display: inline-block;
+	width: 90%;
+	margin-left: 10px;
+}
+
+#eventdetails > #eventinfo > ul > li > #comment-content > .c-message {
 	font-size: 40px;
 	margin: 0px;
 }
 
-#eventdetails > #eventinfo > ul > li > .c-name {
+#eventdetails > #eventinfo > ul > li > #comment-content > .c-name {
 	font-size: 30px;
 	margin: 0px;
 	font-weight: 600;
+}
+
+#eventdetails > #eventinfo > ul + section {
+	position: absolute;
+	bottom: 10px;
+	height: 80px;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #AAA;
+	border-radius: 5px;
+}
+
+#eventdetails > #eventinfo > ul + section > section {
+	width: 100%;
+	position: relative;
+	height: 100%;
+}
+
+#eventdetails > #eventinfo > ul + section > section > input {
+	height: 100%;
+	margin: 0px;
+	font-size: 30px;
+	border: none;
+}
+
+#eventdetails > #eventinfo > ul + section > section > input[type="text"] {
+	width: 77%;
+	padding-left: 10px;
+	padding-right: 10px;
+	outline-color: #c41e3a;
+}
+
+#eventdetails > #eventinfo > ul + section > section > input[type="button"] {
+	width: 20%;
+	color: #FFF;
+	background-color: #c41e3a;
+	outline-color: #c41e3a;
 }
 
 #eventdetails > #options {

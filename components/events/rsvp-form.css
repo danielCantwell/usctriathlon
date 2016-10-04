@@ -115,6 +115,6 @@
 
 #rsvpform > .popup > .row > input[type="button"]:active {
 	border-width: 5px;
-	border-color: rgba(189, 32, 49, 0.5);
+	border-color: #c41e3a;
 	color: #c41e3a;
 }
