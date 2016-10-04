@@ -4,26 +4,36 @@
     <head>
         <meta charset="UTF-8">
         <title>USC Triathlon</title>
-        <link rel="shortcut icon" href="assets/appicon.png" />
+        <link rel="shortcut icon" href="assets/usctri.png" />
         
         <link rel="stylesheet" type="text/css" href="index.css" />
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,300italic,400,600' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" type="text/css" href="components/login/login.css">
         <link rel="stylesheet" type="text/css" href="components/dashboard/dashboard.css">
+        <link rel="stylesheet" type="text/css" href="components/settings/settings.css">
+        <link rel="stylesheet" type="text/css" href="components/events/event-list.css">
+        <link rel="stylesheet" type="text/css" href="components/events/event-details.css">
+        <link rel="stylesheet" type="text/css" href="components/events/rsvp-form.css">
+        <link rel="stylesheet" type="text/css" href="components/news/news-list.css">
     </head>
 
-    <body ng-controller="appCtrl">
-        <login ng-if="$parent.showLogin"></login>
-        <dashboard ng-if="!$parent.showLogin"></dashboard>
+    <body>
+        <main></main>
     </body>
 
     <script src="libs/jquery-2.2.3.min.js"></script>
     <script src="libs/angular.min.js"></script>
     <script src="libs/angular-route.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBHrNw8pF8nyKhJNQlN4wJWMWbicJasq8"></script>
     <script src="index.js"></script>
     <script src="components/login/login.js"></script>
     <script src="components/dashboard/dashboard.js"></script>
+    <script src="components/settings/settings.js"></script>
+    <script src="components/events/event-list.js"></script>
+    <script src="components/events/event-details.js"></script>
+    <script src="components/events/rsvp-form.js"></script>
+    <script src="components/news/news-list.js"></script>
 </html>
 

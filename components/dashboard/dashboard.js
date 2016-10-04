@@ -12,14 +12,19 @@ app.directive('dashboard', function() {
 	}
 });
 
-function DashboardCtrl($scope) {
-	this.activeTab = 'main';
+function DashboardCtrl() {
+	this.options = {
+		showTab: true,
+		activeTab: 'main',
+		showEventDetails: false
+	};
+	this.objectHolder = null;
 }
 
 DashboardCtrl.prototype.activateTab = function(which) {
 	$('.active').removeClass('active');
 	$('#tab-' + which).addClass('active');
-	this.activeTab = which;
+	this.options.activeTab = which;
 };
 
 })();

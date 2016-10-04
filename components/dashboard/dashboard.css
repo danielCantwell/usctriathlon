@@ -1,9 +1,11 @@
 #dashboard {
 	position: fixed;
-	top: 100px;
+	top: 0px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	/*overflow-x: hidden;*/
+	/*overflow-y: scroll;*/
 }
 
 #dashboard > #tabs {
@@ -12,7 +14,6 @@
 	left: 0px;
 	right: 0px;
 	height: 100px;
-	background-color: #FFF;
 }
 
 #dashboard > #tabs > section {
@@ -40,4 +41,23 @@
 	top: 10px;
 	outline: none;
 	border: none;
+}
+
+#dashboard > #content {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+#dashboard > #content > #main,
+#dashboard > #content > #officers,
+#dashboard > #content > #settings {
+	position: fixed;
+	top: 105px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	/*overflow-y: scroll;*/
 }

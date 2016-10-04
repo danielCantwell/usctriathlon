@@ -14,20 +14,31 @@ firebase.initializeApp(config);
 
 // Initialize Angular
 var app = angular.module('app', ['ngRoute']);
-app.constant('FIREBASE_URL', 'https://usctriathlon.firebaseio.com');
 
-app.controller('appCtrl', function($scope) {
-	$scope.showLogin = true;
+app.directive('main', function() {
+	return {
+		restrict: 'E',
+		template: '<section><login ng-if="ctrl.options.showLogin==true"></login><dashboard ng-if="ctrl.options.showLogin==false"></dashboard></section>',
+		controller: MainCtrl,
+		controllerAs: 'ctrl',
+		replace: true,
+		bindToController: true
+	}
+});
+
+function MainCtrl($scope) {
+	this.options = {
+		showLogin: true
+	};
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			// User is signed in
-			$scope.showLogin = false;
-			console.log('User Signed In');
+			this.options.showLogin = false;
 		} else {
 			// No user is signed in
-			$scope.showLogin = true;
-			console.log('No User');
+			this.options.showLogin = true;
 		}
-	})
-});
+		$scope.$apply();
+	}.bind(this));
+}

@@ -1,0 +1,120 @@
+#rsvpform {
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: rgba(100, 100, 100, 0.5);
+}
+
+#rsvpform > .popup {
+	position: fixed;
+	top: 25%;
+	bottom: 25%;
+	left: 10%;
+	right: 10%;
+	background-color: #FFF;
+	box-shadow: 0px 0px 20px #666;
+	border-radius: 5px;
+}
+
+#rsvpform > .popup > .title {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	background-color: #c41e3a;
+	height: 110px;
+	border-radius: 5px;
+}
+
+#rsvpform > .popup > .title > p {
+	padding-left: 20px;
+	font-size: 40px;
+	color: #FFF;
+	height: 110px;
+	line-height: 110px;
+	margin-top: 0px;
+	font-weight: 400;
+}
+
+#rsvpform > .popup > .rsvp-options {
+	position: absolute;
+	top: 110px;
+	left: 0px;
+	right: 0px;
+	bottom: 140px;
+}
+
+#rsvpform > .popup > .rsvp-options > ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
+
+#rsvpform > .popup > .rsvp-options > ul > li {
+	margin: 0px;
+	padding: 0px;
+	height: 140px;
+	position: relative;
+}
+
+#rsvpform > .popup > .rsvp-options > ul > li input {
+	visibility: hidden;
+	display: block;
+}
+
+#rsvpform > .popup > .rsvp-options > ul > li label {
+	display: block;
+	cursor: pointer;
+	font-size: 60px;
+	border-bottom: 1px solid #000;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+	height: 140px;
+	line-height: 140px;
+}
+
+#rsvpform > .popup > .rsvp-options > ul > li input:checked + label {
+	color: #c41e3a;
+	font-weight: 400;
+}
+
+#rsvpform > .popup > .row {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	height: 140px;
+	font-size: 0px;
+	border-top: 1px solid #000;
+}
+
+#rsvpform > .popup > .row > input[type="button"] {
+	display: inline-block;
+	width: 50%;
+	height: 100%;
+	outline: none;
+	margin: 0px;
+	font-size: 40px;
+	background-color: transparent;
+}
+
+#rsvpform > .popup > .row > input[type="button"]:nth-child(1) {
+	border-right: 1px solid #000;
+}
+
+
+#rsvpform > .popup > .row > input[type="button"]:nth-child(2) {
+	border-left: 1px solid #000;
+}
+
+#rsvpform > .popup > .row > input[type="button"]:active {
+	border-width: 5px;
+	border-color: rgba(189, 32, 49, 0.5);
+	color: #c41e3a;
+}

@@ -1,20 +1,26 @@
 <section id="dashboard">
-	<section id="tabs">
-		<section id="tab-main" class="active">
-			<input type="image" src="assets/bike.png" ng-click="ctrl.activateTab('main')">
+	<section id="content">
+		<section id="main" ng-if="ctrl.options.showTab && ctrl.options.activeTab == 'main'">
+			<eventlist dash=ctrl></eventlist>
+			<newslist dash=ctrl></newslist>
 		</section>
-		<section id="tab-chat">
-			<input type="image" src="assets/chat.png" ng-click="ctrl.activateTab('chat')">
+
+		<officers ng-if="ctrl.options.showTab && ctrl.options.activeTab == 'officers'" dash=ctrl></officers>
+
+		<settings ng-if="ctrl.options.showTab && ctrl.options.activeTab == 'settings'" dash=ctrl></settings>
+
+		<eventdetails ng-if="ctrl.options.showEventDetails" dash=ctrl></eventdetails>
+	</section>
+	<section id="tabs" ng-if="ctrl.options.showTab">
+		<section id="tab-main" class="active">
+			<input type="image" src="assets/usctri.png" ng-click="ctrl.activateTab('main')">
+		</section>
+		<section id="tab-officers">
+			<input type="image" src="assets/people.png" ng-click="ctrl.activateTab('officers')">
 		</section>
 		<section id="tab-settings">
 			<input type="image" src="assets/settings.png" ng-click="ctrl.activateTab('settings')">
 		</section>
 	</section>
 
-	<section id="main" ng-if="ctrl.activeTab == 'main'">
-		<event-list mainCtrl=ctrl></event-list>
-	</section>
-
-	<chat ng-if="ctrl.activeTab == 'chat'" mainCtrl=ctrl></chat>
-	<settings ng-if="ctrl.activeTab == 'settings'" mainCtrl=ctrl></settings>
 </section>

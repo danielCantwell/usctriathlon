@@ -1,1 +1,22 @@
-event-details.html
+<section id="eventdetails">
+	<section id="options">
+		<input type="button" value="Home" ng-click="ctrl.goBack()">
+		<input id="view-toggle" type="button" value="Comments" ng-click="ctrl.toggleView()">
+		<input type="button" value="RSVP" ng-click="ctrl.viewRsvpForm()">
+	</section>
+	<section id="eventinfo">
+		<h1>{{ctrl.event.name}}</h1>
+		<h3>Meet @ {{ctrl.event.datetime}}</h3>
+		<section id="details" ng-show="ctrl.view.details">
+			<section id="map"></section>
+			<pre>{{ctrl.event.details}}</pre>
+		</section>
+		<ul ng-show="ctrl.view.comments">
+			<li ng-repeat="c in ctrl.comments">
+				<p class="c-name">{{c.name}}</p>
+				<p class="c-message">{{c.message}}</p>
+			</li>
+		</ul>
+		<rsvpform ng-show="ctrl.view.rsvp" eventctrl="ctrl" event="ctrl.event"></rsvpform>
+	</section>
+</section>
