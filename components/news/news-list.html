@@ -1,7 +1,10 @@
 <section id="newslist">
-	<h1>ANNOUNCEMENTS</h1>
-	<hr>
-	<section>
+	<section class="header">
+		<h1>ANNOUNCEMENTS</h1>
+		<input type="image" src="assets/add.png" ng-if="ctrl.hasOfficerStatus()">
+		<hr>
+	</section>
+	<section class="content">
 		<ul>
 			<li ng-repeat="ann in ctrl.announcements">
 				<h2>{{ann.name}}</h2>

@@ -1,35 +1,39 @@
 #eventlist {
-	position: absolute;
-	top: 5px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-	overflow-x: hidden;
-	overflow-y: scroll;
+	width: 100%;
+	position: relative;
 }
 
-#eventlist > h1 {
+#eventlist > section.header {
+	width: 100%;
+	padding-top: 50px;
 	position: relative;
-	top: 90px;
-	left: 40px;
+}
+
+#eventlist > section.header > h1 {
 	font-size: 50px;
-	margin: 0px;
 	color: #c41e3a;
 	text-shadow: 5px 5px 10px #AAA;
+	margin-left: 40px;
+	display: inline-block;
 }
 
-#eventlist > hr {
-	position: relative;
-	top: 90px;
+#eventlist > section.header > input {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	margin: 0px;
+	float: right;
+	margin-right: 50px;
+}
+
+#eventlist > section.header > hr {
 	border-color: #c41e3a;
 }
 
 #eventlist > ul {
-	position: relative;
-	top: 100px;
 	width: 100%;
 	list-style: none;
-	padding: 0px;
+	padding: 40px 0px 20px 0px;
 }
 
 #eventlist > ul > li {
@@ -38,25 +42,95 @@
 	margin: 0 auto;
 	width: 90%;
 	background-color: #FFF;
-	border: 1px solid #AAAAAA;
+	border: 1px solid #AAA;
 	border-radius: 4px;
 	margin-bottom: 20px;
-	box-shadow: 0px 5px 10px #AAAAAA;
+	box-shadow: 0px 5px 10px #AAA;
 	height: 160px;
 }
 
 #eventlist > ul > li > h2 {
 	display: block;
 	position: absolute;
-	top: 0px;
+	top: 10px;
 	left: 20px;
 	font-size: 40px;
+	font-weight: 400;
 }
 
 #eventlist > ul > li > p {
 	display: block;
 	position: absolute;
-	bottom: 0px;
+	bottom: 10px;
 	right: 20px;
 	font-size: 30px;
+}
+
+#eventlist .popup-header {
+	width: 100%;
+	height: 100px;
+	background-color: #c41e3a;
+	color: white;
+}
+
+#eventlist .popup-header > h1 {
+	font-size: 40px;
+	padding-left: 20px;
+	line-height: 100px;
+}
+
+#eventlist .popup-content {
+	width: 100%;
+	position: absolute;
+	top: 100px;
+	bottom: 100px;
+}
+
+#eventlist .popup-content * {
+	display: block;
+}
+
+#eventlist .popup-content > input {
+	position: relative;
+	top: 20px;
+	width: 90%;
+	margin: 0 auto;
+	height: 80px;
+	font-size: 40px;
+	border: none;
+	border-bottom: 1px solid #000;
+	background-color: transparent;
+}
+
+#eventlist .popup-content > section {
+	position: absolute;
+	top: 300px;
+	left: 5%;
+	right: 5%;
+	bottom: 20px;
+}
+
+#eventlist .popup-content > section > textarea {
+	resize: none;
+	height: 100%;
+	width: 100%;
+	font-size: 40px;
+}
+
+#eventlist .popup-actions {
+	width: 100%;
+	height: 100px;
+	border-top: 1px solid #c41e3a;
+	font-size: 0;
+	position: absolute;
+	bottom: 0;
+}
+
+#eventlist .popup-actions > input {
+	display: inline-block;
+	width: 50%;
+	font-size: 35px;
+	height: 100px;
+	border: 1px solid black;
+	background-color: transparent;
 }

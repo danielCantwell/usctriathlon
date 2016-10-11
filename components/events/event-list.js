@@ -28,6 +28,8 @@ function EventListCtrl($scope) {
 		}
 	];
 
+	this.eventPopup = false;
+
 	// this.loadEvent();
 }
 
@@ -35,6 +37,14 @@ EventListCtrl.prototype.loadEvent = function(event) {
 	this.dash.options.showTab = false;
 	this.dash.options.showEventDetails = true;
 	this.dash.objectHolder = event;
+};
+
+EventListCtrl.prototype.hasOfficerStatus = function() {
+	return this.dash.hasOfficerStatus();
+};
+
+EventListCtrl.prototype.popupClickOutside = function() {
+	this.eventPopup = false;
 };
 
 })();

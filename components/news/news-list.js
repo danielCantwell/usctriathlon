@@ -5,7 +5,7 @@ app.directive('newslist', function() {
 	return {
 		restrict: 'E',
 		scope: {
-			mainCtrl: '='
+			dash: '='
 		},
 		templateUrl: 'components/news/news-list.html',
 		controller: NewsListCtrl,
@@ -40,8 +40,16 @@ function NewsListCtrl() {
 		{
 			name: 'Announcement Six',
 			details: 'What happens if the last announcement is multiple lines?  Will the user be able to scroll far enough?  Who knows?  I hope we will find out now.  Here we go.'
+		},
+		{
+			name: 'Announcement from your person',
+			details: 'This week\'s Spirit of Troy goes to one Mr. Daniel Cantwell because he is awesome and can get you through anything and is amazing and wonderful and kind and my person. And will be the Spirit of Troy indefinitely because no one can match his awesomeness. Lava. Olive. You.' 
 		}
 	];
 }
+
+NewsListCtrl.prototype.hasOfficerStatus = function() {
+	return this.dash.hasOfficerStatus();
+};
 
 })();

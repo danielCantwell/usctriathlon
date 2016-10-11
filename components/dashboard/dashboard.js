@@ -19,12 +19,18 @@ function DashboardCtrl() {
 		showEventDetails: false
 	};
 	this.objectHolder = null;
+	this.user = firebase.auth().currentUser;
 }
 
 DashboardCtrl.prototype.activateTab = function(which) {
 	$('.active').removeClass('active');
 	$('#tab-' + which).addClass('active');
 	this.options.activeTab = which;
+};
+
+DashboardCtrl.prototype.hasOfficerStatus = function() {
+	// return user.status == 'officer';
+	return true;
 };
 
 })();

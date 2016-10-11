@@ -4,8 +4,6 @@
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
-	/*overflow-x: hidden;*/
-	/*overflow-y: scroll;*/
 }
 
 #dashboard > #tabs {
@@ -55,9 +53,8 @@
 #dashboard > #content > #officers,
 #dashboard > #content > #settings {
 	position: fixed;
-	top: 105px;
+	top: 100px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
-	/*overflow-y: scroll;*/
 }

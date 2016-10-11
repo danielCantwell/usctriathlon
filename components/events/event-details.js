@@ -15,7 +15,18 @@ app.directive('eventdetails', function() {
 	}
 });
 
-function EventDetailsCtrl() {
+function EventDetailsCtrl($scope, $timeout) {
+
+	this.$timeout = $timeout;
+
+	$scope.$watchCollection('ctrl.comments', function(newValue) {
+		if (newValue) {
+			$timeout(function(){
+				$('ul').scrollTop($('ul')[0].scrollHeight);
+			}, 0);
+		}
+	});
+
 	this.view = {
 		details: true,
 		comments: false,
@@ -128,6 +139,9 @@ EventDetailsCtrl.prototype.toggleView = function() {
 		this.view.details = false;
 		this.view.comments = true;
 		$('#view-toggle').prop('value', 'Details');
+		this.$timeout(function(){
+			$('ul').scrollTop($('ul')[0].scrollHeight);
+		}, 0);
 	} else {
 		this.view.details = true;
 		this.view.comments = false;
@@ -151,7 +165,6 @@ EventDetailsCtrl.prototype.initials = function(name) {
 };
 
 EventDetailsCtrl.prototype.sendComment = function() {
-	console.log(this.newComment);
 	this.comments.push({
 		name: 'First Last',
 		message: this.newComment

@@ -1,10 +1,30 @@
 <section id="eventlist">
-	<h1>WORKOUTS</h1>
-	<hr>
+	<section class="header">
+		<h1>WORKOUTS</h1>
+		<input type="image" src="assets/add.png" ng-if="ctrl.hasOfficerStatus()" ng-click="ctrl.eventPopup = true;">
+		<hr>
+	</section>
 	<ul>
 		<li ng-repeat="event in ctrl.events" ng-click="ctrl.loadEvent(event)">
 			<h2>{{event.name}}</h2>
 			<p>{{event.date}}</p>
 		</li>
 	</ul>
+	<popup ng-if="ctrl.eventPopup" ctrl="ctrl">
+		<section class="popup-header">
+			<h1>New Workout</h1>
+		</section>
+		<section class="popup-content">
+			<input type="text" ng-model="ctrl.popupName" placeholder="Name of Workout">
+			<input type="date" ng-model="ctrl.popupDate">
+			<input type="text" ng-model="ctrl.popupLocation" placeholder="Location">
+			<section>
+				<textarea name="details" ng-model="ctrl.popupDetails"  placeholder="Write details about the workout here"></textarea>
+			</section>
+		</section>
+		<section class="popup-actions">
+			<input type="button" value="Cancel">
+			<input type="button" value="Save">
+		</section>
+	</popup>
 </section>
