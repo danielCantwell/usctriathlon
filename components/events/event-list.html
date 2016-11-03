@@ -1,30 +1,34 @@
 <section id="eventlist">
 	<section class="header">
 		<h1>WORKOUTS</h1>
-		<input type="image" src="assets/add.png" ng-if="ctrl.hasOfficerStatus()" ng-click="ctrl.eventPopup = true;">
+		<input type="image" src="assets/add.png" ng-if="ctrl.hasOfficerStatus()" ng-click="ctrl.openPopup()">
 		<hr>
 	</section>
 	<ul>
 		<li ng-repeat="event in ctrl.events" ng-click="ctrl.loadEvent(event)">
 			<h2>{{event.name}}</h2>
-			<p>{{event.date}}</p>
+			<p>{{event.datetime | date : 'dd MMM yyyy'}}</p>
 		</li>
 	</ul>
-	<popup ng-if="ctrl.eventPopup" ctrl="ctrl">
+	<popup ng-if="ctrl.eventPopup" ctrl="ctrl" class="small">
 		<section class="popup-header">
-			<h1>New Workout</h1>
+			<h1>{{ctrl.popupTitle}}</h1>
 		</section>
-		<section class="popup-content">
+		<section class="popup-content" ng-if="ctrl.popupPage == 1">
 			<input type="text" ng-model="ctrl.popupName" placeholder="Name of Workout">
-			<input type="date" ng-model="ctrl.popupDate">
-			<input type="text" ng-model="ctrl.popupLocation" placeholder="Location">
-			<section>
+			<input type="datetime-local" ng-model="ctrl.popupDate">
+			<section class="detailssection">
 				<textarea name="details" ng-model="ctrl.popupDetails"  placeholder="Write details about the workout here"></textarea>
 			</section>
 		</section>
+		<section class="popup-content" ng-if="ctrl.popupPage == 2">
+			<section id="map"></section>
+		</section>
 		<section class="popup-actions">
-			<input type="button" value="Cancel">
-			<input type="button" value="Save">
+			<input type="button" value="Cancel" ng-click="ctrl.closePopup()" ng-if="ctrl.popupPage == 1;">
+			<input type="button" value="Back" ng-click="ctrl.backPopup();" ng-if="ctrl.popupPage > 1;">
+			<input type="button" value="Save" ng-click="ctrl.validateAndSave()" ng-if="ctrl.popupPage == 2">
+			<input type="button" value="Next" ng-click="ctrl.validateAndNext()" ng-if="ctrl.popupPage < 2">
 		</section>
 	</popup>
 </section>

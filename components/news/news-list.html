@@ -1,15 +1,30 @@
 <section id="newslist">
 	<section class="header">
 		<h1>ANNOUNCEMENTS</h1>
-		<input type="image" src="assets/add.png" ng-if="ctrl.hasOfficerStatus()">
+		<input type="image" src="assets/add.png" ng-if="ctrl.hasOfficerStatus()" ng-click="ctrl.openPopup()">
 		<hr>
 	</section>
 	<section class="content">
 		<ul>
 			<li ng-repeat="ann in ctrl.announcements">
 				<h2>{{ann.name}}</h2>
-				<p>{{ann.details}}</p>
+				<pre>{{ann.details}}</pre>
 			</li>
 		</ul>
 	</section>
+	<popup ng-if="ctrl.newsPopup" ctrl="ctrl" class="small">
+		<section class="popup-header">
+			<h1>{{ctrl.popupTitle}}</h1>
+		</section>
+		<section class="popup-content">
+			<input type="text" ng-model="ctrl.popupName" placeholder="Announcement Title">
+			<section class="detailssection">
+				<textarea name="details" ng-model="ctrl.popupDetails" placeholder="Write the content of the announcement here"></textarea>
+			</section>
+		</section>
+		<section class="popup-actions">
+			<input type="button" value="Cancel" ng-click="ctrl.closePopup()">
+			<input type="button" value="Submit" ng-click="ctrl.submit()">
+		</section>
+	</popup>
 </section>

@@ -15,13 +15,16 @@ app.directive('login', function() {
 function LoginCtrl($scope) {
 	this.registering = false;
 	this.$scope = $scope;
+	this.loader = false;
 }
 
 LoginCtrl.prototype.login = function(user) {
 	if (this.validateLoginFields(user)) {
 		// Login User
+		this.loader = true;
 		firebase.auth().signInWithEmailAndPassword(user.email, user.password).catch(function(error) {
 			console.log('Sign In Failed');
+			this.loader = false;
 		});
 	}
 };
@@ -30,8 +33,10 @@ LoginCtrl.prototype.register = function(user) {
 	if (this.validateRegistrationFields(user)) {
 
 		// Register User
+		this.loader = true;
 		firebase.auth().createUserWithEmailAndPassword(user.email, user.password).catch(function(error) {
 			console.log('Registration Failed');
+			this.loader = false;
 		});
 	}
 };

@@ -46,10 +46,37 @@ function NewsListCtrl() {
 			details: 'This week\'s Spirit of Troy goes to one Mr. Daniel Cantwell because he is awesome and can get you through anything and is amazing and wonderful and kind and my person. And will be the Spirit of Troy indefinitely because no one can match his awesomeness. Lava. Olive. You.' 
 		}
 	];
+
+	this.popupTitle = 'New Announcement';
+	this.newsPopup = false;
 }
 
 NewsListCtrl.prototype.hasOfficerStatus = function() {
 	return this.dash.hasOfficerStatus();
+};
+
+NewsListCtrl.prototype.openPopup = function() {
+	this.newsPopup = true;
+};
+
+NewsListCtrl.prototype.popupClickOutside = function() {
+	this.closePopup();
+};
+
+NewsListCtrl.prototype.closePopup = function() {
+	this.newsPopup = false;
+	this.popupName = '';
+	this.popupDetails = '';
+};
+
+NewsListCtrl.prototype.submit = function() {
+	var ann = {
+		name: this.popupName,
+		details: this.popupDetails,
+		date: new Date()
+	};
+	this.announcements.push(ann);
+	this.closePopup();
 };
 
 })();

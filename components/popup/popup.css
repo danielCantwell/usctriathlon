@@ -10,13 +10,27 @@
 
 #popup > section {
 	position: absolute;
+	background-color: #FFF;
+	box-shadow: 0px 0px 20px #666;
+	border-radius: 5px;
 	top: 25%;
 	bottom: 25%;
 	left: 10%;
 	right: 10%;
-	background-color: #FFF;
-	box-shadow: 0px 0px 20px #666;
-	border-radius: 5px;
+}
+
+#popup.small > section {
+	top: 25%;
+	bottom: 25%;
+	left: 10%;
+	right: 10%;
+}
+
+#popup.large > section {
+	top: 12%;
+	bottom: 12%;
+	left: 5%;
+	right: 5%;
 }
 
 #popup > section > section {

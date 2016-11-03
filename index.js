@@ -18,7 +18,7 @@ var app = angular.module('app', ['ngRoute']);
 app.directive('main', function() {
 	return {
 		restrict: 'E',
-		template: '<section><login ng-if="ctrl.options.showLogin==true"></login><dashboard ng-if="ctrl.options.showLogin==false"></dashboard></section>',
+		template: '<section><section class="loader" ng-if="ctrl.options.loader==true"></section><login ng-if="ctrl.options.showLogin==true"></login><dashboard ng-if="ctrl.options.showLogin==false"></dashboard></section>',
 		controller: MainCtrl,
 		controllerAs: 'ctrl',
 		replace: true,
@@ -28,16 +28,19 @@ app.directive('main', function() {
 
 function MainCtrl($scope) {
 	this.options = {
-		showLogin: true
+		showLogin: true,
+		loader: true
 	};
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			// User is signed in
 			this.options.showLogin = false;
+			this.options.loader = false;
 		} else {
 			// No user is signed in
 			this.options.showLogin = true;
+			this.options.loader = false;
 		}
 		$scope.$apply();
 	}.bind(this));
