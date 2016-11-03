@@ -58,3 +58,8 @@
 	right: 0px;
 	bottom: 0px;
 }
+
+#dashboard > #content > #main {
+	display: flex;
+	flex-direction: column;
+}

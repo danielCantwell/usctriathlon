@@ -75,7 +75,7 @@ NewsListCtrl.prototype.submit = function() {
 		details: this.popupDetails,
 		date: new Date()
 	};
-	this.announcements.push(ann);
+	this.announcements.unshift(ann);
 	this.closePopup();
 };
 

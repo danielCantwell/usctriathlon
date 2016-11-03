@@ -6,7 +6,7 @@
 	</section>
 	<section id="eventinfo">
 		<h1>{{ctrl.event.name}}</h1>
-		<h3>Meet @ {{ctrl.event.datetime | date : 'H:mm a - dd MMM yyyy'}}</h3>
+		<h3>Meet @ {{ctrl.event.datetime | date : 'HH:mm a - dd MMM yyyy'}}</h3>
 		<section id="details" ng-show="ctrl.view.details">
 			<section id="map"></section>
 			<pre>{{ctrl.event.details}}</pre>

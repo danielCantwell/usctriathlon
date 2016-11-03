@@ -1,6 +1,9 @@
 #eventlist {
 	width: 100%;
 	position: relative;
+	order: 1;
+	flex-basis: auto;
+	flex: 1;
 }
 
 #eventlist > section.header {
