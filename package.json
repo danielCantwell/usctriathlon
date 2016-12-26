@@ -1,15 +1,16 @@
 {
-    "name": "usctriathlon",
-    "version": "0.0.1",
-    "description": "",
-    "private": true,
-    "author": "Daniel Cantwell",
-    "license": "ISC",
-    "scripts": {
-        "start": "node server.js"
-    },
-    "dependencies": {
-        "express": "^4.1.1",
-        "body-parser": "^1.14.2"
-    }
+  "name": "usctriathlon",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "author": "Daniel Cantwell",
+  "license": "ISC",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.1.1",
+    "sortablejs": "^1.4.2"
+  }
 }

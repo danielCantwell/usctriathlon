@@ -6,25 +6,113 @@
 	bottom: 0px;
 }
 
-#eventdetails > #eventinfo {
-	position: fixed;
-	top: 50px;
-	left: 40px;
-	right: 40px;
-	bottom: 100px;
+#eventdetails > header {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 90px;
+	border-bottom: 1px solid #c41e3a;
+	display: flex;
+	flex-direction: row;
+	/*background-color: rgba(255, 255, 255, 0.9);*/
+	background-color: #fff;
 }
 
-#eventdetails > #eventinfo > h1 {
+#eventdetails > header > h1 {
 	margin: 0 auto;
 	text-align: center;
 	font-size: 50px;
 	color: #c41e3a;
+	flex: 4 0 auto;
+	line-height: 90px;
+}
+
+#eventdetails > header > section {
+	flex: 1 0 0;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 20px;
+}
+
+#eventdetails > header > section > input {
+	height: 50px;
+	font-size: 32px;
+	text-align: center;
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	outline: none;
+}
+
+#eventdetails > #tabs {
+	position: absolute;
+	top: 90px;
+	left: 0px;
+	right: 0px;
+	height: 100px;
+	display: flex;
+	flex-direction: row;
+	/*background-color: rgba(255, 255, 255, 0.9);*/
+	background-color: #fff;
+}
+
+#eventdetails > #tabs > section {
+	display: inline-block;
+	flex: 1 0 auto;
+	height: 100px;
+	margin: 0px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+	transition: border-width 0.5s;
+	transition: border-color 0.5s;
+}
+
+#eventdetails > #tabs > section.active {
+	border-bottom: 4px solid #c41e3a;
+	transition: border-width 0.5s;
+	transition: border-color 0.5s;
+}
+
+#eventdetails > #tabs > section > input {
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	font-size: 32px;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	border-radius: 0;
+	-webkit-appearance: none;
+	width: 100%;
+	height: 100%;
+}
+
+#eventdetails > #tabs > section.active > input {
+	color: #c41e3a;
+}
+
+#eventdetails > #eventinfo {
+	position: absolute;
+	top: 200px;
+	left: 40px;
+	right: 40px;
+	bottom: 20px;
+	/*background-color: rgba(255, 255, 255, 0.9);*/
+	background-color: #fff;
 }
 
 #eventdetails > #eventinfo > h3 {
 	margin: 0 auto;
 	text-align: center;
 	font-size: 40px;
+}
+
+#eventdetails > #eventinfo > input[type=image] {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	width: 50px;
+	height: 50px;
 }
 
 #eventdetails > #eventinfo > #details > #map {
@@ -34,11 +122,11 @@
 }
 
 #eventdetails > #eventinfo > #details > pre {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 200;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 200;
 	font-size: 30px;
 	position: absolute;
-	top: 560px;
+	top: 500px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
@@ -47,20 +135,21 @@
 	word-wrap: break-word;
 }
 
-#eventdetails > #eventinfo > ul {
+#eventdetails > #eventinfo > #comments > ul {
 	list-style: none;
 	padding: 0px;
 	position: absolute;
-	top: 120px;
-	bottom: 90px;
+	top: 10px;
+	bottom: 80px;
 	overflow-y: scroll;
 }
 
-#eventdetails > #eventinfo > ul > li {
-	border-top: 1px solid #AAA;
+#eventdetails > #eventinfo > #comments > ul > li {
+	/*border-top: 1px solid #AAA;*/
+	margin: 10px 0;
 }
 
-#eventdetails > #eventinfo > ul > li > #initials {
+#eventdetails > #eventinfo > #comments > ul > li > #initials {
 	display: inline-block;
 	width: 60px;
 	height: 60px;
@@ -72,7 +161,7 @@
 	position: relative;
 }
 
-#eventdetails > #eventinfo > ul > li > #initials > p {
+#eventdetails > #eventinfo > #comments > ul > li > #initials > p {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -87,90 +176,150 @@
 	color: #c41e3a;
 }
 
-#eventdetails > #eventinfo > ul > li > #comment-content {
+#eventdetails > #eventinfo > #comments > ul > li > #comment-content {
 	display: inline-block;
 	width: 90%;
 	margin-left: 10px;
 }
 
-#eventdetails > #eventinfo > ul > li > #comment-content > .c-message {
+#eventdetails > #eventinfo > #comments > ul > li > #comment-content > .c-message {
 	font-size: 40px;
 	margin: 0px 0px 10px 0px;
 }
 
-#eventdetails > #eventinfo > ul > li > #comment-content > .c-name {
+#eventdetails > #eventinfo > #comments > ul > li > #comment-content > .c-name {
 	font-size: 20px;
 	font-weight: 400;
 	margin: 15px 0px 0px 0px;
 }
 
-#eventdetails > #eventinfo > ul + section {
-	position: absolute;
-	bottom: 10px;
-	height: 80px;
-	width: 100%;
-	margin: 0px;
-	padding: 0px;
-	border: 1px solid #AAA;
-	border-radius: 5px;
-}
-
-#eventdetails > #eventinfo > ul + section > section {
-	width: 100%;
-	position: relative;
-	height: 100%;
-}
-
-#eventdetails > #eventinfo > ul + section > section > input {
-	height: 100%;
-	margin: 0px;
-	font-size: 30px;
-	border: none;
-}
-
-#eventdetails > #eventinfo > ul + section > section > input[type="text"] {
-	width: 77%;
-	padding-left: 10px;
-	padding-right: 10px;
-	outline-color: #c41e3a;
-}
-
-#eventdetails > #eventinfo > ul + section > section > input[type="text"]:focus {
-	border: 1px solid #c41e3a;
-}
-
-#eventdetails > #eventinfo > ul + section > section > input[type="button"] {
-	width: 20%;
-	background-color: transparent;
-	outline: none;
-	border: 1px solid #c41e3a;
-}
-
-#eventdetails > #options {
+#eventdetails > #eventinfo > #comments > ul + section {
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-
-	display: block;
-	width: 100%;
-	height: 100px;
-	border-top: 2px solid #c41e3a;
-}
-
-#eventdetails > #options > input {
-	padding: 0px;
+	height: 80px;
 	margin: 0px;
-	width: 33%;
-	height: 100px;
-	line-height: 100px;
-	outline: none;
-	font-size: 40px;
-	border: none;
-	background-color: transparent;
+	padding: 0px;
+	border: 1px solid #AAA;
+	border-radius: 0;
 }
 
-#eventdetails > #options > input:nth-child(2) {
-	border-left: 1px solid black;
-	border-right: 1px solid black;
+#eventdetails > #eventinfo > #comments > ul + section > section {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+#eventdetails > #eventinfo > #comments > ul + section > section > input {
+	height: 100%;
+	margin: 0px;
+	font-size: 45px;
+	border: none;
+}
+
+#eventdetails > #eventinfo > #comments > ul + section > section > input[type="text"] {
+	padding-left: 10px;
+	padding-right: 10px;
+	outline-color: #c41e3a;
+	flex: 9 0 auto;
+}
+
+#eventdetails > #eventinfo > #comments > ul + section > section > input[type="text"]:focus {
+	border: 1px solid #c41e3a;
+}
+
+#eventdetails > #eventinfo > #comments > ul + section > section > input[type="button"] {
+	background-color: transparent;
+	outline: none;
+	border: none;
+	border-left: 1px solid #c41e3a;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	flex: 1 0 auto;
+}
+
+#eventdetails .popup-content {
+	display: flex;
+	flex-direction: column;
+}
+
+#eventdetails .popup-content > input {
+	display: block;
+	flex: 1 0 auto;
+	width: 100%;
+	border: none;
+	border: 1px solid black;
+	background-color: #fff;
+	font-size: 40px;
+	border-radius: 0;
+	-webkit-appearance: none;
+}
+
+#eventdetails .popup-content > input:active {
+	font-weight: 500;
+	color: #c41e3a;
+}
+
+@media (min-width: 1200px) {
+	#eventdetails > header {
+		height: 50px;
+	}
+
+	#eventdetails > header > h1 {
+		font-size: 30px;
+		line-height: 50px;
+	}
+
+	#eventdetails > header > section > input {
+		height: 20px;
+		font-size: 20px;
+	}
+
+	#eventdetails > #tabs {
+		top: 51px;
+		height: 50px;
+	}
+
+	#eventdetails > #tabs > section {
+		height: 50px;
+	}
+
+	#eventdetails > #tabs > section.active {
+		border-width: 2px;
+	}
+
+	#eventdetails > #tabs > section > input {
+		font-size: 20px;
+	}
+
+	#eventdetails > #eventinfo {
+		width: 80%;
+		margin: 0 auto;
+		top: 125px;
+	}
+
+	#eventdetails > #eventinfo > #details > #map {
+		position: absolute;
+		width: 48%;
+		height: auto;
+		top: 0px;
+		left: 0px;
+		bottom: 0px;
+		right: auto;
+		display: inline-block;
+		margin-top: 0px
+	}
+
+	#eventdetails > #eventinfo > #details > pre {
+		display: inline-block;
+		font-size: 20px;
+		width: 50%;
+		top: 20px;
+		right: 0px;
+		bottom: 20px;
+		left: auto;
+	}
 }

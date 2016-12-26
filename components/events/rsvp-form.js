@@ -6,7 +6,9 @@ app.directive('rsvpform', function() {
 		restrict: 'E',
 		scope: {
 			eventctrl: '=',
-			event: '='
+			event: '=',
+			negative: '=',
+			positive: '='
 		},
 		templateUrl: 'components/events/rsvp-form.html',
 		controller: RsvpCtrl,
@@ -21,5 +23,19 @@ function RsvpCtrl($scope) {
 		option: 'passenger'
 	}
 }
+
+RsvpCtrl.prototype.negativeClick = function() {
+	console.log('Negative Click');
+	if (this.negative) {
+		this.negative(false);
+	}
+};
+
+RsvpCtrl.prototype.positiveClick = function() {
+	console.log('Positive Click');
+	if (this.positive) {
+		this.positive(true, this.rsvp.option);
+	}
+};
 
 })();

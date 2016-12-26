@@ -1,0 +1,60 @@
+#officers {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#officers > ul {
+	position: absolute;
+	top: 20px;
+	bottom: 0;
+	list-style: none;
+	padding: 0;
+	overflow-y: scroll;
+	padding-bottom: 20px;
+	margin: 0 auto;
+}
+
+#officers > ul > li {
+	text-align: center;
+	margin: 0 auto;
+	/*box-shadow: 0px 4px 10px #AAA;*/
+	border: 1px solid #000;
+	width: 400px;
+	height: 400px;
+	position: relative;
+	display: inline-block;
+	margin-left: 55px;
+}
+
+/*#officers > ul > li:not(:first-child) {
+	margin-top: 40px;
+}*/
+
+#officers > ul > li > img {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	width: 380px;
+	height: 300px;
+	border: 1px solid #AAA;
+}
+
+#officers > ul > li > p {
+	position: absolute;
+	bottom: 10px;
+	left: 0;
+	right: 0;
+	font-size: 24px
+}
+
+#officers > ul > li > h2 {
+	position: absolute;
+	bottom: 40px;
+	left: 0;
+	right: 0;
+	font-size: 32px;
+}

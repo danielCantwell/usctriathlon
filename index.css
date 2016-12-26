@@ -28,3 +28,50 @@ body {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.row, .row-1 {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.row-2 {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+}
+
+.row-3 {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+}
+
+.col, .col-1 {
+  flex: 1;
+}
+
+.col-2 {
+  flex: 2;
+}
+
+.col-3 {
+  flex: 3;
+}
+
+.t-left {
+  text-align: left;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.t-right {
+  text-align: right;
+}

@@ -79,4 +79,10 @@ NewsListCtrl.prototype.submit = function() {
 	this.closePopup();
 };
 
+NewsListCtrl.prototype.editIfOfficer = function(ann) {
+	if (this.dash.hasOfficerStatus()) {
+		console.log('Editing Announcement:', ann.name);
+	}
+};
+
 })();

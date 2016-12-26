@@ -1,0 +1,162 @@
+#attendees {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#attendees > .table {
+	position: relative;
+	top: 20px;
+	border-bottom: 1px solid #333;
+	padding-bottom: 20px;
+	flex: 0 0 auto;
+}
+
+#attendees > .table > .row > p {
+	font-size: 40px;
+}
+
+#attendees > .table > .row > p.col-1 {
+	font-weight: 500;
+}
+
+#attendees > .lists {
+	position: relative;
+	margin-top: 80px;
+	flex: 1 0 auto;
+}
+
+#attendees > .lists > h2 {
+	position: relative;
+	top: 20px;
+	font-size: 40px;
+	font-style: italic;
+	border-bottom: 1px solid #AAA;
+}
+
+#attendees > .lists > h2:not(:first-child) {
+	margin-top: 50px;
+}
+
+#attendees > .lists > ul {
+	position: relative;
+	top: 40px;
+	left: 20px;
+	column-count: 2;
+}
+
+#attendees > .lists > ul > li {
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+#attendees > .lists > ul > li > label:hover,
+#attendees > .lists > ul > li > label > input[type=checkbox]:hover {
+	cursor: pointer;
+}
+
+#attendees > .lists > ul > li > label > input[type=checkbox] {
+	width: 30px;
+	height: 30px;
+	margin-left: 20px;
+}
+
+#attendees > .lists > ul > li > section {
+	font-size: 36px;
+	font-weight: 500;
+	margin-right: 20px;
+}
+
+#attendees > .lists > ul > li > section > img {
+	width: 40px;
+	height: 40px;
+}
+
+#attendees > .lists > ul > li > p,
+#attendees > .lists > ul > li > label {
+	display: inline-block;
+	font-size: 36px;
+	line-height: 30px;
+	height: 30px;
+	margin-right: 20px;
+}
+
+#attendees > .lists > ul > li > img {
+	width: 40px;
+	height: 40px;
+}
+
+#attendees > .lists > ul > li > img[src="assets/simple_bike.png"] {
+	margin-right: 20px;
+}
+
+@media (min-width: 1200px) {
+	#attendees > .table,
+	#attendees > .lists {
+		left: auto;
+		right: auto;
+		margin: 0 auto;
+		width: 800px;
+	}
+
+	#attendees > .table {
+		top: 20px;
+		padding-bottom: 10px;
+	}
+
+	#attendees > .table > .row > p {
+		font-size: 20px;
+	}
+
+	#attendees > .lists {
+		margin-top: 20px;
+	}
+
+	#attendees > .lists > h2 {
+		font-size: 20px;
+	}
+
+	#attendees > .lists > h2:not(:first-child) {
+		margin-top: 40px;
+	}
+
+	#attendees > .lists > ul {
+		column-count: 3;
+	}
+
+	#attendees > .lists > ul > li > label > input[type=checkbox] {
+		width: auto;
+		height: auto;
+		margin-left: 10px;
+	}
+
+	#attendees > .lists > ul > li > section {
+		font-size: 20px;
+		margin-right: 20px;
+	}
+
+	#attendees > .lists > ul > li > section > img {
+		width: 20px;
+		height: 20px;
+	}
+
+	#attendees > .lists > ul > li > p,
+	#attendees > .lists > ul > li > label {
+		font-size: 20px;
+		margin-right: 10px;
+		height: 20px;
+		line-height: 20px;
+	}
+
+	#attendees > .lists > ul > li > img {
+		width: 20px;
+		height: 20px;
+	}
+
+}

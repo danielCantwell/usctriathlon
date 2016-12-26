@@ -34,7 +34,7 @@ function EventListCtrl($scope, $timeout) {
 	this.eventPopup = false;
 	this.popupPage = 0;
 	this.popupTitle = 'New Workout';
-
+	this.popupDate = '';
 	this.popupPositiveButton = 'Next';
 }
 
@@ -111,7 +111,7 @@ EventListCtrl.prototype.popupClickOutside = function() {
 EventListCtrl.prototype.closePopup = function() {
 	this.eventPopup = false;
 	this.popupName = '';
-	this.popupDate = null;
+	this.popupDate = '';
 	this.popupLocation = null;
 	this.popupDetails = '';
 };

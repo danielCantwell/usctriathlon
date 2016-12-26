@@ -4,6 +4,9 @@
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	background-image: url('../../assets/transition_area.JPG');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 #dashboard > #tabs {
@@ -12,6 +15,7 @@
 	left: 0px;
 	right: 0px;
 	height: 100px;
+	background-color: rgba(255, 255, 255, 0.9);
 }
 
 #dashboard > #tabs > section {
@@ -62,4 +66,42 @@
 #dashboard > #content > #main {
 	display: flex;
 	flex-direction: column;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+@media (min-width: 1200px) {
+
+	#dashboard > #tabs {
+		height: 50px;
+	}
+
+	#dashboard > #tabs > section {
+		height: 50px;
+	}
+
+	#dashboard > #tabs > section > input {
+		height: 40px;
+		width: 40px;
+	}
+
+	#dashboard > #tabs > section.active {
+		border-bottom: 2px solid #c41e3a;
+	}
+
+	#dashboard > #content {
+		width: 100%;
+	}
+
+	#dashboard > #content > #main,
+	#dashboard > #content > #officers,
+	#dashboard > #content > #settings {
+		top: 60px;
+		width: 80%;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	#dashboard > #content > #main {
+		flex-direction: row;
+	}
 }

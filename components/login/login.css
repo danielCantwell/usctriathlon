@@ -94,3 +94,27 @@
 	color: #c41e3a;
 	font-weight: 300;
 }
+
+@media (min-width: 1200px) {
+	#login-page > img {
+		width: 12%;
+		top: 5%;
+		left: 44%;
+	}
+
+	#login-page > #login {
+		top: 40%;
+	}
+
+	#login-page > #login > #login-button,
+	#login-page > #login > #or-register-button,
+	#login-page > #login > #register > #register-button,
+	#login-page > #login > #register > #or-login-button {
+		width: 30%;
+		font-size: 30px;
+	}
+
+	input[type=button]:hover {
+		cursor: pointer;
+	}
+}

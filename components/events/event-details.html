@@ -1,33 +1,67 @@
 <section id="eventdetails">
-	<section id="options">
-		<input type="button" value="Home" ng-click="ctrl.goBack()">
-		<input id="view-toggle" type="button" value="Comments" ng-click="ctrl.toggleView()">
-		<input type="button" value="RSVP" ng-click="ctrl.viewRsvpForm()">
-	</section>
-	<section id="eventinfo">
+	<header>
+		<section>
+			<input type="image" src="assets/back.png" ng-click="ctrl.goBack()">
+		</section>
 		<h1>{{ctrl.event.name}}</h1>
-		<h3>Meet @ {{ctrl.event.datetime | date : 'HH:mm a - dd MMM yyyy'}}</h3>
-		<section id="details" ng-show="ctrl.view.details">
+		<section ng-if="ctrl.hasOfficerStatus()">
+			<input type="image" src="assets/options.png" ng-click="ctrl.clickOfficerOptions()">
+		</section>
+		<section>
+			<input type="button" value="{{ctrl.rsvpButtonText}}" ng-click="ctrl.viewRsvpForm()">
+		</section>
+	</header>
+
+	<section id="tabs">
+		<section id="tab-details" class="active">
+			<input type="button" value="Details" ng-click="ctrl.activateTab('details')">
+		</section>
+		<section id="tab-comments">
+			<input type="button" value="Comments" ng-click="ctrl.activateTab('comments')">
+		</section>
+		<section id="tab-attendees" ng-if="ctrl.hasOfficerStatus()">
+			<input type="button" value="Attendees" ng-click="ctrl.activateTab('attendees')">
+		</section>
+	</section>
+
+	<section id="eventinfo">
+		<section id="details" ng-show="ctrl.view == 'details'">
+			<!-- <h3>Meet @ {{ctrl.event.datetime | date : 'HH:mm a - dd MMM yyyy'}}</h3> -->
 			<section id="map"></section>
 			<pre>{{ctrl.event.details}}</pre>
 		</section>
-		<ul ng-show="ctrl.view.comments">
-			<li ng-repeat="c in ctrl.comments">
-				<section id="initials">
-					<p>{{ctrl.initials(c.name)}}</p>
-				</section>
-				<section id="comment-content">
-					<p class="c-name">{{c.name}}</p>
-					<p class="c-message">{{c.message}}</p>
-				</section>
-			</li>
-		</ul>
-		<section ng-show="ctrl.view.comments">
+		<section id="comments" ng-show="ctrl.view == 'comments'">
+			<ul>
+				<li ng-repeat="c in ctrl.comments">
+					<section id="initials">
+						<p>{{ctrl.initials(c.name)}}</p>
+					</section>
+					<section id="comment-content">
+						<p class="c-name">{{c.name}}</p>
+						<p class="c-message">{{c.message}}</p>
+					</section>
+				</li>
+			</ul>
 			<section>
-				<input type="text" placeholder="Add Comment" ng-model="ctrl.newComment">
-				<input type="button" value="Send" ng-click="ctrl.sendComment()">
+				<section>
+					<input type="text" placeholder="Add Comment" ng-model="ctrl.newComment">
+					<input type="button" value="Send" ng-click="ctrl.sendComment()">
+				</section>
 			</section>
 		</section>
-		<rsvpform ng-show="ctrl.view.rsvp" eventctrl="ctrl" event="ctrl.event"></rsvpform>
+
+		<attendees ng-if="ctrl.view == 'attendees'" eventctrl="ctrl" event="ctrl.event"></attendees>
+		<rsvpform ng-show="ctrl.rsvpPopup" eventctrl="ctrl" event="ctrl.event" negative="ctrl.rsvp" positive="ctrl.rsvp"></rsvpform>
 	</section>
+
+	<popup ng-if="ctrl.showOfficerOptions" ctrl="ctrl" class="x-small">
+		<section class="popup-header">
+			<h1>Officer Options</h1>
+		</section>
+		<section class="popup-content">
+			<input type="button" value="Close RSVPs">
+			<input type="button" value="Edit Event">
+			<input type="button" value="Delete Event">
+		</section>
+	</popup>
 </section>

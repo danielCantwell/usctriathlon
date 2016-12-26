@@ -1,0 +1,36 @@
+<section id="attendees">
+	<section class="table">
+		<section class="row">
+			<p class="col-3 t-center">People Going:</p><p class='col-1'>{{ctrl.passengerCount}}</p>
+			<p class="col-3 t-center">Bikes Going:</p><p class="col-1">{{ctrl.bikeCount}}</p>
+		</section>
+		<section class="row">
+			<p class="col-3 t-center">Available Seats:</p><p class="col-1">{{ctrl.passengerSpots}}</p>
+			<p class="col-3 t-center">Bike Spots:</p><p class="col-1">{{ctrl.bikeSpots}}</p>
+		</section>
+	</section>
+
+	<section class="lists">
+		<h2>Drivers</h2>
+		<ul>
+			<li ng-repeat="driver in ctrl.drivers track by $index">
+				<label>{{driver}}<input type="checkbox"></label>
+				<section>
+					2<img src="assets/person.png" alt="people"> 4 <img src="assets/simple_bike.png" alt="bikes">
+				</section>
+			</li>
+		</ul>
+
+		<h2>Passengers</h2>
+		<ul>
+			<li ng-repeat="passenger in ctrl.passengers track by $index">
+				<p>{{passenger}}</p><img src="assets/person.png"><img src="assets/simple_bike.png">
+			</li>
+		</ul>
+
+		<h2>Driving Self</h2>
+		<ul>
+			
+		</ul>
+	</section>
+</section>

@@ -18,11 +18,12 @@
 					<input type="radio" ng-model="ctrl.rsvp.option" value="not-carpooling" id="radioNotCarpooling">
 					<label for="radioNotCarpooling">Not Carpooling</label>
 				</li>
+				<li></li>
 			</ul>
 		</section>
 		<section class="row">
-			<input type="button" value="Not Going">
-			<input type="button" value="Going">
+			<input type="button" value="Not Going" ng-click="ctrl.negativeClick()">
+			<input type="button" value="Going" ng-click="ctrl.positiveClick()">
 		</section>
 	</section>
 </section>

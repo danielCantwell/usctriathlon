@@ -15,48 +15,53 @@
 	right: 10%;
 	background-color: #FFF;
 	box-shadow: 0px 0px 20px #666;
-	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
 }
 
 #rsvpform > .popup > .title {
-	position: absolute;
-	top: 0px;
+	/*position: absolute;*/
+	/*top: 0px;*/
 	width: 100%;
 	background-color: #c41e3a;
-	height: 110px;
-	border-radius: 5px;
+	flex: 0 0 100px;
 }
 
 #rsvpform > .popup > .title > p {
 	padding-left: 20px;
 	font-size: 40px;
 	color: #FFF;
-	height: 110px;
-	line-height: 110px;
+	height: 100px;
+	line-height: 100px;
 	margin-top: 0px;
 	font-weight: 400;
 }
 
 #rsvpform > .popup > .rsvp-options {
-	position: absolute;
-	top: 110px;
-	left: 0px;
-	right: 0px;
-	bottom: 140px;
+	flex: 4 0 auto;
+	position: relative;
 }
 
 #rsvpform > .popup > .rsvp-options > ul {
+	position: absolute;
+	top: -18px;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	list-style: none;
-	margin: 0px;
-	padding: 0px;
-	height: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
 }
 
 #rsvpform > .popup > .rsvp-options > ul > li {
-	margin: 0px;
-	padding: 0px;
-	height: 140px;
+	margin: 0;
+	padding: 0;
+	flex: 1 0 0;
 	position: relative;
+	border-bottom: 1px solid #000;
+	height: 100%;
 }
 
 #rsvpform > .popup > .rsvp-options > ul > li input {
@@ -68,30 +73,23 @@
 	display: block;
 	cursor: pointer;
 	font-size: 60px;
-	border-bottom: 1px solid #000;
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
-	height: 140px;
-	line-height: 140px;
+	margin-top: .5em;
 }
 
 #rsvpform > .popup > .rsvp-options > ul > li input:checked + label {
 	color: #c41e3a;
-	font-weight: 400;
 }
 
 #rsvpform > .popup > .row {
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
 	display: block;
 	padding: 0px;
 	margin: 0px;
-	height: 140px;
+	height: 100px;
 	font-size: 0px;
-	border-top: 1px solid #000;
+	flex: 0 0 100px;
 }
 
 #rsvpform > .popup > .row > input[type="button"] {
@@ -102,6 +100,7 @@
 	margin: 0px;
 	font-size: 40px;
 	background-color: transparent;
+	border: none;
 }
 
 #rsvpform > .popup > .row > input[type="button"]:nth-child(1) {
