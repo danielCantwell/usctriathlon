@@ -15,8 +15,8 @@
 	border-bottom: 1px solid #c41e3a;
 	display: flex;
 	flex-direction: row;
-	/*background-color: rgba(255, 255, 255, 0.9);*/
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.9);
+	/*background-color: #fff;*/
 }
 
 #eventdetails > header > h1 {
@@ -53,8 +53,8 @@
 	height: 100px;
 	display: flex;
 	flex-direction: row;
-	/*background-color: rgba(255, 255, 255, 0.9);*/
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.9);
+	/*background-color: #fff;*/
 }
 
 #eventdetails > #tabs > section {
@@ -97,8 +97,8 @@
 	left: 40px;
 	right: 40px;
 	bottom: 20px;
-	/*background-color: rgba(255, 255, 255, 0.9);*/
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.9);
+	/*background-color: #fff;*/
 }
 
 #eventdetails > #eventinfo > h3 {
@@ -258,9 +258,73 @@
 	-webkit-appearance: none;
 }
 
+#eventdetails .popup-content > ul {
+	position: absolute;
+	top: 100px;
+	bottom: 100px;
+	left: 0;
+	right: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+#eventdetails .popup-content > ul > li {
+	margin: 0;
+	padding: 0;
+	flex: 1 0 0;
+	position: relative;
+	border: 1px solid #000;
+	height: 100%;
+}
+
+#eventdetails .popup-content > ul > li input {
+	visibility: hidden;
+	display: block;
+}
+
+#eventdetails .popup-content > ul > li label {
+	display: block;
+	cursor: pointer;
+	font-size: 60px;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	padding-top: 10%;
+	/*height: 100%;*/
+}
+
+#eventdetails .popup-content > ul > li input:checked + label {
+	color: #c41e3a;
+	font-size: 80px;
+}
+
 #eventdetails .popup-content > input:active {
 	font-weight: 500;
 	color: #c41e3a;
+}
+
+#eventdetails .popup-actions {
+	width: 100%;
+	height: 100px;
+	border-top: 1px solid #c41e3a;
+	font-size: 0;
+	position: absolute;
+	bottom: 0;
+}
+
+#eventdetails .popup-actions > input {
+	display: inline-block;
+	width: 50%;
+	font-size: 35px;
+	height: 100px;
+	border: 1px solid black;
+	background-color: transparent;
 }
 
 @media (min-width: 1200px) {
@@ -321,5 +385,78 @@
 		right: 0px;
 		bottom: 20px;
 		left: auto;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul {
+		top: 0;
+		bottom: 50px;
+		left: 0;
+		right: 0;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul > li {
+		margin: 5px 0;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul > li > #initials {
+		width: 32px;
+		height: 32px;
+		border-radius: 4px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+		margin-left: 8px;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul > li > #initials > p {
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		font-size: 22px;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul > li > #comment-content > .c-message {
+		font-size: 20px;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul > li > #comment-content > .c-name {
+		font-size: 14px;
+		margin: 10px 0px 0px 0px;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul + section {
+		position: absolute;
+		height: 50px;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul + section > section > input {
+		font-size: 22px;
+	}
+
+	#eventdetails > #eventinfo > #comments > ul + section > section > input:hover {
+		color: #c41e3a;
+	}
+
+	#eventdetails .popup-content > ul {
+		position: absolute;
+		top: 60px;
+		bottom: 60px;
+	}
+
+	#eventdetails .popup-content > ul > li label {
+		font-size: 30px;
+	}
+
+		#eventdetails .popup-content > ul > li input:checked + label {
+		font-size: 45px;
+	}
+
+	#eventdetails .popup-actions {
+		width: 100%;
+		height: 60px;
+	}
+
+	#eventdetails .popup-actions > input {
+		font-size: 20px;
+		height: 60px;
 	}
 }

@@ -187,7 +187,12 @@ EventDetailsCtrl.prototype.clickOfficerOptions = function() {
 };
 
 EventDetailsCtrl.prototype.popupClickOutside = function() {
-	this.showOfficerOptions = false;
+	this.closePopups();
 };
+
+EventDetailsCtrl.prototype.closePopups = function() {
+	this.showOfficerOptions = false;
+	this.rsvpPopup = false;
+}
 
 })();

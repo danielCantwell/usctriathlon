@@ -51,7 +51,29 @@
 		</section>
 
 		<attendees ng-if="ctrl.view == 'attendees'" eventctrl="ctrl" event="ctrl.event"></attendees>
-		<rsvpform ng-show="ctrl.rsvpPopup" eventctrl="ctrl" event="ctrl.event" negative="ctrl.rsvp" positive="ctrl.rsvp"></rsvpform>
+		<!-- <rsvpform ng-show="ctrl.rsvpPopup" eventctrl="ctrl" event="ctrl.event" negative="ctrl.rsvp" positive="ctrl.rsvp"></rsvpform> -->
+		<popup ng-if="ctrl.rsvpPopup" ctrl="ctrl" class="small">
+			<section class="popup-header">
+				<h1>If going, how are you getting there?</h1>
+			</section>
+			<section class="popup-content">
+				<ul>
+					<li>
+						<input type="radio" ng-model="ctrl.rsvp.option" value="driver" id="radioDriver"><label for="radioDriver">Driver</label>
+					</li>
+					<li>
+						<input type="radio" ng-model="ctrl.rsvp.option" value="passenger" id="radioPassenger" ng-checked="true"><label for="radioPassenger">Passenger</label>
+					</li>
+					<li>
+						<input type="radio" ng-model="ctrl.rsvp.option" value="not-carpooling" id="radioNotCarpooling"><label for="radioNotCarpooling">Not Carpooling</label>
+					</li>
+				</ul>
+			</section>
+			<seciton class="popup-actions">
+				<input type="button" value="Not Going" ng-click="ctrl.closePopups()">
+				<input type="button" value="Going" ng-click="ctrl.rsvp()">
+			</seciton>
+		</popup>
 	</section>
 
 	<popup ng-if="ctrl.showOfficerOptions" ctrl="ctrl" class="x-small">
