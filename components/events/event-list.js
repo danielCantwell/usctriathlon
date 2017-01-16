@@ -18,18 +18,14 @@ app.directive('eventlist', function() {
 function EventListCtrl($scope, $timeout) {
 	this.$scope = $scope;
 	this.$timeout = $timeout;
-	this.events = [
-		{
-			name: 'Event One',
-			datetime: '29 Sept 2016',
-			location: {}
-		},
-		{
-			name: 'Event Two',
-			datetime: '30 Sept 2016',
-			location: {}
-		}
-	];
+
+	var eventRef = firebase.database().ref('events');
+	eventRef.on('value', function(snapshot) {
+		this.events = snapshot.val();
+		this.$timeout(function() {
+			this.$scope.$apply();
+		}.bind(this));
+	}.bind(this));
 
 	this.eventPopup = false;
 	this.popupPage = 0;
@@ -62,6 +58,10 @@ EventListCtrl.prototype.validateAndNext = function() {
 
 				this.$timeout(function() {
 					var eventLocation = new google.maps.LatLng(34.022413, -118.287862);
+					this.popupLocation = {
+						lat: eventLocation.lat(),
+						lon: eventLocation.lng()
+					};
 
 					var mapOptions = {
 						zoom: 14,
@@ -75,7 +75,6 @@ EventListCtrl.prototype.validateAndNext = function() {
 						title: 'Meeting Location'
 					});
 					map.addListener('click', function(event) {
-	          // map.setZoom(15);
 	          this.popupLocation = {lat: event.latLng.lat(), lon: event.latLng.lng()};
 	          var position = new google.maps.LatLng(this.popupLocation.lat, this.popupLocation.lon);
 	          marker.setPosition(position);
@@ -96,8 +95,13 @@ EventListCtrl.prototype.validateAndSave = function() {
 		location: this.popupLocation,
 		details: this.popupDetails
 	};
-	this.events.push(event);
-	this.closePopup();
+	var dataRef = firebase.database().ref();
+	var newEventKey = dataRef.child('events').push().key;
+	var updates = {};
+	updates['/events/' + newEventKey] = event;
+	dataRef.update(updates).then(function() {
+		this.closePopup();
+	}.bind(this));
 };
 
 EventListCtrl.prototype.hasOfficerStatus = function() {
@@ -114,6 +118,7 @@ EventListCtrl.prototype.closePopup = function() {
 	this.popupDate = '';
 	this.popupLocation = null;
 	this.popupDetails = '';
+	this.$scope.$apply();
 };
 
 EventListCtrl.prototype.backPopup = function() {

@@ -34,9 +34,29 @@ function MainCtrl($scope) {
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-			// User is signed in
-			this.options.showLogin = false;
-			this.options.loader = false;
+			// Check if this is a new user...
+			var dataRef = firebase.database().ref();
+
+			dataRef.child('users').once('value').then(function(snapshot) {
+				var hasUser = snapshot.hasChild(user.uid);
+				if (!hasUser) {
+					var userEmail = user.email;
+
+					var newUserObj = {
+						name: '',
+						email: userEmail,
+						phone: ''
+					};
+					var updates = {};
+					updates['/users/' + user.uid] = newUserObj;
+					dataRef.update(updates);
+				}
+
+				// User is signed in
+				this.options.showLogin = false;
+				this.options.loader = false;
+				$scope.$apply();
+			}.bind(this));
 		} else {
 			// No user is signed in
 			this.options.showLogin = true;

@@ -4,6 +4,7 @@
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	background-color: rgba(255, 255, 255, 0.9);
 }
 
 #eventdetails > header {
@@ -15,7 +16,7 @@
 	border-bottom: 1px solid #c41e3a;
 	display: flex;
 	flex-direction: row;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: transparent;
 	/*background-color: #fff;*/
 }
 
@@ -53,7 +54,7 @@
 	height: 100px;
 	display: flex;
 	flex-direction: row;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: transparent;
 	/*background-color: #fff;*/
 }
 
@@ -97,7 +98,7 @@
 	left: 40px;
 	right: 40px;
 	bottom: 20px;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: transparent;
 	/*background-color: #fff;*/
 }
 
