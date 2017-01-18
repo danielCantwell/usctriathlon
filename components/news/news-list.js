@@ -15,37 +15,20 @@ app.directive('newslist', function() {
 	}
 });
 
-function NewsListCtrl() {
-	this.announcements = [
-		{
-			name: 'Announcement One',
-			details: 'Here is my first announcement.  It is a good first announcement.'
-		},
-		{
-			name: 'Announcement Two',
-			details: 'Here I am announcing more things.  Please take appropriate action in response to this great announcement.  If you do not do this by the deadline, well, that sucks.'
-		},
-		{
-			name: 'Announcement Three',
-			details: 'This announcement is the best of them all.  None can match the greatness of this announcement.  Ok I will stop.'
-		},
-		{
-			name: 'Announcement Four',
-			details: 'Oh but here is another one.'
-		},
-		{
-			name: 'Announcement Five',
-			details: 'Hopefully this one requires the user to scroll down to see.'
-		},
-		{
-			name: 'Announcement Six',
-			details: 'What happens if the last announcement is multiple lines?  Will the user be able to scroll far enough?  Who knows?  I hope we will find out now.  Here we go.'
-		},
-		{
-			name: 'Announcement from your person',
-			details: 'This week\'s Spirit of Troy goes to one Mr. Daniel Cantwell because he is awesome and can get you through anything and is amazing and wonderful and kind and my person. And will be the Spirit of Troy indefinitely because no one can match his awesomeness. Lava. Olive. You.' 
-		}
-	];
+function NewsListCtrl($scope, $timeout) {
+	this.$scope = $scope;
+	this.$timeout = $timeout;
+
+	var newsRef = firebase.database().ref('announcements').orderByChild('negdate').limitToFirst(10);
+	newsRef.on('value', function(snapshot) {
+		this.announcements = [];
+		snapshot.forEach(function(child) {
+			this.announcements.push(child.val());
+		}.bind(this));
+		this.$timeout(function() {
+			this.$scope.$apply();
+		}.bind(this));
+	}.bind(this));
 
 	this.popupTitle = 'New Announcement';
 	this.newsPopup = false;
@@ -67,15 +50,30 @@ NewsListCtrl.prototype.closePopup = function() {
 	this.newsPopup = false;
 	this.popupName = '';
 	this.popupDetails = '';
+
+	this.$timeout(function() {
+		this.$scope.$apply();
+	}.bind(this));
 };
 
 NewsListCtrl.prototype.submit = function() {
+	var negativeDate = 0 - Date.now();
 	var ann = {
 		name: this.popupName,
 		details: this.popupDetails,
-		date: new Date()
+		negdate: negativeDate
 	};
-	this.announcements.unshift(ann);
+	
+	var dataRef = firebase.database().ref();
+	var newAnnouncementKey = dataRef.child('announcements').push().key;
+	ann.uid = newAnnouncementKey;
+	var updates = {};
+	updates['/announcements/' + newAnnouncementKey] = ann;
+
+	dataRef.update(updates).then(function() {
+		this.closePopup();
+	}.bind(this));
+
 	this.closePopup();
 };
 

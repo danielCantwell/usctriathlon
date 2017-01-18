@@ -142,12 +142,15 @@
 	position: absolute;
 	top: 10px;
 	bottom: 80px;
+	left: 0;
+	right: 0;
 	overflow-y: scroll;
 }
 
 #eventdetails > #eventinfo > #comments > ul > li {
 	/*border-top: 1px solid #AAA;*/
 	margin: 10px 0;
+	width: 100%;
 }
 
 #eventdetails > #eventinfo > #comments > ul > li > #initials {
@@ -433,7 +436,7 @@
 		font-size: 22px;
 	}
 
-	#eventdetails > #eventinfo > #comments > ul + section > section > input:hover {
+	#eventdetails > #eventinfo > #comments > ul + section > section > input[type=button]:hover {
 		color: #c41e3a;
 	}
 
@@ -441,6 +444,10 @@
 		position: absolute;
 		top: 60px;
 		bottom: 60px;
+	}
+
+	#eventdetails .popup-content > input {
+		font-size: 24px;
 	}
 
 	#eventdetails .popup-content > ul > li label {

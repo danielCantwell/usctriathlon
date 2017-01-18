@@ -95,10 +95,13 @@ EventListCtrl.prototype.validateAndSave = function() {
 		location: this.popupLocation,
 		details: this.popupDetails
 	};
+
 	var dataRef = firebase.database().ref();
 	var newEventKey = dataRef.child('events').push().key;
+	event.uid = newEventKey;
 	var updates = {};
 	updates['/events/' + newEventKey] = event;
+
 	dataRef.update(updates).then(function() {
 		this.closePopup();
 	}.bind(this));
@@ -118,7 +121,9 @@ EventListCtrl.prototype.closePopup = function() {
 	this.popupDate = '';
 	this.popupLocation = null;
 	this.popupDetails = '';
-	this.$scope.$apply();
+	this.$timeout(function() {
+		this.$scope.$apply();
+	}.bind(this));
 };
 
 EventListCtrl.prototype.backPopup = function() {

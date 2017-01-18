@@ -36,7 +36,7 @@
 
 #newslist > section.content {
 	position: absolute;
-	top: 75px;
+	top: 110px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
@@ -52,7 +52,9 @@
 	overflow-y: auto;
 	overflow-x: hidden;
 	list-style: none;
-	padding: 40px 0px 20px 0px;
+	padding: 0px 0px 20px 0px;
+	/*display: flex;*/
+	/*flex-direction: column-reverse;*/
 }
 
 #newslist > section.content > ul > li {
@@ -176,6 +178,10 @@
 
 	#newslist > section.header > hr {
 		width: 96%;
+	}
+
+	#newslist > section.content {
+		top: 75px;
 	}
 
 	#newslist > section.content > ul {

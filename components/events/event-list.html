@@ -7,7 +7,7 @@
 	<ul>
 		<li ng-repeat="event in ctrl.events" ng-click="ctrl.loadEvent(event)">
 			<h2>{{event.name}}</h2>
-			<p>{{event.datetime | date : 'dd MMM yyyy'}}</p>
+			<p>{{event.datetime | date : 'h:mm a - dd MMM yyyy'}}</p>
 		</li>
 	</ul>
 	<popup ng-if="ctrl.eventPopup" ctrl="ctrl" class="small">

@@ -16,7 +16,7 @@ app.directive('eventdetails', function() {
 });
 
 function EventDetailsCtrl($scope, $timeout) {
-
+	this.$scope = $scope;
 	this.$timeout = $timeout;
 
 	$scope.$watchCollection('ctrl.comments', function(newValue) {
@@ -33,6 +33,26 @@ function EventDetailsCtrl($scope, $timeout) {
 
 	this.event = this.dash.objectHolder;
 
+	this.eUID = this.event.uid;
+
+	// Load Attendees (RSVPs)
+	var attendeesRef = firebase.database().ref('attendees/' + this.eUID);
+	attendeesRef.on('value', function(snapshot) {
+		this.attendees = snapshot.val();
+		this.$timeout(function() {
+			this.$scope.$apply();
+		}.bind(this));
+	}.bind(this));
+
+	// Load Comments
+	var commentsRef = firebase.database().ref('comments/' + this.eUID);
+	commentsRef.on('value', function(snapshot) {
+		this.comments = snapshot.val();
+		this.$timeout(function() {
+			this.$scope.$apply();
+		}.bind(this));
+	}.bind(this));
+
 	// this.event = {
 	// 	name: 'Amalfi Loops',
 	// 	datetime: '7:00 AM - 9/30/16',
@@ -44,73 +64,73 @@ function EventDetailsCtrl($scope, $timeout) {
 	// 	}
 	// };
 
-	this.attendees = [
-		'Daniel Cantwell',
-		'Christina Yang',
-		'Kenneth Rodriguez-Clisham',
-		'Justin Zhang',
-		'Dawson Ray'
-	];
+	// this.attendees = [
+	// 	'Daniel Cantwell',
+	// 	'Christina Yang',
+	// 	'Kenneth Rodriguez-Clisham',
+	// 	'Justin Zhang',
+	// 	'Dawson Ray'
+	// ];
 
-	this.drivers = [
-		'Christina Yang',
-		'Kenneth Rodriguez-Clisham'
-	];
+	// this.drivers = [
+	// 	'Christina Yang',
+	// 	'Kenneth Rodriguez-Clisham'
+	// ];
 
-	this.comments = [
-		{
-			name: 'Daniel Cantwell',
-			message: 'This is my first comment'
-		},
-		{
-			name: 'Christina Yang',
-			message: 'This comment is much better though'
-		},
-		{
-			name: 'Daniel Cantwell',
-			message: 'Oh you are right.  I should have known.'
-		},
-		{
-			name: 'Other Person',
-			message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
-		},
-		{
-			name: 'Christina Yang',
-			message: 'This comment is much better though'
-		},
-		{
-			name: 'Daniel Cantwell',
-			message: 'Oh you are right.  I should have known.'
-		},
-		{
-			name: 'Other Person',
-			message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
-		},
-		{
-			name: 'Christina Yang',
-			message: 'This comment is much better though'
-		},
-		{
-			name: 'Daniel Cantwell',
-			message: 'Oh you are right.  I should have known.'
-		},
-		{
-			name: 'Other Person',
-			message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
-		},
-		{
-			name: 'Christina Yang',
-			message: 'This comment is much better though'
-		},
-		{
-			name: 'Daniel Cantwell',
-			message: 'Oh you are right.  I should have known.'
-		},
-		{
-			name: 'Other Person',
-			message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
-		}
-	];
+	// this.comments = [
+	// 	{
+	// 		name: 'Daniel Cantwell',
+	// 		message: 'This is my first comment'
+	// 	},
+	// 	{
+	// 		name: 'Christina Yang',
+	// 		message: 'This comment is much better though'
+	// 	},
+	// 	{
+	// 		name: 'Daniel Cantwell',
+	// 		message: 'Oh you are right.  I should have known.'
+	// 	},
+	// 	{
+	// 		name: 'Other Person',
+	// 		message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
+	// 	},
+	// 	{
+	// 		name: 'Christina Yang',
+	// 		message: 'This comment is much better though'
+	// 	},
+	// 	{
+	// 		name: 'Daniel Cantwell',
+	// 		message: 'Oh you are right.  I should have known.'
+	// 	},
+	// 	{
+	// 		name: 'Other Person',
+	// 		message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
+	// 	},
+	// 	{
+	// 		name: 'Christina Yang',
+	// 		message: 'This comment is much better though'
+	// 	},
+	// 	{
+	// 		name: 'Daniel Cantwell',
+	// 		message: 'Oh you are right.  I should have known.'
+	// 	},
+	// 	{
+	// 		name: 'Other Person',
+	// 		message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
+	// 	},
+	// 	{
+	// 		name: 'Christina Yang',
+	// 		message: 'This comment is much better though'
+	// 	},
+	// 	{
+	// 		name: 'Daniel Cantwell',
+	// 		message: 'Oh you are right.  I should have known.'
+	// 	},
+	// 	{
+	// 		name: 'Other Person',
+	// 		message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
+	// 	}
+	// ];
 
 	var eventLocation = new google.maps.LatLng(this.event.location.lat, this.event.location.lon);
 
@@ -165,11 +185,24 @@ EventDetailsCtrl.prototype.initials = function(name) {
 
 EventDetailsCtrl.prototype.sendComment = function() {
 	if (this.newComment) {
-		this.comments.push({
-			name: 'First Last',
-			message: this.newComment
-		});
-		this.newComment = '';
+
+		var comment = {
+			name: this.dash.userInfo.name,
+			message: this.newComment,
+			uid: this.dash.user.uid,
+			date: Date.now()
+		};
+
+		var dataRef = firebase.database().ref();
+		var newCommentKey = dataRef.child('comments/' + this.eUID).push().key;
+		comment.uid = newCommentKey;
+		var updates = {};
+		updates['/comments/' + this.eUID + '/' + newCommentKey] = comment;
+
+		dataRef.update(updates).then(function() {
+			this.newComment = '';
+			this.closePopups();
+		}.bind(this));
 	}
 };
 
@@ -193,6 +226,9 @@ EventDetailsCtrl.prototype.popupClickOutside = function() {
 EventDetailsCtrl.prototype.closePopups = function() {
 	this.showOfficerOptions = false;
 	this.rsvpPopup = false;
+	this.$timeout(function() {
+		this.$scope.$apply();
+	}.bind(this));
 }
 
 })();

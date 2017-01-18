@@ -20,6 +20,11 @@ function DashboardCtrl() {
 	};
 	this.objectHolder = null;
 	this.user = firebase.auth().currentUser;
+
+	var userRef = firebase.database().ref('users/' + this.user.uid);
+	userRef.on('value', function(snapshot) {
+		this.userInfo = snapshot.val();
+	}.bind(this));
 }
 
 DashboardCtrl.prototype.activateTab = function(which) {

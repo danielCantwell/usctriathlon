@@ -18,7 +18,7 @@ var app = angular.module('app', ['ngRoute']);
 app.directive('main', function() {
 	return {
 		restrict: 'E',
-		template: '<section><section class="loader" ng-if="ctrl.options.loader==true"></section><login ng-if="ctrl.options.showLogin==true"></login><dashboard ng-if="ctrl.options.showLogin==false"></dashboard></section>',
+		template: '<section><section class="loader" ng-if="ctrl.options.loader==true"></section><login ng-if="ctrl.options.showLogin==true" main="ctrl"></login><dashboard ng-if="ctrl.options.showLogin==false"></dashboard></section>',
 		controller: MainCtrl,
 		controllerAs: 'ctrl',
 		replace: true,
@@ -43,10 +43,13 @@ function MainCtrl($scope) {
 					var userEmail = user.email;
 
 					var newUserObj = {
-						name: '',
-						email: userEmail,
-						phone: ''
+						email: userEmail
 					};
+					if (this.newUserInfo) {
+						newUserObj.name = this.newUserInfo.name;
+						newUserObj.phone = this.newUserInfo.phone;
+						this.newUserInfo = null;
+					}
 					var updates = {};
 					updates['/users/' + user.uid] = newUserObj;
 					dataRef.update(updates);

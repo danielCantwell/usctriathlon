@@ -4,6 +4,9 @@
 app.directive('login', function() {
 	return {
 		restrict: 'E',
+		scope: {
+			main: '='
+		},
 		templateUrl: 'components/login/login.html',
 		controller: LoginCtrl,
 		controllerAs: 'ctrl',
@@ -32,11 +35,17 @@ LoginCtrl.prototype.login = function(user) {
 LoginCtrl.prototype.register = function(user) {
 	if (this.validateRegistrationFields(user)) {
 
+		this.main.newUserInfo = {
+			name: user.name,
+			phone: user.phone
+		};
+
 		// Register User
 		this.loader = true;
 		firebase.auth().createUserWithEmailAndPassword(user.email, user.password).catch(function(error) {
 			console.log('Registration Failed');
 			this.loader = false;
+			this.main.newUserInfo = null;
 		});
 	}
 };
@@ -59,9 +68,9 @@ LoginCtrl.prototype.validateRegistrationFields = function(user) {
 	var reName = /^([a-zA-Z]{2,}\s[a-zA-Z]{2,})$/;
 	var rePhone = /^([0-9]{10})$/;
 	this.flagName = !user || !user.name || !reName.test(user.name);
-	this.flagPhone = ! user || !user.phone || !rePhone.test(user.phone);
+	this.flagPhone = !user || !user.phone || !rePhone.test(user.phone);
 
-	return !validLoginInfo || !this.flagName || !this.flagPhone;
+	return validLoginInfo && !this.flagName && !this.flagPhone;
 };
 
 })();
