@@ -13,7 +13,7 @@ var config = {
 firebase.initializeApp(config);
 
 // Initialize Angular
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute', 'ngChange']);
 
 app.directive('main', function() {
 	return {

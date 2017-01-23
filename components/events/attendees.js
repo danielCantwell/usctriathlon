@@ -71,6 +71,10 @@ function AttendeesCtrl($scope, $timeout) {
 	}.bind(this));
 }
 
+AttendeesCtrl.prototype.toggleDriver = function(driver) {
+	console.log(driver);
+};
+
 AttendeesCtrl.prototype.hasOfficerStatus = function() {
 	// return user.status == 'officer';
 	return true;
