@@ -118,7 +118,8 @@ EventDetailsCtrl.prototype.rsvp = function() {
 		var rsvp = {
 			name: this.dash.userInfo.name,
 			hasBike: this.dash.userInfo.hasBike,
-			date: Date.now()
+			date: Date.now(),
+			key: this.dash.user.uid
 		};
 
 		if (this.rsvp.option == 'driver') {

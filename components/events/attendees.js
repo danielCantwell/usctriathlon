@@ -31,6 +31,8 @@ function AttendeesCtrl($scope, $timeout) {
 	this.passengerCapacity = 0;
 	this.bikeCapacity = 0;
 
+	this.driverSelection = {};
+
 	// Load Attendees (RSVPs)
 	var attendeesRef = firebase.database().ref('attendees/' + this.event.key);
 	attendeesRef.on('value', function(snapshot) {
@@ -46,10 +48,19 @@ function AttendeesCtrl($scope, $timeout) {
 
 			if (this.attendees.driver) {
 				var driverArray = $.map(this.attendees.driver, function(d) { return d; });
-				var pCapArray = $.map(driverArray, function(d) { return d.passengerCapacity; });
-				var bCapArray = $.map(driverArray, function(d) { return d.bikeCapacity; });
-				this.passengerCapacity = pCapArray.reduce(function(total, cap) { return total + cap; });
-				this.bikeCapacity = bCapArray.reduce(function(total, cap) { return total + cap; });
+				var selectedDrivers = driverArray.filter(function(d) { return d.selected; });
+				
+				$.each(driverArray, function(k, driver) {
+					this.driverSelection[driver.key] = driver.selected;
+			  }.bind(this));
+
+			  if (Object.keys(selectedDrivers).length > 0) {
+					var pCapArray = $.map(selectedDrivers, function(d) { return d.passengerCapacity; });
+					var bCapArray = $.map(selectedDrivers, function(d) { return d.bikeCapacity; });
+					this.passengerCapacity = pCapArray.reduce(function(total, cap) { return total + cap; });
+					this.bikeCapacity = bCapArray.reduce(function(total, cap) { return total + cap; });
+			  }
+
 				pcount += Object.keys(this.attendees.driver).length
 
 				if (this.attendees.passenger) {
@@ -69,11 +80,21 @@ function AttendeesCtrl($scope, $timeout) {
 			}.bind(this));
 		}
 	}.bind(this));
-}
 
-AttendeesCtrl.prototype.toggleDriver = function(driver) {
-	console.log(driver);
-};
+	// Update driver selection in firebase
+	this.$scope.$watch('ctrl.driverSelection', function(newVal, oldVal) {
+		if (Object.keys(oldVal).length > 0) {
+			var dataRef = firebase.database().ref();
+			var updates = {};
+
+			$.each(newVal, function(driverKey, selection) {
+				updates['/attendees/' + this.event.key + '/driver/' + driverKey + '/selected'] = selection;
+		  }.bind(this));
+
+			dataRef.update(updates);
+		}
+	}.bind(this), true);
+}
 
 AttendeesCtrl.prototype.hasOfficerStatus = function() {
 	// return user.status == 'officer';
