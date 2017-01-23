@@ -50,7 +50,7 @@
 			</section>
 		</section>
 
-		<attendees ng-if="ctrl.view == 'attendees'" eventctrl="ctrl" event="ctrl.event"></attendees>
+		<attendees ng-if="ctrl.view == 'attendees'" eventctrl="ctrl"></attendees>
 		<!-- <rsvpform ng-show="ctrl.rsvpPopup" eventctrl="ctrl" event="ctrl.event" negative="ctrl.rsvp" positive="ctrl.rsvp"></rsvpform> -->
 		<popup ng-if="ctrl.rsvpPopup" ctrl="ctrl" class="small">
 			<section class="popup-header">
@@ -62,7 +62,7 @@
 						<input type="radio" ng-model="ctrl.rsvp.option" value="driver" id="radioDriver"><label for="radioDriver">Driver</label>
 					</li>
 					<li>
-						<input type="radio" ng-model="ctrl.rsvp.option" value="passenger" id="radioPassenger" ng-checked="true"><label for="radioPassenger">Passenger</label>
+						<input type="radio" ng-model="ctrl.rsvp.option" value="passenger" id="radioPassenger"><label for="radioPassenger">Passenger</label>
 					</li>
 					<li>
 						<input type="radio" ng-model="ctrl.rsvp.option" value="not-carpooling" id="radioNotCarpooling"><label for="radioNotCarpooling">Not Carpooling</label>

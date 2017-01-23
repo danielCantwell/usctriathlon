@@ -66,7 +66,7 @@ NewsListCtrl.prototype.submit = function() {
 	
 	var dataRef = firebase.database().ref();
 	var newAnnouncementKey = dataRef.child('announcements').push().key;
-	ann.uid = newAnnouncementKey;
+	ann.key = newAnnouncementKey;
 	var updates = {};
 	updates['/announcements/' + newAnnouncementKey] = ann;
 

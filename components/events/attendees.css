@@ -26,6 +26,11 @@
 	font-weight: 500;
 }
 
+#attendees > .table > .row > p > img {
+	width: 40px;
+	height: 40px;
+}
+
 #attendees > .lists {
 	position: relative;
 	margin-top: 80px;
@@ -54,6 +59,13 @@
 #attendees > .lists > ul > li {
 	text-align: right;
 	margin-bottom: 10px;
+	break-inside: avoid-column;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	-o-column-break-inside: avoid;
+	-ms-column-break-inside: avoid;
+	column-break-inside: avoid;
+	padding-bottom: 5px;
 }
 
 #attendees > .lists > ul > li > label:hover,
@@ -114,6 +126,11 @@
 		font-size: 20px;
 	}
 
+	#attendees > .table > .row > p > img {
+		width: 20px;
+		height: 20px;
+	}
+
 	#attendees > .lists {
 		margin-top: 20px;
 	}
@@ -122,12 +139,9 @@
 		font-size: 20px;
 	}
 
-	#attendees > .lists > h2:not(:first-child) {
-		margin-top: 40px;
-	}
-
 	#attendees > .lists > ul {
 		column-count: 3;
+		margin-right: 20px;
 	}
 
 	#attendees > .lists > ul > li > label > input[type=checkbox] {
@@ -138,7 +152,7 @@
 
 	#attendees > .lists > ul > li > section {
 		font-size: 20px;
-		margin-right: 20px;
+		margin-right: 35px;
 	}
 
 	#attendees > .lists > ul > li > section > img {

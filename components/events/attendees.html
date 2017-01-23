@@ -1,12 +1,14 @@
 <section id="attendees">
 	<section class="table">
 		<section class="row">
-			<p class="col-3 t-center">People Going:</p><p class='col-1'>{{ctrl.passengerCount}}</p>
-			<p class="col-3 t-center">Bikes Going:</p><p class="col-1">{{ctrl.bikeCount}}</p>
+			<p class="col-3">Carpooling:</p>
+			<p class='col-3 t-right'>{{ctrl.passengerCount}}</p><p class="col-1 t-left"><img src="assets/person.png" alt="people"></p>
+			<p class="col-3 t-right">{{ctrl.bikeCount}}</p><p class="col-1 t-left">&nbsp<img src="assets/simple_bike.png" alt="bikes"></p>
 		</section>
 		<section class="row">
-			<p class="col-3 t-center">Passenger Capacity:</p><p class="col-1">{{ctrl.passengerSpots}}</p>
-			<p class="col-3 t-center">Bike Capacity:</p><p class="col-1">{{ctrl.bikeSpots}}</p>
+			<p class="col-3">Capacity:</p>
+			<p class='col-3 t-right'>{{ctrl.passengerCapacity}}</p><p class="col-1 t-left"><img src="assets/person.png" alt="people"></p>
+			<p class="col-3 t-right">{{ctrl.bikeCapacity}}</p><p class="col-1 t-left">&nbsp<img src="assets/simple_bike.png" alt="bikes"></p>
 		</section>
 	</section>
 
@@ -14,9 +16,9 @@
 		<h2>Drivers</h2>
 		<ul>
 			<li ng-repeat="driver in ctrl.drivers track by $index">
-				<label>{{driver}}<input type="checkbox"></label>
+				<label>{{driver.name}}<input type="checkbox" ng-model="ctrl.drivers[$index]"></label>
 				<section>
-					2<img src="assets/person.png" alt="people"> 4 <img src="assets/simple_bike.png" alt="bikes">
+					{{driver.passengerCapacity}}<img src="assets/person.png" alt="people"> {{driver.bikeCapacity}} <img src="assets/simple_bike.png" alt="bikes">
 				</section>
 			</li>
 		</ul>
@@ -24,13 +26,15 @@
 		<h2>Passengers</h2>
 		<ul>
 			<li ng-repeat="passenger in ctrl.passengers track by $index">
-				<p>{{passenger}}</p><img src="assets/person.png"><img src="assets/simple_bike.png">
+				<p>{{passenger.name}}</p><img src="assets/person.png"><img src="assets/simple_bike.png" ng-if="passenger.hasBike">
 			</li>
 		</ul>
 
 		<h2>Driving Self</h2>
 		<ul>
-			
+			<li ng-repeat="person in ctrl.selfDrivers track by $index">
+				<p>{{person.name}}</p><img src="assets/simple_bike.png" ng-if="person.hasBike">
+			</li>
 		</ul>
 	</section>
 </section>

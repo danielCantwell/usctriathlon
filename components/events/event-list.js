@@ -95,12 +95,22 @@ EventListCtrl.prototype.validateAndSave = function() {
 		location: this.popupLocation,
 		details: this.popupDetails
 	};
+	var att = {
+		passengerCount: 0,
+		bikeCount: 0,
+		passengerCapacity: 0,
+		bikeCapacity: 0,
+		driver: {},
+		passenger: {},
+		'not-carpooling': {}
+	};
 
 	var dataRef = firebase.database().ref();
 	var newEventKey = dataRef.child('events').push().key;
-	event.uid = newEventKey;
+	event.key = newEventKey;
 	var updates = {};
 	updates['/events/' + newEventKey] = event;
+	updates['/attendees/' + newEventKey] = att;
 
 	dataRef.update(updates).then(function() {
 		this.closePopup();

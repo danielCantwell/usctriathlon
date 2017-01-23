@@ -37,7 +37,10 @@ LoginCtrl.prototype.register = function(user) {
 
 		this.main.newUserInfo = {
 			name: user.name,
-			phone: user.phone
+			phone: user.phone,
+			hasBike: true,
+			passengerCapacity: 0,
+			bikeCapacity: 0
 		};
 
 		// Register User

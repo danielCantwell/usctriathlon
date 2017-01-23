@@ -32,20 +32,10 @@ function EventDetailsCtrl($scope, $timeout) {
 	this.showOfficerOptions = false;
 
 	this.event = this.dash.objectHolder;
-
-	this.eUID = this.event.uid;
-
-	// Load Attendees (RSVPs)
-	var attendeesRef = firebase.database().ref('attendees/' + this.eUID);
-	attendeesRef.on('value', function(snapshot) {
-		this.attendees = snapshot.val();
-		this.$timeout(function() {
-			this.$scope.$apply();
-		}.bind(this));
-	}.bind(this));
+	this.eKey = this.event.key;
 
 	// Load Comments
-	var commentsRef = firebase.database().ref('comments/' + this.eUID);
+	var commentsRef = firebase.database().ref('comments/' + this.eKey);
 	commentsRef.on('value', function(snapshot) {
 		this.comments = snapshot.val();
 		this.$timeout(function() {
@@ -53,87 +43,7 @@ function EventDetailsCtrl($scope, $timeout) {
 		}.bind(this));
 	}.bind(this));
 
-	// this.event = {
-	// 	name: 'Amalfi Loops',
-	// 	datetime: '7:00 AM - 9/30/16',
-	// 	details: 'Hey team! Who is ready for some AMALFI AWESOMENESS tomorrow?\n\nWe will be heading out to the rolling hills of Santa Monica to test ourselves with some Amalfi loops. This is a beautiful area and a super fun ride (I personally like to go house hunting as we ride through the neighborhoods!)\n\nHere are the details:\n- leaving at 7:00 am at the parking lot on the corner of Orchard and Jefferson! Please be there on time, especially if you are a driver.\n- meeting at the intersection of Ocean and San Vicente, by the picnic tables! There is abundant street parking on Georgina, which is one street south of San Vicente. Do not do the parking meter thing. Save yo money.\n\nFor those of you who just got bikes or are a little less experienced, do not worry - we will take some time to go over basics of road riding and make sure everyone knows the route really well before we send you guys out.\n\nMake sure to bring:\nBike\nBike shoes\nHelmet\nSunglasses\nWATER BOTTLES (not a screw top - something you can easily drink on the bike!)\n\nThe team will be providing nutrition (gels, bars) courtesy of Clif!!\n\nPlease text me (Emily) with any questions - 8582325164\n\nSee you guys tomorrow bright and early!!! 7am SHARP!!!!\n\nEm',
-	// 	rsvpclose: '6:00 PM - 9/28/16',
-	// 	location: {
-	// 		lat: 34.025874,
-	// 		lon: -118.512749
-	// 	}
-	// };
-
-	// this.attendees = [
-	// 	'Daniel Cantwell',
-	// 	'Christina Yang',
-	// 	'Kenneth Rodriguez-Clisham',
-	// 	'Justin Zhang',
-	// 	'Dawson Ray'
-	// ];
-
-	// this.drivers = [
-	// 	'Christina Yang',
-	// 	'Kenneth Rodriguez-Clisham'
-	// ];
-
-	// this.comments = [
-	// 	{
-	// 		name: 'Daniel Cantwell',
-	// 		message: 'This is my first comment'
-	// 	},
-	// 	{
-	// 		name: 'Christina Yang',
-	// 		message: 'This comment is much better though'
-	// 	},
-	// 	{
-	// 		name: 'Daniel Cantwell',
-	// 		message: 'Oh you are right.  I should have known.'
-	// 	},
-	// 	{
-	// 		name: 'Other Person',
-	// 		message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
-	// 	},
-	// 	{
-	// 		name: 'Christina Yang',
-	// 		message: 'This comment is much better though'
-	// 	},
-	// 	{
-	// 		name: 'Daniel Cantwell',
-	// 		message: 'Oh you are right.  I should have known.'
-	// 	},
-	// 	{
-	// 		name: 'Other Person',
-	// 		message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
-	// 	},
-	// 	{
-	// 		name: 'Christina Yang',
-	// 		message: 'This comment is much better though'
-	// 	},
-	// 	{
-	// 		name: 'Daniel Cantwell',
-	// 		message: 'Oh you are right.  I should have known.'
-	// 	},
-	// 	{
-	// 		name: 'Other Person',
-	// 		message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
-	// 	},
-	// 	{
-	// 		name: 'Christina Yang',
-	// 		message: 'This comment is much better though'
-	// 	},
-	// 	{
-	// 		name: 'Daniel Cantwell',
-	// 		message: 'Oh you are right.  I should have known.'
-	// 	},
-	// 	{
-	// 		name: 'Other Person',
-	// 		message: 'I am going to leave a long comment that will hopefully span two lines, to make sure the words wrap correctly.'
-	// 	}
-	// ];
-
 	var eventLocation = new google.maps.LatLng(this.event.location.lat, this.event.location.lon);
-
 	var mapOptions = {
 		zoom: 14,
 		center: eventLocation,
@@ -173,10 +83,6 @@ EventDetailsCtrl.prototype.viewRsvpForm = function() {
 	this.rsvpPopup = true;
 };
 
-EventDetailsCtrl.prototype.hideRSVP = function() {
-	this.rsvpPopup = false;
-};
-
 EventDetailsCtrl.prototype.initials = function(name) {
 	var matches = name.match(/\b(\w)/g);
 	var acronym = matches.join('');
@@ -194,10 +100,10 @@ EventDetailsCtrl.prototype.sendComment = function() {
 		};
 
 		var dataRef = firebase.database().ref();
-		var newCommentKey = dataRef.child('comments/' + this.eUID).push().key;
-		comment.uid = newCommentKey;
+		var newCommentKey = dataRef.child('comments/' + this.eKey).push().key;
+		comment.key = newCommentKey;
 		var updates = {};
-		updates['/comments/' + this.eUID + '/' + newCommentKey] = comment;
+		updates['/comments/' + this.eKey + '/' + newCommentKey] = comment;
 
 		dataRef.update(updates).then(function() {
 			this.newComment = '';
@@ -208,11 +114,27 @@ EventDetailsCtrl.prototype.sendComment = function() {
 
 // This is called in the context of the rsvp form controller
 EventDetailsCtrl.prototype.rsvp = function() {
-	console.log('RSVP:', arguments);
-	if (arguments[0]) {
-		console.log('User going as', arguments[1]);
+	if (this.rsvp.option) {
+		var rsvp = {
+			name: this.dash.userInfo.name,
+			hasBike: this.dash.userInfo.hasBike,
+			date: Date.now()
+		};
+
+		if (this.rsvp.option == 'driver') {
+			rsvp.passengerCapacity = this.dash.userInfo.passengerCapacity;
+			rsvp.bikeCapacity = this.dash.userInfo.bikeCapacity;
+			rsvp.selected = true;
+		}
+
+		var dataRef = firebase.database().ref();
+		var updates = {};
+		updates['/attendees/' + this.eKey + '/' + this.rsvp.option + '/' + this.dash.user.uid] = rsvp;
+
+		dataRef.update(updates).then(function() {
+			this.closePopups();
+		}.bind(this));
 	}
-	this.eventctrl.hideRSVP();
 };
 
 EventDetailsCtrl.prototype.clickOfficerOptions = function() {
