@@ -15,9 +15,10 @@ app.directive('eventdetails', function() {
 	}
 });
 
-function EventDetailsCtrl($scope, $timeout) {
+function EventDetailsCtrl($scope, $timeout, $q) {
 	this.$scope = $scope;
 	this.$timeout = $timeout;
+	this.$q = $q;
 
 	$scope.$watchCollection('ctrl.comments', function(newValue) {
 		if (newValue) {
@@ -41,6 +42,19 @@ function EventDetailsCtrl($scope, $timeout) {
 		this.$timeout(function() {
 			this.$scope.$apply();
 		}.bind(this));
+	}.bind(this));
+
+	var attendeesRef = firebase.database().ref('attendees/' + this.eKey);
+	attendeesRef.on('value', function(snapshot) {
+	  if (snapshot.hasChild('driver') && this.dash.user.uid in snapshot.val()['driver']) {
+	    this.rsvpButtonText = 'Driver';
+	  } else if (snapshot.hasChild('passenger') && this.dash.user.uid in snapshot.val()['passenger']) {
+	    this.rsvpButtonText = 'Passenger';
+	  } else if (snapshot.hasChild('not-carpooling') && this.dash.user.uid in snapshot.val()['not-carpooling']) {
+	    this.rsvpButtonText = 'Driving Self';
+	  } else {
+	  	this.rsvpButtonText = 'RSVP';
+	  }
 	}.bind(this));
 
 	var eventLocation = new google.maps.LatLng(this.event.location.lat, this.event.location.lon);
@@ -113,29 +127,40 @@ EventDetailsCtrl.prototype.sendComment = function() {
 };
 
 // This is called in the context of the rsvp form controller
-EventDetailsCtrl.prototype.rsvp = function() {
-	if (this.rsvp.option) {
-		var rsvp = {
-			name: this.dash.userInfo.name,
-			hasBike: this.dash.userInfo.hasBike,
-			date: Date.now(),
-			key: this.dash.user.uid
-		};
+EventDetailsCtrl.prototype.rsvp = function(going) {
+	// whether the person is not going, or changing their rsvp, we want to remove any existing rsvps
 
-		if (this.rsvp.option == 'driver') {
-			rsvp.passengerCapacity = this.dash.userInfo.passengerCapacity;
-			rsvp.bikeCapacity = this.dash.userInfo.bikeCapacity;
-			rsvp.selected = true;
-		}
+	var removeRef = firebase.database().ref().child('attendees').child(this.eKey);
+	var pd = removeRef.child('driver').child(this.dash.user.uid).remove();
+	var pp = removeRef.child('passenger').child(this.dash.user.uid).remove();
+	var pn = removeRef.child('not-carpooling').child(this.dash.user.uid).remove();
 
-		var dataRef = firebase.database().ref();
-		var updates = {};
-		updates['/attendees/' + this.eKey + '/' + this.rsvp.option + '/' + this.dash.user.uid] = rsvp;
+	this.$q.all([pd, pp, pn]).then(function() {
+		if (going && this.rsvp.option) {
+			var rsvp = {
+				name: this.dash.userInfo.name,
+				hasBike: this.dash.userInfo.hasBike,
+				date: Date.now(),
+				key: this.dash.user.uid
+			};
 
-		dataRef.update(updates).then(function() {
+			if (this.rsvp.option == 'driver') {
+				rsvp.passengerCapacity = this.dash.userInfo.passengerCapacity;
+				rsvp.bikeCapacity = this.dash.userInfo.bikeCapacity;
+				rsvp.selected = true;
+			}
+
+			var dataRef = firebase.database().ref();
+			var updates = {};
+			updates['/attendees/' + this.eKey + '/' + this.rsvp.option + '/' + this.dash.user.uid] = rsvp;
+
+			dataRef.update(updates).then(function() {
+				this.closePopups();
+			}.bind(this));
+		} else {
 			this.closePopups();
-		}.bind(this));
-	}
+		}
+	}.bind(this));
 };
 
 EventDetailsCtrl.prototype.clickOfficerOptions = function() {

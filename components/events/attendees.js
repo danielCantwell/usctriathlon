@@ -38,13 +38,17 @@ function AttendeesCtrl($scope, $timeout) {
 	attendeesRef.on('value', function(snapshot) {
 		this.attendees = snapshot.val();
 
+		this.passengerCount = 0;
+		this.bikeCount = 0;
+		this.passengerCapacity = 0;
+		this.bikeCapacity = 0;
+
 		if (this.attendees) {
 			this.drivers = this.attendees.driver;
 			this.passengers = this.attendees.passenger;
 			this.selfDrivers = this.attendees['not-carpooling'];
 
 			var pcount = 0;
-			var bcount = 0;
 
 			if (this.attendees.driver) {
 				var driverArray = $.map(this.attendees.driver, function(d) { return d; });
@@ -74,11 +78,15 @@ function AttendeesCtrl($scope, $timeout) {
 				this.bikeCount = $.map(this.attendees.passenger, function(p) { return p; }).filter(function(person) { return person.hasBike; }).length;
 			}
 			this.passengerCount = pcount;
+		} else {
+			this.drivers = null;
+			this.passengers = null;
+			this.selfDrivers = null;
+		}
 
-			this.$timeout(function() {
+		this.$timeout(function() {
 				this.$scope.$apply();
 			}.bind(this));
-		}
 	}.bind(this));
 
 	// Update driver selection in firebase
