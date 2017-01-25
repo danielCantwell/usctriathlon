@@ -7,7 +7,8 @@
 	<ul>
 		<li ng-repeat="event in ctrl.events" ng-click="ctrl.loadEvent(event)">
 			<h2>{{event.name}}</h2>
-			<p>{{event.datetime | date : 'h:mm a - dd MMM yyyy'}}</p>
+			<p class="rsvptext">{{ctrl.rsvpText(event.openRSVP)}}</p>
+			<p class="eventdate">{{event.datetime | date : 'h:mm a - dd MMM yyyy'}}</p>
 		</li>
 	</ul>
 	<popup ng-if="ctrl.eventPopup" ctrl="ctrl" class="small">

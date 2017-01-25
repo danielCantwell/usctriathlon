@@ -58,6 +58,7 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 		}.bind(this));
 	}.bind(this));
 
+	// Load RSVP status
 	var attendeesRef = firebase.database().ref('attendees/' + this.eKey);
 	attendeesRef.on('value', function(snapshot) {
 	  if (snapshot.hasChild('driver') && this.dash.user.uid in snapshot.val()['driver']) {
@@ -69,6 +70,20 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 	  } else {
 	  	this.rsvpButtonText = 'RSVP';
 	  }
+	}.bind(this));
+
+	// Check if rsvp status is open or closed
+	var rsvpOpenRef = firebase.database().ref('events/' + this.eKey);
+	rsvpOpenRef.on('value', function(snapshot) {
+		var openRSVP = snapshot.val()['openRSVP'];
+		if (openRSVP) {
+			this.officerOptionsText.close.display = 'Close RSVPs';
+			this.officerOptionsText.close.value = 'close-rsvp';
+		} else {
+			this.officerOptionsText.close.display = 'Open RSVPs';
+			this.officerOptionsText.close.value = 'open-rsvp';
+
+		}
 	}.bind(this));
 
 	var eventLocation = new google.maps.LatLng(this.event.location.lat, this.event.location.lon);
@@ -201,10 +216,18 @@ EventDetailsCtrl.prototype.officerOption = function(option) {
 			this.officerOptionsText.close.value = 'close-rsvp-confirm';
 			break;
 		case 'close-rsvp-confirm':
-			this.officerOptionsText.close.display = 'Close RSVPs';
-			this.officerOptionsText.close.value = 'close-rsvp';
-			this.closeRSVPs();
-			this.closePopups();
+			this.openRSVPs(false).then(function() {
+				this.closePopups();
+			}.bind(this));
+			break;
+		case 'open-rsvp':
+			this.officerOptionsText.close.display = 'CONFIRM: Open RSVPs?';
+			this.officerOptionsText.close.value = 'open-rsvp-confirm';
+			break;
+		case 'open-rsvp-confirm':
+			this.openRSVPs(true).then(function() {
+				this.closePopups();
+			}.bind(this));
 			break;
 		case 'edit':
 			console.log('edit')
@@ -224,11 +247,14 @@ EventDetailsCtrl.prototype.officerOption = function(option) {
 		default:
 			this.closePopups();
 	}
-	console.log(this.officerOptionsText);
 };
 
-EventDetailsCtrl.prototype.closeRSVPs = function() {
-
+EventDetailsCtrl.prototype.openRSVPs = function(openStatus) {
+	var dataRef = firebase.database().ref();
+	var openRSVPref = '/events/' + this.eKey + '/openRSVP';
+	var update = {};
+	update[openRSVPref] = openStatus;
+	return dataRef.update(update);
 };
 
 EventDetailsCtrl.prototype.deleteEvent = function() {

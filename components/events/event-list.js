@@ -93,7 +93,8 @@ EventListCtrl.prototype.validateAndSave = function() {
 		name: this.popupName,
 		datetime: this.popupDate,
 		location: this.popupLocation,
-		details: this.popupDetails
+		details: this.popupDetails,
+		openRSVP: true
 	};
 	var att = {
 		passengerCount: 0,
@@ -138,6 +139,14 @@ EventListCtrl.prototype.closePopup = function() {
 
 EventListCtrl.prototype.backPopup = function() {
 	this.popupPage -= 1;
+};
+
+EventListCtrl.prototype.rsvpText = function(openRSVP) {
+	if (openRSVP) {
+		return 'RSVP Open';
+	} else {
+		return 'RSVP Closed';
+	}
 };
 
 })();

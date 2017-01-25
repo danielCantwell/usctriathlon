@@ -62,7 +62,15 @@
 	font-weight: 400;
 }
 
-#eventlist > ul > li > p {
+#eventlist > ul > li > p.rsvptext {
+	display: block;
+	position: absolute;
+	bottom: 10px;
+	left: 20px;
+	font-size: 30px;
+}
+
+#eventlist > ul > li > p.eventdate {
 	display: block;
 	position: absolute;
 	bottom: 10px;
