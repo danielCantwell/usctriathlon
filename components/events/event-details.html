@@ -80,9 +80,9 @@
 			<h1>Officer Options</h1>
 		</section>
 		<section class="popup-content">
-			<input type="button" value="Close RSVPs">
-			<input type="button" value="Edit Event">
-			<input type="button" value="Delete Event">
+			<input type="button" value="{{ctrl.officerOptionsText.close.display}}" ng-click="ctrl.officerOption('close')">
+			<input type="button" value="{{ctrl.officerOptionsText.edit.display}}" ng-click="ctrl.officerOption('edit')">
+			<input type="button" value="{{ctrl.officerOptionsText.delete.display}}" ng-click="ctrl.officerOption('delete')">
 		</section>
 	</popup>
 </section>

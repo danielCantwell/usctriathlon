@@ -31,6 +31,20 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 	this.view = 'details';
 	this.rsvpButtonText = 'RSVP';
 	this.showOfficerOptions = false;
+	this.officerOptionsText = {
+		close: {
+			display: 'Close RSVPs',
+			value: 'close-rsvp'
+		},
+		edit: {
+			display: 'Edit Event',
+			value: 'edit'
+		},
+		delete: {
+			display: 'Delete Event',
+			value: 'delete'
+		}
+	};
 
 	this.event = this.dash.objectHolder;
 	this.eKey = this.event.key;
@@ -177,6 +191,57 @@ EventDetailsCtrl.prototype.closePopups = function() {
 	this.$timeout(function() {
 		this.$scope.$apply();
 	}.bind(this));
-}
+};
+
+EventDetailsCtrl.prototype.officerOption = function(option) {
+	var action = this.officerOptionsText[option].value;
+	switch (action) {
+		case 'close-rsvp':
+			this.officerOptionsText.close.display = 'CONFIRM: Close RSVPs?';
+			this.officerOptionsText.close.value = 'close-rsvp-confirm';
+			break;
+		case 'close-rsvp-confirm':
+			this.officerOptionsText.close.display = 'Close RSVPs';
+			this.officerOptionsText.close.value = 'close-rsvp';
+			this.closeRSVPs();
+			this.closePopups();
+			break;
+		case 'edit':
+			console.log('edit')
+			break;
+		case 'delete':
+			this.officerOptionsText.delete.display = 'CONFIRM: Delete Event?';
+			this.officerOptionsText.delete.value = 'delete-confirm';
+			break;
+		case 'delete-confirm':
+			this.officerOptionsText.delete.display = 'Delete Event';
+			this.officerOptionsText.delete.value = 'delete';
+			this.deleteEvent().then(function() {
+				this.closePopups();
+				this.goBack();
+			}.bind(this));
+			break;
+		default:
+			this.closePopups();
+	}
+	console.log(this.officerOptionsText);
+};
+
+EventDetailsCtrl.prototype.closeRSVPs = function() {
+
+};
+
+EventDetailsCtrl.prototype.deleteEvent = function() {
+	var dataRef = firebase.database().ref();
+
+	// delete all information related to event ...
+	// delete attendees
+	dataRef.child('attendees').child(this.eKey).remove();
+	// delete comments
+	dataRef.child('comments').child(this.eKey).remove();
+
+	// delete the event itself, and return the promise
+	return dataRef.child('events').child(this.eKey).remove();
+};
 
 })();

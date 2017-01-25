@@ -44,6 +44,7 @@
 	border: none;
 	border-radius: 0;
 	outline: none;
+	padding-right: 10px;
 }
 
 #eventdetails > #tabs {
@@ -342,7 +343,7 @@
 	}
 
 	#eventdetails > header > section > input {
-		height: 20px;
+		height: 24px;
 		font-size: 20px;
 	}
 
