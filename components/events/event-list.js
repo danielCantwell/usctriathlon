@@ -19,9 +19,13 @@ function EventListCtrl($scope, $timeout) {
 	this.$scope = $scope;
 	this.$timeout = $timeout;
 
-	var eventRef = firebase.database().ref('events');
+	var eventRef = firebase.database().ref('events').orderByChild('datetime').startAt(Date.now() - 86400000).limitToFirst(4);
+	// 86400000 is the number of milliseconds in one day
 	eventRef.on('value', function(snapshot) {
-		this.events = snapshot.val();
+		this.events = [];
+		snapshot.forEach(function(child) {
+			this.events.push(child.val());
+		}.bind(this));
 		this.$timeout(function() {
 			this.$scope.$apply();
 		}.bind(this));
@@ -91,7 +95,7 @@ EventListCtrl.prototype.validateAndNext = function() {
 EventListCtrl.prototype.validateAndSave = function() {
 	var event = {
 		name: this.popupName,
-		datetime: this.popupDate,
+		datetime: Date.parse(this.popupDate),
 		location: this.popupLocation,
 		details: this.popupDetails,
 		openRSVP: true

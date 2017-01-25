@@ -194,7 +194,13 @@
 		font-size: 22px;
 	}
 
-	#eventlist > ul > li > p {
+	#eventlist > ul > li > p.rsvptext {
+		bottom: 5px;
+		left: 10px;
+		font-size: 20px;
+	}
+
+	#eventlist > ul > li > p.eventdate {
 		bottom: 5px;
 		right: 10px;
 		font-size: 20px;

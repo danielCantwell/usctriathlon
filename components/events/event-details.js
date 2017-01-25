@@ -75,14 +75,15 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 	// Check if rsvp status is open or closed
 	var rsvpOpenRef = firebase.database().ref('events/' + this.eKey);
 	rsvpOpenRef.on('value', function(snapshot) {
-		var openRSVP = snapshot.val()['openRSVP'];
-		if (openRSVP) {
-			this.officerOptionsText.close.display = 'Close RSVPs';
-			this.officerOptionsText.close.value = 'close-rsvp';
-		} else {
-			this.officerOptionsText.close.display = 'Open RSVPs';
-			this.officerOptionsText.close.value = 'open-rsvp';
-
+		if (snapshot.val()) {
+			var openRSVP = snapshot.val()['openRSVP'];
+			if (openRSVP) {
+				this.officerOptionsText.close.display = 'Close RSVPs';
+				this.officerOptionsText.close.value = 'close-rsvp';
+			} else {
+				this.officerOptionsText.close.display = 'Open RSVPs';
+				this.officerOptionsText.close.value = 'open-rsvp';
+			}
 		}
 	}.bind(this));
 
