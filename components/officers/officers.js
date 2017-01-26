@@ -12,54 +12,16 @@ app.directive('officers', function() {
 	}
 });
 
-function OfficersCtrl() {
-	this.officers = [
-		{
-			'name': 'Kenneth Rodriguez-Clisham',
-			'title': 'President'
-		},
-		{
-			'name': 'Christina Yang',
-			'title': 'Recruitment Chair'
-		},
-		{
-			'name': 'Daniel Cantwell',
-			'title': 'Christina\'s Person'
-		},
-		{
-			'name': 'Other Person',
-			'title': 'Some Position'
-		},
-		{
-			'name': 'Christina Yang',
-			'title': 'Recruitment Chair'
-		},
-		{
-			'name': 'Daniel Cantwell',
-			'title': 'Christina\'s Person'
-		},
-		{
-			'name': 'Other Person',
-			'title': 'Some Position'
-		},
-		{
-			'name': 'Christina Yang',
-			'title': 'Recruitment Chair'
-		},
-		{
-			'name': 'Daniel Cantwell',
-			'title': 'Christina\'s Person'
-		},
-		{
-			'name': 'Other Person',
-			'title': 'Some Position'
+function OfficersCtrl($scope, $timeout) {
+	var dataRef = firebase.database().ref('officers');
+	dataRef.once('value', function(snapshot) {
+		if (snapshot.val()) {
+			this.officers = $.map(snapshot.val(), function(o) { return o; });
+			$timeout(function() {
+				$scope.$apply();
+			});
 		}
-	];
+	}.bind(this));
 }
-
-OfficersCtrl.prototype.hasOfficerStatus = function() {
-	// return user.status == 'officer';
-	return true;
-};
 
 })();

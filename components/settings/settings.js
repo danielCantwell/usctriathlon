@@ -116,6 +116,10 @@ SettingsCtrl.prototype.updatePersonalInfo = function(info) {
 		update[userRef + '/phone'] = info.phone;
 		update[userRef + '/hasBike'] = info.hasBike;
 
+		if (this.officerSettings.isOfficer) {
+			update['/officers/' + this.dash.user.uid + '/name'] = info.name;
+		}
+
 		this.personalUpdateValue.label = "Updating...";
 		dataRef.update(update).then(function() {
 			this.personalUpdateValue.show = false;
@@ -171,13 +175,13 @@ SettingsCtrl.prototype.closePopups = function() {
 };
 
 SettingsCtrl.prototype.enterOfficerCode = function(code) {
-	var dataRef = firebase.database().ref('officers/code');
+	var dataRef = firebase.database().ref('officercode');
 	dataRef.once('value', function(snapshot) {
 		if (code == snapshot.val()) {
-			var officerRef = dataRef.child('officers').child(this.dash.user.uid);
+			var officerRef = firebase.database().ref('officers/' + this.dash.user.uid);
 			var update = {
 				name: this.dash.userInfo.name,
-				position: '[position on eboard]'
+				position: ''
 			};
 			officerRef.update(update);
 		} else {

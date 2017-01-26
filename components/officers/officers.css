@@ -7,27 +7,35 @@
 }
 
 #officers > ul {
+	display: block;
 	position: absolute;
 	top: 20px;
 	bottom: 0;
+	left: 0;
+	right: 0;
 	list-style: none;
 	padding: 0;
 	overflow-y: scroll;
 	padding-bottom: 20px;
 	margin: 0 auto;
+	column-count: 2;
 }
 
 #officers > ul > li {
 	text-align: center;
-	margin: 0 auto;
-	/*box-shadow: 0px 4px 10px #AAA;*/
+	margin: 10px auto;
 	border: 1px solid #000;
-	width: 400px;
+	width: 320px;
 	height: 400px;
 	position: relative;
-	display: inline-block;
-	margin-left: 55px;
+	display: block;
 	background-color: rgba(255, 255, 255, 0.9);
+	break-inside: avoid-column;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	-o-column-break-inside: avoid;
+	-ms-column-break-inside: avoid;
+	column-break-inside: avoid;
 }
 
 #officers > ul > li > img {
@@ -35,7 +43,7 @@
 	top: 10px;
 	left: 10px;
 	right: 10px;
-	width: 380px;
+	width: 300px;
 	height: 300px;
 	border: 1px solid #AAA;
 }
@@ -59,5 +67,27 @@
 @media (min-width: 1200px) {
 	#officers > ul {
 		top: 0;
+		column-count: 3;
+	}
+
+	#officers > ul > li {
+		width: 220px;
+		height: 260px;
+	}
+
+	#officers > ul > li > img {
+		width: 200px;
+		height: 200px;
+	}
+
+	#officers > ul > li > h2 {
+		font-size: 18px;
+		font-weight: 500;
+		bottom: 24px;
+	}
+
+	#officers > ul > li > p {
+		font-size: 16px;
+		bottom: 6px;
 	}
 }
