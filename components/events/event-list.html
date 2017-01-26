@@ -1,7 +1,7 @@
 <section id="eventlist">
 	<section class="header">
 		<h1>WORKOUTS</h1>
-		<input type="image" src="assets/add.png" ng-if="ctrl.hasOfficerStatus()" ng-click="ctrl.openPopup()">
+		<input type="image" src="assets/add.png" ng-if="ctrl.userIsOfficer" ng-click="ctrl.openPopup()">
 		<hr>
 	</section>
 	<ul>

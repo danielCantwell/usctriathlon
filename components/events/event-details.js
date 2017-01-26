@@ -49,6 +49,15 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 	this.event = this.dash.objectHolder;
 	this.eKey = this.event.key;
 
+	this.userIsOfficer = false;
+	// Check if user is officer
+	var officerRef = firebase.database().ref('officers/' + this.dash.user.uid);
+	officerRef.once('value', function(snapshot) {
+		if (snapshot.val()) {
+			this.userIsOfficer = true;
+		}
+	}.bind(this));
+
 	// Load Comments
 	var commentsRef = firebase.database().ref('comments/' + this.eKey);
 	commentsRef.on('value', function(snapshot) {
@@ -100,10 +109,6 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 		title: 'Event Location'
 	});
 }
-
-EventDetailsCtrl.prototype.hasOfficerStatus = function() {
-	return this.dash.hasOfficerStatus();
-};
 
 EventDetailsCtrl.prototype.goBack = function() {
 	this.dash.options.showTab = true;

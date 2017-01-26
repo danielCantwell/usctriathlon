@@ -78,6 +78,24 @@ function SettingsCtrl($scope, $timeout) {
 		}.bind(this));
 	}.bind(this));
 
+	this.officerSettings = {
+		isOfficer: false,
+		position: 'none'
+	};
+
+	// Check if user is officer
+	var officerRef = firebase.database().ref('officers/' + this.dash.user.uid);
+	officerRef.on('value', function(snapshot) {
+		if (snapshot.val()) {
+			this.officerSettings = {
+				isOfficer: true,
+				position: snapshot.val()['position']
+			};
+			this.$timeout(function() {
+				this.$scope.$apply();
+			}.bind(this));
+		}
+	}.bind(this));
 }
 
 SettingsCtrl.prototype.updatePersonalInfo = function(info) {
@@ -141,10 +159,6 @@ SettingsCtrl.prototype.openOfficerSettings = function() {
 	this.showOfficerSettings = true;
 };
 
-SettingsCtrl.prototype.hasOfficerStatus = function() {
-	return !this.dash.hasOfficerStatus();
-};
-
 SettingsCtrl.prototype.popupClickOutside = function() {
 	this.closePopups();
 };
@@ -157,23 +171,34 @@ SettingsCtrl.prototype.closePopups = function() {
 };
 
 SettingsCtrl.prototype.enterOfficerCode = function(code) {
-	var dataRef = firebase.database().ref();
-	dataRef.child('officers').child('code').once('value', function(snapshot) {
+	var dataRef = firebase.database().ref('officers/code');
+	dataRef.once('value', function(snapshot) {
 		if (code == snapshot.val()) {
 			var officerRef = dataRef.child('officers').child(this.dash.user.uid);
 			var update = {
 				name: this.dash.userInfo.name,
-				positon: '[position on eboard]'
+				position: '[position on eboard]'
 			};
-			officerRef.update(update).then(function() {
-				this.closePopups();
-			}.bind(this));
+			officerRef.update(update);
 		} else {
 			this.codeInput = 'Invalid Entry';
 			this.$timeout(function() {
 				this.$scope.$apply();
 			}.bind(this));
 		}
+	}.bind(this));
+};
+
+SettingsCtrl.prototype.updateOfficerSettings = function() {
+	var dataRef = firebase.database().ref('officers/' + this.dash.user.uid);
+	var update = {
+		position: this.officerSettings.position
+	};
+	dataRef.update(update).then(function() {
+		this.$timeout(function() {
+			this.$scope.$apply();
+			this.closePopups();
+		}.bind(this));
 	}.bind(this));
 };
 

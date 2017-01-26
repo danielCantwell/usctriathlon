@@ -36,6 +36,15 @@ function EventListCtrl($scope, $timeout) {
 	this.popupTitle = 'New Workout';
 	this.popupDate = '';
 	this.popupPositiveButton = 'Next';
+
+	this.userIsOfficer = false;
+	// Check if user is officer
+	var officerRef = firebase.database().ref('officers/' + this.dash.user.uid);
+	officerRef.once('value', function(snapshot) {
+		if (snapshot.val()) {
+			this.userIsOfficer = true;
+		}
+	}.bind(this));
 }
 
 EventListCtrl.prototype.openPopup = function() {
@@ -120,10 +129,6 @@ EventListCtrl.prototype.validateAndSave = function() {
 	dataRef.update(updates).then(function() {
 		this.closePopup();
 	}.bind(this));
-};
-
-EventListCtrl.prototype.hasOfficerStatus = function() {
-	return this.dash.hasOfficerStatus();
 };
 
 EventListCtrl.prototype.popupClickOutside = function() {

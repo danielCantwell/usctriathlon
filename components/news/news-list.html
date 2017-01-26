@@ -1,7 +1,7 @@
 <section id="newslist">
 	<section class="header">
 		<h1>ANNOUNCEMENTS</h1>
-		<input type="image" src="assets/add.png" ng-if="ctrl.hasOfficerStatus()" ng-click="ctrl.openPopup()">
+		<input type="image" src="assets/add.png" ng-if="ctrl.userIsOfficer" ng-click="ctrl.openPopup()">
 		<hr>
 	</section>
 	<section class="content">

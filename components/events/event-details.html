@@ -4,7 +4,7 @@
 			<input type="image" src="assets/back.png" ng-click="ctrl.goBack()">
 		</section>
 		<h1>{{ctrl.event.name}}</h1>
-		<section ng-if="ctrl.hasOfficerStatus()">
+		<section ng-if="ctrl.userIsOfficer">
 			<input type="image" src="assets/options.png" ng-click="ctrl.clickOfficerOptions()">
 		</section>
 		<section>
@@ -19,7 +19,7 @@
 		<section id="tab-comments">
 			<input type="button" value="Comments" ng-click="ctrl.activateTab('comments')">
 		</section>
-		<section id="tab-attendees" ng-if="ctrl.hasOfficerStatus()">
+		<section id="tab-attendees">
 			<input type="button" value="Attendees" ng-click="ctrl.activateTab('attendees')">
 		</section>
 	</section>

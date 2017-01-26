@@ -12,7 +12,7 @@ app.directive('dashboard', function() {
 	}
 });
 
-function DashboardCtrl() {
+function DashboardCtrl($scope, $timeout) {
 	this.options = {
 		showTab: true,
 		activeTab: 'main',
@@ -25,17 +25,24 @@ function DashboardCtrl() {
 	userRef.on('value', function(snapshot) {
 		this.userInfo = snapshot.val();
 	}.bind(this));
+
+	this.userIsOfficer = false;
+
+	var officerRef = firebase.database().ref('officers/' + this.user.uid);
+	officerRef.once('value', function(snapshot) {
+		if (snapshot.val()) {
+			this.userIsOfficer = true;
+			$timeout(function() {
+				$scope.$apply();
+			});
+		}
+	}.bind(this));
 }
 
 DashboardCtrl.prototype.activateTab = function(which) {
 	$('.active').removeClass('active');
 	$('#tab-' + which).addClass('active');
 	this.options.activeTab = which;
-};
-
-DashboardCtrl.prototype.hasOfficerStatus = function() {
-	// return user.status == 'officer';
-	return true;
 };
 
 })();

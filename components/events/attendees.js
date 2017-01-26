@@ -33,6 +33,18 @@ function AttendeesCtrl($scope, $timeout) {
 
 	this.driverSelection = {};
 
+	this.userIsOfficer = false;
+	// Check if user is officer
+	var officerRef = firebase.database().ref('officers/' + this.user.uid);
+	officerRef.once('value', function(snapshot) {
+		if (snapshot.val()) {
+			this.userIsOfficer = true;
+			this.$timeout(function() {
+				this.$scope.$apply();
+			}.bind(this));
+		}
+	}.bind(this));
+
 	// Load Attendees (RSVPs)
 	var attendeesRef = firebase.database().ref('attendees/' + this.event.key);
 	attendeesRef.on('value', function(snapshot) {
@@ -103,10 +115,5 @@ function AttendeesCtrl($scope, $timeout) {
 		}
 	}.bind(this), true);
 }
-
-AttendeesCtrl.prototype.hasOfficerStatus = function() {
-	// return user.status == 'officer';
-	return true;
-};
 
 })();

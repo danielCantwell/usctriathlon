@@ -32,11 +32,16 @@ function NewsListCtrl($scope, $timeout) {
 
 	this.popupTitle = 'New Announcement';
 	this.newsPopup = false;
-}
 
-NewsListCtrl.prototype.hasOfficerStatus = function() {
-	return this.dash.hasOfficerStatus();
-};
+	this.userIsOfficer = false;
+	// Check if user is officer
+	var officerRef = firebase.database().ref('officers/' + this.dash.user.uid);
+	officerRef.once('value', function(snapshot) {
+		if (snapshot.val()) {
+			this.userIsOfficer = true;
+		}
+	}.bind(this));
+}
 
 NewsListCtrl.prototype.openPopup = function() {
 	this.newsPopup = true;
