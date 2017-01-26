@@ -87,6 +87,11 @@
 	margin: 80px auto 0 auto;
 }
 
+#settings .popup-actions > input {
+	border: 1px solid black;
+	background-color: transparent;
+}
+
 @media (min-width: 1200px) {
 
 	#settings .table {

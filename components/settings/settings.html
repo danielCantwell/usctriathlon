@@ -51,17 +51,21 @@
 			<section ng-if="!ctrl.hasOfficerStatus()" class="table">
 				<section class="row">
 					<p>ENTER CODE</p>
-					<input type="text" ng-model="ctrl.officerCodeInput" placeholder="code">
+					<input type="text" ng-model="ctrl.codeInput" placeholder="code">
 				</section>
 				<section class="loader" ng-if="ctrl.loader"></section>
 			</section>
 			<section ng-if="ctrl.hasOfficerStatus()">
-				
+				<section class="row">
+					<p>POSITION</p>
+					<input type="text" ng-model="ctrl.officerPosition" placeholder="position">
+				</section>
 			</section>
 		</section>
 		<section class="popup-actions">
-			<input type="button" value="Cancel" ng-if="!ctrl.hasOfficerStatus()">
-			<input type="button" value="Submit" ng-if="!ctrl.hasOfficerStatus()">
+			<input type="button" value="Cancel" ng-click="ctrl.closePopups()">
+			<input type="button" value="Submit" ng-if="!ctrl.hasOfficerStatus()" ng-click="ctrl.enterOfficerCode(ctrl.codeInput)">
+			<input type="button" value="Submit" ng-if="ctrl.hasOfficerStatus()" ng-click="ctrl.updateOfficerSettings()">
 		</section>
 	</popup>
 	<input type="button" value="Sign Out" ng-click="ctrl.signOut()">

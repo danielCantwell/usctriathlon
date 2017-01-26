@@ -156,4 +156,25 @@ SettingsCtrl.prototype.closePopups = function() {
 	}.bind(this));
 };
 
+SettingsCtrl.prototype.enterOfficerCode = function(code) {
+	var dataRef = firebase.database().ref();
+	dataRef.child('officers').child('code').once('value', function(snapshot) {
+		if (code == snapshot.val()) {
+			var officerRef = dataRef.child('officers').child(this.dash.user.uid);
+			var update = {
+				name: this.dash.userInfo.name,
+				positon: '[position on eboard]'
+			};
+			officerRef.update(update).then(function() {
+				this.closePopups();
+			}.bind(this));
+		} else {
+			this.codeInput = 'Invalid Entry';
+			this.$timeout(function() {
+				this.$scope.$apply();
+			}.bind(this));
+		}
+	}.bind(this));
+};
+
 })();

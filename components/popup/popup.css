@@ -70,7 +70,6 @@
 	flex: 0 0 100px;
 	display: flex;
 	flex-direction: row;
-	border-top: 1px solid #c41e3a;
 }
 
 #popup .popup-actions > input {
@@ -116,6 +115,6 @@
 	}
 
 	#popup .popup-actions > input {
-		font-size: 30px;
+		font-size: 20px;
 	}
 }
