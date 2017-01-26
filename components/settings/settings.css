@@ -4,13 +4,61 @@
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	background-color: rgba(255, 255, 255, 0.9);
+	overflow-y: scroll;
+}
+
+#settings .table {
+	position: relative;
+	top: 80px;
+}
+
+#settings .table > .row {
+	height: 80px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-width: 1px 0px 1px 0px;
+}
+
+#settings .table > .row > p  {
+	position: absolute;
+	left: 0px;
+	text-align: right;
+	width: 40%;
+	font-size: 40px;
+	height: 80px;
+	line-height: 80px;
+	margin: 0px;
+}
+
+#settings .table > .row > p.bold  {
+	font-weight: 500;
+}
+
+#settings .table > .row > input,
+#settings .table > .row > select {
+	position: absolute;
+	right: 0px;
+	text-align: left;
+	width: 50%;
+	font-size: 30px;
+	height: 80px;
+	margin: 0px;
+	padding-left: 10px;
+	border: none;
+	background-color: transparent;
+	outline: none;
+}
+
+#settings .table > .row > input[type=button] {
+	color: #c41e3a;
 }
 
 #settings > input {
-	position: absolute;
-	bottom: 40px;
-	left: 10%;
-	margin: 0 auto;
+	position: relative;
+	top: 140px;
+
+	display: block;
+	margin: 20px auto 0 auto;
 	text-align: center;
 
 	width: 80%;
@@ -25,7 +73,46 @@
 	line-height: 80px;
 }
 
+#settings > input:hover {
+	color: #c41e3a;
+}
+
 #settings > input:active {
 	border-color: #c41e3a;
-	color: #c41e3a;
+}
+
+#settings .loader {
+	position: static;
+	display: block;
+	margin: 80px auto 0 auto;
+}
+
+@media (min-width: 1200px) {
+
+	#settings .table {
+		top: 50px;
+	}
+
+	#settings .table > .row {
+		height: 50px;
+	}
+
+	#settings .table > .row > p  {
+		font-size: 20px;
+		height: 50px;
+		line-height: 50px;
+	}
+
+	#settings .table > .row > input,
+	#settings .table > .row > select {
+		font-size: 16px;
+		height: 50px;
+	}
+
+	#settings > input {
+		display: inline-block;
+		width: 240px;
+		height: 80px;
+		font-size: 20px;
+	}
 }

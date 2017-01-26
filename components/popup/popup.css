@@ -68,6 +68,15 @@
 
 #popup .popup-actions {
 	flex: 0 0 100px;
+	display: flex;
+	flex-direction: row;
+	border-top: 1px solid #c41e3a;
+}
+
+#popup .popup-actions > input {
+	height: 100%;
+	flex: 1 0 auto;
+	font-size: 40px;
 }
 
 @media (min-width: 1200px) {
@@ -104,5 +113,9 @@
 
 	#popup .popup-actions {
 		flex: 0 0 60px;
+	}
+
+	#popup .popup-actions > input {
+		font-size: 30px;
 	}
 }

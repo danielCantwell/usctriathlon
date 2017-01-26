@@ -1,3 +1,68 @@
 <section id="settings">
+	<section class="table personal-info">
+		<section class="row">
+			<p class=" bold">Personal Info:</p>
+			<input type="button" value="{{ctrl.personalUpdateValue.label}}" ng-click="ctrl.updatePersonalInfo(ctrl.personalInfo)" ng-if="ctrl.personalUpdateValue.show">
+		</section>
+		<section class="row">
+			<p>NAME</p>
+			<input type="text" ng-model="ctrl.personalInfo.name" placeholder="Tommy Trojan">
+		</section>
+		<section class="row">
+			<p>EMAIL</p>
+			<input type="text" ng-model="ctrl.personalInfo.email" placeholder="ttrojan@usc.edu">
+		</section>
+		<section class="row">
+			<p>PHONE</p>
+			<input type="text" ng-model="ctrl.personalInfo.phone" placeholder="5551234567">
+		</section>
+		<section class="row">
+			<p>HAVE BIKE</p>
+			<select ng-model="ctrl.personalInfo.hasBike" ng-options="opt.value as opt.label for opt in ctrl.bikeOptions">
+			</select>
+		</section>
+		<section class="row">
+		</section>
+	</section>
+	<section class="table car-info">
+		<section class="row">
+			<p class=" bold">If you have a car:</p>
+			<input type="button" value="{{ctrl.carUpdateValue.label}}" ng-click="ctrl.updateCarInfo(ctrl.carInfo)" ng-if="ctrl.carUpdateValue.show">
+		</section>
+		<section class="row">
+			<p>PASSENGER CAPACITY</p>
+			<select ng-model="ctrl.carInfo.passengerCapacity" ng-options="opt.value as opt.label for opt in ctrl.capacityOptions">
+			</select>
+		</section>
+		<section class="row">
+			<p>BIKE CAPACITY</p>
+			<select ng-model="ctrl.carInfo.bikeCapacity" ng-options="opt.value as opt.label for opt in ctrl.capacityOptions">
+			</select>
+		</section>
+	</section>
+
+	<input type="button" value="Officer Settings" ng-click="ctrl.openOfficerSettings()">
+
+	<popup ng-if="ctrl.showOfficerSettings" ctrl="ctrl" class="x-small">
+		<section class="popup-header">
+			<h1>Officer Settings</h1>
+		</section>
+		<section class="popup-content">
+			<section ng-if="!ctrl.hasOfficerStatus()" class="table">
+				<section class="row">
+					<p>ENTER CODE</p>
+					<input type="text" ng-model="ctrl.officerCodeInput" placeholder="code">
+				</section>
+				<section class="loader" ng-if="ctrl.loader"></section>
+			</section>
+			<section ng-if="ctrl.hasOfficerStatus()">
+				
+			</section>
+		</section>
+		<section class="popup-actions">
+			<input type="button" value="Cancel" ng-if="!ctrl.hasOfficerStatus()">
+			<input type="button" value="Submit" ng-if="!ctrl.hasOfficerStatus()">
+		</section>
+	</popup>
 	<input type="button" value="Sign Out" ng-click="ctrl.signOut()">
 </section>
