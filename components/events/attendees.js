@@ -81,6 +81,7 @@ function AttendeesCtrl($scope, $timeout) {
 
 				if (this.attendees.passenger) {
 					pcount += Object.keys(this.attendees.passenger).length;
+					var passengerArray = $.map(this.attendees.passenger, function(p) { return p; });
 					this.bikeCount = driverArray.concat(passengerArray).filter(function(person) { return person.hasBike; }).length;
 				} else {
 					this.bikeCount = driverArray.filter(function(person) { return person.hasBike; }).length;

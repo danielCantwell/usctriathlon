@@ -43,6 +43,10 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 		delete: {
 			display: 'Delete Event',
 			value: 'delete'
+		},
+		export: {
+			display: 'Export Emails',
+			value: 'export'
 		}
 	};
 
@@ -176,7 +180,8 @@ EventDetailsCtrl.prototype.rsvp = function(going) {
 				name: this.dash.userInfo.name,
 				hasBike: this.dash.userInfo.hasBike,
 				date: Date.now(),
-				key: this.dash.user.uid
+				key: this.dash.user.uid,
+				email: this.dash.userInfo.email
 			};
 
 			if (this.rsvp.option == 'driver') {
@@ -250,6 +255,9 @@ EventDetailsCtrl.prototype.officerOption = function(option) {
 				this.goBack();
 			}.bind(this));
 			break;
+		case 'export':
+			this.exportEmails();
+			break;
 		default:
 			this.closePopups();
 	}
@@ -274,6 +282,56 @@ EventDetailsCtrl.prototype.deleteEvent = function() {
 
 	// delete the event itself, and return the promise
 	return dataRef.child('events').child(this.eKey).remove();
+};
+
+EventDetailsCtrl.prototype.exportEmails = function() {
+
+	var dataRef = firebase.database().ref('attendees/' + this.eKey);
+	dataRef.once('value', function(snapshot) {
+		if (snapshot.val()) {
+			var att = snapshot.val();
+			var emails = [];
+
+			if (att['driver']) {
+				var driverArray = $.map(att.driver, function(d) { return d.email; });
+				emails = emails.concat(driverArray);
+			}
+			if (att['passenger']) {
+				var passengerArray = $.map(att.passenger, function(d) { return d.email; });
+				emails = emails.concat(passengerArray);
+			}
+			if (att['not-carpooling']) {
+				var selfDriversArray = $.map(att['not-carpooling'], function(d) { return d.email; });
+				emails = emails.concat(selfDriversArray);
+			}
+
+			// Export Email Array to CSV File
+			var CSV = '';
+
+			for (var i = 0; i < emails.length; i++) {
+				CSV += '"' + emails[i] + '"\r\n';
+			}
+
+			var filename = this.event.name + '-' + this.event.datetime;
+			filename = filename.replace(/ /g, '-');
+			var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+
+	    // generate a temp <a /> tag
+	    var link = document.createElement("a");    
+	    link.href = uri;
+	    
+	    // set the visibility hidden so it will not effect on your web-layout
+	    link.style = "visibility:hidden";
+	    link.download = filename + ".csv";
+	    
+	    // this part will append the anchor tag and remove it after automatic click
+	    document.body.appendChild(link);
+	    link.click();
+	    document.body.removeChild(link);
+		}
+	}.bind(this));
+
+	this.closePopups();
 };
 
 })();
