@@ -4,38 +4,29 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
+	background-color: rgba(255, 255, 255, 0.9);
 }
 
 #officers > ul {
 	display: block;
-	position: absolute;
-	top: 20px;
-	bottom: 0;
-	left: 0;
-	right: 0;
+	width: 724px;
 	list-style: none;
 	padding: 0;
-	overflow-y: scroll;
 	padding-bottom: 20px;
 	margin: 0 auto;
-	column-count: 2;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #officers > ul > li {
 	text-align: center;
-	margin: 10px auto;
 	border: 1px solid #000;
 	width: 320px;
 	height: 400px;
+	margin: 20px;
 	position: relative;
-	display: block;
+	display: inline-block;
 	background-color: rgba(255, 255, 255, 0.9);
-	break-inside: avoid-column;
-	-webkit-column-break-inside: avoid;
-	-moz-column-break-inside: avoid;
-	-o-column-break-inside: avoid;
-	-ms-column-break-inside: avoid;
-	column-break-inside: avoid;
 }
 
 #officers > ul > li > img {
@@ -46,6 +37,7 @@
 	width: 300px;
 	height: 300px;
 	border: 1px solid #AAA;
+	object-fit: cover;
 }
 
 #officers > ul > li > p {
@@ -65,9 +57,9 @@
 }
 
 @media (min-width: 1200px) {
+
 	#officers > ul {
-		top: 0;
-		column-count: 3;
+		width: 95%;
 	}
 
 	#officers > ul > li {

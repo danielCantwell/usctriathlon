@@ -7,7 +7,7 @@ var config = {
 	apiKey: "AIzaSyCQrW6PCvAMZ9zEQ9Z17HACA2mUcxdho9I",
 	authDomain: "usc-triathlon.firebaseapp.com",
 	databaseURL: "https://usc-triathlon.firebaseio.com",
-	storageBucket: "",
+	storageBucket: "gs://usc-triathlon.appspot.com",
 	messagingSenderId: "1427279346"
 };
 firebase.initializeApp(config);
@@ -48,6 +48,9 @@ function MainCtrl($scope) {
 					if (this.newUserInfo) {
 						newUserObj.name = this.newUserInfo.name;
 						newUserObj.phone = this.newUserInfo.phone;
+						newUserObj.hasBike = false;
+						newUserObj.passengerCapacity = 0;
+						newUserObj.bikeCapacity = 0;
 						this.newUserInfo = null;
 					}
 					var updates = {};

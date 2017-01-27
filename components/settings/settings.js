@@ -15,6 +15,19 @@ app.directive('settings', function() {
 	}
 });
 
+app.directive('fileInput', ['$parse', function ($parse) {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attributes) {
+      element.bind('change', function () {
+        $parse(attributes.fileInput)
+        .assign(scope,element[0].files)
+        scope.$apply()
+      });
+    }
+  };
+}]);
+
 function SettingsCtrl($scope, $timeout) {
 	this.$scope = $scope;
 	this.$timeout = $timeout;
@@ -175,6 +188,7 @@ SettingsCtrl.prototype.closePopups = function() {
 };
 
 SettingsCtrl.prototype.enterOfficerCode = function(code) {
+	this.loader = true;
 	var dataRef = firebase.database().ref('officercode');
 	dataRef.once('value', function(snapshot) {
 		if (code == snapshot.val()) {
@@ -190,20 +204,42 @@ SettingsCtrl.prototype.enterOfficerCode = function(code) {
 				this.$scope.$apply();
 			}.bind(this));
 		}
+		this.loader = false;
 	}.bind(this));
 };
 
 SettingsCtrl.prototype.updateOfficerSettings = function() {
+	this.loader = true;
 	var dataRef = firebase.database().ref('officers/' + this.dash.user.uid);
 	var update = {
 		position: this.officerSettings.position
 	};
-	dataRef.update(update).then(function() {
-		this.$timeout(function() {
-			this.$scope.$apply();
-			this.closePopups();
+
+	if (this.officerSettings.image && this.officerSettings.image[0]) {
+		var imageFile = this.officerSettings.image[0];
+		var ext = imageFile.name.substr(imageFile.name.lastIndexOf('.') + 1);
+
+		firebase.storage().ref('officerPics/' + this.dash.user.uid + '.' + ext).put(imageFile).then(function(snapshot) {
+
+			update['imgUrl'] = snapshot.downloadURL;
+
+			dataRef.update(update).then(function() {
+				this.$timeout(function() {
+					this.$scope.$apply();
+					this.closePopups();
+				}.bind(this));
+				this.loader = false;
+			}.bind(this));
 		}.bind(this));
-	}.bind(this));
+	} else {
+		dataRef.update(update).then(function() {
+			this.$timeout(function() {
+				this.$scope.$apply();
+				this.closePopups();
+			}.bind(this));
+			this.loader = false;
+		}.bind(this));
+	}	
 };
 
 })();

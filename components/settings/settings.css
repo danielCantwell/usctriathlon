@@ -49,6 +49,10 @@
 	outline: none;
 }
 
+#settings .table > .row > input[type=file] {
+	margin-top: 20px;
+}
+
 #settings .table > .row > input[type=button] {
 	color: #c41e3a;
 }
@@ -119,5 +123,9 @@
 		width: 240px;
 		height: 80px;
 		font-size: 20px;
+	}
+
+	#settings .table > .row > input[type=file] {
+		margin-top: 15px;
 	}
 }

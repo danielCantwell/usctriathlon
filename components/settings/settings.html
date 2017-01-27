@@ -60,6 +60,11 @@
 					<p>POSITION</p>
 					<input type="text" ng-model="ctrl.officerSettings.position" placeholder="position">
 				</section>
+				<section class="row">
+					<p>IMAGE</p>
+					<input type="file" accept="image/*" file-input="ctrl.officerSettings.image">
+				</section>
+				<section class="loader" ng-if="ctrl.loader"></section>
 			</section>
 		</section>
 		<section class="popup-actions">
