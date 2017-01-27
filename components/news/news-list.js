@@ -53,6 +53,7 @@ NewsListCtrl.prototype.popupClickOutside = function() {
 
 NewsListCtrl.prototype.closePopup = function() {
 	this.newsPopup = false;
+	this.popupKey = '';
 	this.popupName = '';
 	this.popupDetails = '';
 
@@ -70,22 +71,34 @@ NewsListCtrl.prototype.submit = function() {
 	};
 	
 	var dataRef = firebase.database().ref();
-	var newAnnouncementKey = dataRef.child('announcements').push().key;
-	ann.key = newAnnouncementKey;
 	var updates = {};
-	updates['/announcements/' + newAnnouncementKey] = ann;
+
+	if (this.popupKey.length > 0) {
+		updates['/announcements/' + this.popupKey] = ann;
+		ann.key = this.popupKey;
+	} else {
+		var newAnnouncementKey = dataRef.child('announcements').push().key;
+		updates['/announcements/' + newAnnouncementKey] = ann;
+		ann.key = newAnnouncementKey;
+	}
 
 	dataRef.update(updates).then(function() {
 		this.closePopup();
 	}.bind(this));
-
-	this.closePopup();
 };
 
 NewsListCtrl.prototype.editIfOfficer = function(ann) {
 	if (this.userIsOfficer) {
-		console.log('Editing Announcement:', ann.name);
+		this.newsPopup = true;
+		this.popupKey = ann.key;
+		this.popupName = ann.name;
+		this.popupDetails = ann.details;
 	}
+};
+
+NewsListCtrl.prototype.deleteAnnouncement = function(key) {
+	firebase.database().ref('announcements/' + key).remove();
+	this.closePopup();
 };
 
 })();

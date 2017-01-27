@@ -4,7 +4,6 @@
 	order: 2;
 	flex: 2;
 	text-align: left;
-	/*background-color: rgba(255, 255, 255, 0.8);*/
 }
 
 #newslist > section.header {
@@ -140,7 +139,7 @@
 	resize: none;
 	height: 100%;
 	width: 100%;
-	font-size: 50px;
+	font-size: 40px;
 	border: none;
 }
 
@@ -235,6 +234,7 @@
 		height: 100%;
 		width: 100%;
 		font-size: 24px;
+		font-weight: 300;
 		border: none;
 	}
 

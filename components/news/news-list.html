@@ -23,7 +23,8 @@
 			</section>
 		</section>
 		<section class="popup-actions">
-			<input type="button" value="Cancel" ng-click="ctrl.closePopup()">
+			<input type="button" value="Cancel" ng-click="ctrl.closePopup()" ng-if="ctrl.popupKey.length == 0">
+			<input type="button" value="Delete" ng-click="ctrl.deleteAnnouncement(ctrl.popupKey)" ng-if="ctrl.popupKey.length > 0">
 			<input type="button" value="Submit" ng-click="ctrl.submit()">
 		</section>
 	</popup>
