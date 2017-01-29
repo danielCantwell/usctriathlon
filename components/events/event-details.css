@@ -264,16 +264,13 @@
 }
 
 #eventdetails .popup-content > ul {
-	position: absolute;
-	top: 100px;
-	bottom: 100px;
-	left: 0;
-	right: 0;
+	width: 100%;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	display: flex;
 	flex-direction: column;
+	flex: 1 0 auto;
 }
 
 #eventdetails .popup-content > ul > li {
@@ -301,7 +298,6 @@
 	top: 0;
 	bottom: 0;
 	padding-top: 10%;
-	/*height: 100%;*/
 }
 
 #eventdetails .popup-content > ul > li input:checked + label {
@@ -319,8 +315,6 @@
 	height: 100px;
 	border-top: 1px solid #c41e3a;
 	font-size: 0;
-	position: absolute;
-	bottom: 0;
 }
 
 #eventdetails .popup-actions > input {
