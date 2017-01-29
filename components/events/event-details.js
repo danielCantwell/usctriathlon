@@ -53,6 +53,57 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 	this.event = this.dash.objectHolder;
 	this.eKey = this.event.key;
 
+	// Load RSVP status
+	var attendeesRef = firebase.database().ref('attendees/' + this.eKey);
+	attendeesRef.on('value', function(snapshot) {
+		if (this.event.openRSVP) {
+		  if (snapshot.hasChild('driver') && this.dash.user.uid in snapshot.val()['driver']) {
+		    this.rsvpButtonText = 'Driver';
+		  } else if (snapshot.hasChild('passenger') && this.dash.user.uid in snapshot.val()['passenger']) {
+		    this.rsvpButtonText = 'Passenger';
+		  } else if (snapshot.hasChild('not-carpooling') && this.dash.user.uid in snapshot.val()['not-carpooling']) {
+		    this.rsvpButtonText = 'Driving Self';
+		  } else {
+		  	this.rsvpButtonText = 'RSVP';
+		  }
+		} else {
+  		this.rsvpButtonText = 'RSVPs Closed';
+	  }
+	}.bind(this));
+
+	// Keep event updated
+	var eventRef = firebase.database().ref('events/' + this.eKey);
+	eventRef.on('value', function(snapshot) {
+		if (snapshot.val()) {
+			this.event = snapshot.val();
+
+			if (this.event.openRSVP) {
+				this.officerOptionsText.close.display = 'Close RSVPs';
+				this.officerOptionsText.close.value = 'close-rsvp';
+
+				attendeesRef.once('value', function(snapshot) {
+				  if (snapshot.hasChild('driver') && this.dash.user.uid in snapshot.val()['driver']) {
+				    this.rsvpButtonText = 'Driver';
+				  } else if (snapshot.hasChild('passenger') && this.dash.user.uid in snapshot.val()['passenger']) {
+				    this.rsvpButtonText = 'Passenger';
+				  } else if (snapshot.hasChild('not-carpooling') && this.dash.user.uid in snapshot.val()['not-carpooling']) {
+				    this.rsvpButtonText = 'Driving Self';
+				  } else {
+				  	this.rsvpButtonText = 'RSVP';
+				  }
+				}.bind(this));
+			} else {
+				this.officerOptionsText.close.display = 'Open RSVPs';
+				this.officerOptionsText.close.value = 'open-rsvp';
+				this.rsvpButtonText = 'RSVPs Closed';
+			}
+
+			this.$timeout(function() {
+				this.$scope.$apply();
+			}.bind(this));
+		}
+	}.bind(this));
+
 	this.userIsOfficer = false;
 	// Check if user is officer
 	var officerRef = firebase.database().ref('officers/' + this.dash.user.uid);
@@ -71,34 +122,20 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 		}.bind(this));
 	}.bind(this));
 
-	// Load RSVP status
-	var attendeesRef = firebase.database().ref('attendees/' + this.eKey);
-	attendeesRef.on('value', function(snapshot) {
-	  if (snapshot.hasChild('driver') && this.dash.user.uid in snapshot.val()['driver']) {
-	    this.rsvpButtonText = 'Driver';
-	  } else if (snapshot.hasChild('passenger') && this.dash.user.uid in snapshot.val()['passenger']) {
-	    this.rsvpButtonText = 'Passenger';
-	  } else if (snapshot.hasChild('not-carpooling') && this.dash.user.uid in snapshot.val()['not-carpooling']) {
-	    this.rsvpButtonText = 'Driving Self';
-	  } else {
-	  	this.rsvpButtonText = 'RSVP';
-	  }
-	}.bind(this));
-
-	// Check if rsvp status is open or closed
-	var rsvpOpenRef = firebase.database().ref('events/' + this.eKey);
-	rsvpOpenRef.on('value', function(snapshot) {
-		if (snapshot.val()) {
-			var openRSVP = snapshot.val()['openRSVP'];
-			if (openRSVP) {
-				this.officerOptionsText.close.display = 'Close RSVPs';
-				this.officerOptionsText.close.value = 'close-rsvp';
-			} else {
-				this.officerOptionsText.close.display = 'Open RSVPs';
-				this.officerOptionsText.close.value = 'open-rsvp';
-			}
-		}
-	}.bind(this));
+	// // Check if rsvp status is open or closed
+	// var rsvpOpenRef = firebase.database().ref('events/' + this.eKey);
+	// rsvpOpenRef.on('value', function(snapshot) {
+	// 	if (snapshot.val()) {
+	// 		var openRSVP = snapshot.val()['openRSVP'];
+	// 		if (openRSVP) {
+	// 			this.officerOptionsText.close.display = 'Close RSVPs';
+	// 			this.officerOptionsText.close.value = 'close-rsvp';
+	// 		} else {
+	// 			this.officerOptionsText.close.display = 'Open RSVPs';
+	// 			this.officerOptionsText.close.value = 'open-rsvp';
+	// 		}
+	// 	}
+	// }.bind(this));
 
 	var eventLocation = new google.maps.LatLng(this.event.location.lat, this.event.location.lon);
 	var mapOptions = {
@@ -133,7 +170,9 @@ EventDetailsCtrl.prototype.activateTab = function(which) {
 };
 
 EventDetailsCtrl.prototype.viewRsvpForm = function() {
-	this.rsvpPopup = true;
+	if (this.event.openRSVP) {
+		this.rsvpPopup = true;
+	}
 };
 
 EventDetailsCtrl.prototype.initials = function(name) {
@@ -205,6 +244,13 @@ EventDetailsCtrl.prototype.rsvp = function(going) {
 
 EventDetailsCtrl.prototype.clickOfficerOptions = function() {
 	this.showOfficerOptions = true;
+	// if (this.event.openRSVP) {
+	// 	this.officerOptionsText.close.display = 'Close RSVPs';
+	// 	this.officerOptionsText.close.value = 'close-rsvp';
+	// } else {
+	// 	this.officerOptionsText.close.display = 'Open RSVPs';
+	// 	this.officerOptionsText.close.value = 'open-rsvp';
+	// }
 };
 
 EventDetailsCtrl.prototype.popupClickOutside = function() {
