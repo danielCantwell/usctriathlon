@@ -114,11 +114,11 @@ function SettingsCtrl($scope, $timeout) {
 SettingsCtrl.prototype.updatePersonalInfo = function(info) {
 
 	var reEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	var reName = /^([a-zA-Z]{2,}\s[a-zA-Z]{2,})$/;
+	// var reName = /^([a-zA-Z]{2,}\s[a-zA-Z]{2,})$/;
 	var rePhone = /^([0-9]{10})$/;
 
 	// make sure email, name, and phone all have valid info
-	if (reName.test(info.name) && reEmail.test(info.email) && rePhone.test(info.phone)) {
+	if (info.name && (info.name.length > 0) && reEmail.test(info.email) && rePhone.test(info.phone)) {
 
 		var dataRef = firebase.database().ref();
 		var userRef = '/users/' + this.dash.user.uid;

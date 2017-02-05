@@ -68,9 +68,9 @@ LoginCtrl.prototype.validateLoginFields = function(user) {
 
 LoginCtrl.prototype.validateRegistrationFields = function(user) {
 	var validLoginInfo = this.validateLoginFields(user);
-	var reName = /^([a-zA-Z]{2,}\s[a-zA-Z]{2,})$/;
+	// var reName = /^([a-zA-Z]{2,}\s[a-zA-Z]{2,})$/;
 	var rePhone = /^([0-9]{10})$/;
-	this.flagName = !user || !user.name || !reName.test(user.name);
+	this.flagName = !user || !user.name;
 	this.flagPhone = !user || !user.phone || !rePhone.test(user.phone);
 
 	return validLoginInfo && !this.flagName && !this.flagPhone;
