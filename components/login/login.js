@@ -49,7 +49,7 @@ LoginCtrl.prototype.register = function(user) {
 			console.log('Registration Failed');
 			this.loader = false;
 			this.main.newUserInfo = null;
-		});
+		}.bind(this));
 	}
 };
 
