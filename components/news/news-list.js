@@ -32,6 +32,7 @@ function NewsListCtrl($scope, $timeout) {
 
 	this.popupTitle = 'New Announcement';
 	this.newsPopup = false;
+	this.popupKey = '';
 
 	this.userIsOfficer = false;
 	// Check if user is officer
@@ -66,9 +67,12 @@ NewsListCtrl.prototype.submit = function() {
 	var negativeDate = 0 - Date.now();
 	var ann = {
 		name: this.popupName,
-		details: this.popupDetails,
 		negdate: negativeDate
 	};
+
+	if (this.popupDetails) {
+		ann.details = this.popupDetails;
+	}
 	
 	var dataRef = firebase.database().ref();
 	var updates = {};
