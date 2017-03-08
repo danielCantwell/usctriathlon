@@ -20,12 +20,12 @@
 }
 
 #newslist > section.header > input {
-	width: 50px;
-	height: 50px;
+	width: 25px;
+	height: 25px;
 	display: inline-block;
 	margin: 0px;
 	float: right;
-	margin-right: 50px;
+	margin-right: 20px;
 }
 
 #newslist > section.header > hr {
@@ -73,39 +73,18 @@
 	word-wrap: break-word;
 }
 
-#newslist .popup-header {
-	width: 100%;
-	height: 100px;
-	background-color: #c41e3a;
-	color: white;
-	text-align: center;
-}
-
-#newslist .popup-header > h1 {
-	font-size: 40px;
-	padding-left: 20px;
-	line-height: 100px;
-}
-
-#newslist .popup-content {
-	width: 100%;
-	position: absolute;
-	top: 100px;
-	bottom: 100px;
-}
-
 #newslist .popup-content * {
 	display: block;
 }
 
 #newslist .popup-content > input {
 	position: relative;
-	top: 20px;
+	top: 0;
 	width: 90%;
 	margin: 0 auto;
-	height: 100px;
-	line-height: 100px;
-	font-size: 50px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
 	border: none;
 	border-bottom: 1px solid #000;
 	border-radius: 0;
@@ -114,36 +93,18 @@
 
 #newslist .popup-content > section.detailssection {
 	position: absolute;
-	top: 180px;
-	left: 5%;
-	right: 5%;
-	bottom: 20px;
+	top: 50px;
+	bottom: 0;
+	left: 10px;
+	right: 10px;
 }
 
 #newslist .popup-content > section > textarea {
 	resize: none;
 	height: 100%;
 	width: 100%;
-	font-size: 40px;
+	font-size: 16px;
 	border: none;
-}
-
-#newslist .popup-actions {
-	width: 100%;
-	height: 100px;
-	border-top: 1px solid #c41e3a;
-	font-size: 0;
-	position: absolute;
-	bottom: 0;
-}
-
-#newslist .popup-actions > input {
-	display: inline-block;
-	width: 50%;
-	font-size: 35px;
-	height: 100px;
-	border: 1px solid black;
-	background-color: transparent;
 }
 
 @media (min-width: 768px) {
