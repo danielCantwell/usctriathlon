@@ -19,8 +19,9 @@ function EventListCtrl($scope, $timeout) {
 	this.$scope = $scope;
 	this.$timeout = $timeout;
 
-	var eventRef = firebase.database().ref('events').orderByChild('datetime').startAt(Date.now() - 86400000).limitToFirst(4);
+	var eventRef = firebase.database().ref('events').orderByChild('datetime').startAt(Date.now() - (3 * 86400000));
 	// 86400000 is the number of milliseconds in one day
+	// 604800000 is the number of milliseconds in one week
 	eventRef.on('value', function(snapshot) {
 		this.events = [];
 		snapshot.forEach(function(child) {
@@ -155,6 +156,12 @@ EventListCtrl.prototype.rsvpText = function(openRSVP) {
 		return 'RSVP Open';
 	} else {
 		return 'RSVP Closed';
+	}
+};
+
+EventListCtrl.prototype.eventClass = function(event) {
+	if (event.datetime < (Date.now() - 86400000)) {
+		return 'old';
 	}
 };
 

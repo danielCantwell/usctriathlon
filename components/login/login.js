@@ -26,9 +26,18 @@ LoginCtrl.prototype.login = function(user) {
 		// Login User
 		this.loader = true;
 		firebase.auth().signInWithEmailAndPassword(user.email, user.password).catch(function(error) {
-			console.log('Sign In Failed');
 			this.loader = false;
-		});
+			switch (error.code) {
+				case 'auth/wrong-password':
+					this.errorMessage = 'Password is not correct';
+			}
+			if (this.errorMessage == null) {
+				this.errorMessage = 'Error logging in. Please make sure your email is correct.';
+			}
+			this.$scope.$apply();
+		}.bind(this));
+	} else {
+		this.errorMessage = 'Error in the format of your login information'
 	}
 };
 

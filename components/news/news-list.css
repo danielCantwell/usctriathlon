@@ -1,22 +1,21 @@
 #newslist {
 	width: 100%;
 	position: relative;
-	order: 2;
-	flex: 2;
+	height: auto;
 	text-align: left;
 }
 
 #newslist > section.header {
 	width: 100%;
-	top: 20px;
-	position: absolute;
+	top: 10px;
+	position: relative;
 }
 
 #newslist > section.header > h1 {
-	font-size: 50px;
+	font-size: 24px;
 	color: #c41e3a;
 	text-shadow: 5px 5px 10px #AAA;
-	margin-left: 40px;
+	margin-left: 20px;
 	display: inline-block;
 }
 
@@ -34,26 +33,13 @@
 }
 
 #newslist > section.content {
-	position: absolute;
-	top: 110px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
+	position: relative;
 }
 
 #newslist > section.content > ul {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	max-height:  100%;
-	overflow-y: auto;
-	overflow-x: hidden;
+	width: 100%;
 	list-style: none;
-	padding: 0px 0px 20px 0px;
-	/*display: flex;*/
-	/*flex-direction: column-reverse;*/
+	padding: 8px 0px 8px 0px;
 }
 
 #newslist > section.content > ul > li {
@@ -63,27 +49,26 @@
 	width: 90%;
 	background-color: #FFF;
 	border-radius: 4px;
-	margin-bottom: 20px;
-	box-shadow: 0px 4px 10px #AAAAAA;
-	min-height: 160px;
+	margin-bottom: 10px;
+	box-shadow: 0px 4px 10px #AAA;
+	min-height: 60px;
 }
 
 #newslist > section.content > ul > li > h2 {
 	display: block;
 	position: absolute;
-	top: 10px;
-	left: 20px;
-	font-size: 40px;
+	top: 5px;
+	left: 10px;
+	font-size: 20px;
 	font-weight: 400;
 }
 
 #newslist > section.content > ul > li > pre {
 	display: block;
-	/*position: relative;*/
-	font-size: 30px;
-	margin: 0 20px;
-	padding-top: 60px;
-	padding-bottom: 20px;
+	font-size: 16px;
+	margin: 0 10px;
+	padding-top: 30px;
+	padding-bottom: 10px;
 	white-space: pre-wrap;
 	word-wrap: break-word;
 }
@@ -161,9 +146,10 @@
 	background-color: transparent;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
 	#newslist {
-		flex: 1;
+		display: inline-block;
+		width: 300px;
 	}
 
 	#newslist > section.header > h1 {

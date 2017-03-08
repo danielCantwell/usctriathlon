@@ -3,10 +3,12 @@
 	<img src="assets/usctri.png" alt="USC TRI">
 	<section class="loader" ng-if="ctrl.loader"></section>
 
+	<p class="error-message">{{ctrl.errorMessage}}</p>
+
 	<section id="login">
 		<section class="row">
 			<p ng-class="{required: ctrl.flagEmail}">EMAIL</p>
-			<input type="text" ng-model="user.email" placeholder="ttrojan@usc.edu">
+			<input type="email" ng-model="user.email" placeholder="ttrojan@usc.edu">
 		</section>
 		<section class="row">
 			<p ng-class="{required: ctrl.flagPassword}">PASSWORD</p>

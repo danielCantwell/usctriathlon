@@ -16,7 +16,7 @@
 		<h2>Drivers</h2>
 		<ul>
 			<li ng-repeat="driver in ctrl.drivers track by $index">
-				<label>{{driver.name}}<input type="checkbox" ng-checked="driver.selected" ng-model="ctrl.driverSelection[driver.key]" ng-disabled="!ctrl.userIsOfficer"></label>
+				<label><input type="checkbox" ng-checked="driver.selected" ng-model="ctrl.driverSelection[driver.key]" ng-disabled="!ctrl.userIsOfficer">{{driver.name}}</label>
 				<section>
 					{{driver.passengerCapacity}}<img src="assets/person.png" alt="people"> {{driver.bikeCapacity}} <img src="assets/simple_bike.png" alt="bikes">
 				</section>
@@ -26,7 +26,7 @@
 		<h2>Passengers</h2>
 		<ul>
 			<li ng-repeat="passenger in ctrl.passengers track by $index">
-				<p>{{passenger.name}}</p><img src="assets/person.png"><img src="assets/simple_bike.png" ng-if="passenger.hasBike">
+				<img src="assets/person.png"><img src="assets/simple_bike.png" ng-if="passenger.hasBike"><p>{{passenger.name}}</p>
 			</li>
 		</ul>
 

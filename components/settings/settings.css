@@ -10,11 +10,11 @@
 
 #settings .table {
 	position: relative;
-	top: 80px;
+	top: 40px;
 }
 
 #settings .table > .row {
-	height: 80px;
+	height: 40px;
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-width: 1px 0px 1px 0px;
 }
@@ -23,10 +23,10 @@
 	position: absolute;
 	left: 0px;
 	text-align: right;
-	width: 40%;
-	font-size: 40px;
-	height: 80px;
-	line-height: 80px;
+	width: 35%;
+	font-size: 16px;
+	height: 40px;
+	line-height: 40px;
 	margin: 0px;
 }
 
@@ -39,14 +39,20 @@
 	position: absolute;
 	right: 0px;
 	text-align: left;
-	width: 50%;
-	font-size: 30px;
-	height: 80px;
+	width: 60%;
+	font-size: 16px;
+	height: 40px;
 	margin: 0px;
-	padding-left: 10px;
+	padding-left: 5px;
 	border: none;
 	background-color: transparent;
 	outline: none;
+}
+
+#settings .table > .row > select {
+	left: 40%;
+	right: auto;
+	width: auto;
 }
 
 #settings .table > .row > input[type=file] {
@@ -58,23 +64,24 @@
 }
 
 #settings > input {
-	position: relative;
-	top: 140px;
-
 	display: block;
-	margin: 20px auto 0 auto;
+	margin: 0 auto 20px auto;
 	text-align: center;
 
-	width: 80%;
-	height: 80px;
+	width: 200px;
+	height: 60px;
 	
+	outline: none;
 	background-color: white;
 	border: 1px solid #000;
 	border-radius: 2px;
-	outline: none;
 
-	font-size: 40px;
-	line-height: 80px;
+	font-size: 16px;
+	line-height: 60px;
+}
+
+#settings > input:first-of-type {
+	margin-top: 80px;
 }
 
 #settings > input:hover {
@@ -97,7 +104,7 @@
 	height: 100%;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
 
 	#settings .table {
 		top: 50px;

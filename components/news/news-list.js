@@ -23,7 +23,10 @@ function NewsListCtrl($scope, $timeout) {
 	newsRef.on('value', function(snapshot) {
 		this.announcements = [];
 		snapshot.forEach(function(child) {
-			this.announcements.push(child.val());
+			var ann = child.val();
+			// ann.details = '[Fun Stuff](https://www.stuff.com)'
+			// ann.details = markdown.toHTML(ann.details);
+			this.announcements.push(ann);
 		}.bind(this));
 		this.$timeout(function() {
 			this.$scope.$apply();
@@ -103,6 +106,10 @@ NewsListCtrl.prototype.editIfOfficer = function(ann) {
 NewsListCtrl.prototype.deleteAnnouncement = function(key) {
 	firebase.database().ref('announcements/' + key).remove();
 	this.closePopup();
+};
+
+NewsListCtrl.prototype.getMarkdown = function(text) {
+	return markdown.toHTML(text);
 };
 
 })();

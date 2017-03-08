@@ -5,7 +5,7 @@
 		<hr>
 	</section>
 	<ul>
-		<li ng-repeat="event in ctrl.events" ng-click="ctrl.loadEvent(event)">
+		<li ng-repeat="event in ctrl.events" ng-click="ctrl.loadEvent(event)" ng-class="ctrl.eventClass(event)">
 			<h2>{{event.name}}</h2>
 			<p class="rsvptext">{{ctrl.rsvpText(event.openRSVP)}}</p>
 			<p class="eventdate">{{event.datetime | date : 'h:mm a - dd MMM yyyy'}}</p>

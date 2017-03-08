@@ -14,33 +14,35 @@
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	height: 100px;
+	height: 50px;
 	background-color: rgba(255, 255, 255, 0.9);
+	font-size: 0;
 }
 
 #dashboard > #tabs > section {
 	display: inline-block;
-	width: 33%;
-	height: 100px;
+	width: 33.33%;
+	height: 50px;
 	margin: 0px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-	transition: border-width 0.5s;
-	transition: border-color 0.5s;
+	transition: all 0.1s;
+	/*transition: border-color 0.5s;*/
+	margin: 0;
 }
 
 #dashboard > #tabs > section.active {
-	border-bottom: 4px solid #c41e3a;
-	transition: border-width 0.5s;
-	transition: border-color 0.5s;
+	border-bottom: 2px solid #c41e3a;
+	transition: all 0.1s;
+	/*transition: border-color 0.5s;*/
 }
 
 #dashboard > #tabs > section > input {
 	display: block;
-	height: 80px;
-	width: 80px;
+	height: 40px;
+	width: 40px;
 	margin: 0 auto;
 	position: relative;
-	top: 10px;
+	top: 5px;
 	outline: none;
 	border: none;
 }
@@ -57,20 +59,19 @@
 #dashboard > #content > #officers,
 #dashboard > #content > #settings {
 	position: fixed;
-	top: 100px;
+	top: 50px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
 }
 
 #dashboard > #content > #main {
-	display: flex;
-	flex-direction: column;
+	display: block;
 	background-color: rgba(255, 255, 255, 0.9);
+	overflow-y: scroll;
 }
 
-@media (min-width: 1200px) {
-
+@media only screen and (min-width: 768px) {
 	#dashboard > #tabs {
 		height: 50px;
 	}
@@ -92,16 +93,42 @@
 		width: 100%;
 	}
 
+	#dashboard > #content > #main {
+		flex-direction: row;
+	}
+
 	#dashboard > #content > #main,
 	#dashboard > #content > #officers,
 	#dashboard > #content > #settings {
 		top: 60px;
-		width: 80%;
+		width: 750px;
 		margin: 0 auto;
 		text-align: center;
+		transition: width 1s;
 	}
+}
 
-	#dashboard > #content > #main {
-		flex-direction: row;
+
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+	#dashboard > #content > #main,
+	#dashboard > #content > #officers,
+	#dashboard > #content > #settings {
+		top: 60px;
+		width: 1000px;
+		margin: 0 auto;
+		text-align: center;
+		transition: width 1s;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	#dashboard > #content > #main,
+	#dashboard > #content > #officers,
+	#dashboard > #content > #settings {
+		top: 60px;
+		width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+		transition: width 1s;
 	}
 }

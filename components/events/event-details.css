@@ -12,33 +12,35 @@
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	height: 90px;
+	height: 40px;
 	border-bottom: 1px solid #c41e3a;
 	display: flex;
 	flex-direction: row;
 	background-color: transparent;
-	/*background-color: #fff;*/
 }
 
 #eventdetails > header > h1 {
-	margin: 0 auto;
-	text-align: center;
-	font-size: 50px;
+	font-size: 20px;
 	color: #c41e3a;
 	flex: 4 0 auto;
-	line-height: 90px;
+	line-height: 40px;
 }
 
 #eventdetails > header > section {
 	flex: 1 0 0;
 	margin: 0 auto;
 	text-align: center;
-	padding-top: 20px;
+}
+
+#eventdetails > header > section > input[type=image] {
+	height: 20px;
+	margin-top: 10px;
+	margin-left: 10px
 }
 
 #eventdetails > header > section > input {
-	height: 50px;
-	font-size: 32px;
+	height: 40px;
+	font-size: 16px;
 	text-align: center;
 	background-color: transparent;
 	border: none;
@@ -49,10 +51,10 @@
 
 #eventdetails > #tabs {
 	position: absolute;
-	top: 90px;
+	top: 50px;
 	left: 0px;
 	right: 0px;
-	height: 100px;
+	height: 30px;
 	display: flex;
 	flex-direction: row;
 	background-color: transparent;
@@ -62,24 +64,22 @@
 #eventdetails > #tabs > section {
 	display: inline-block;
 	flex: 1 0 auto;
-	height: 100px;
+	height: 30px;
 	margin: 0px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-	transition: border-width 0.5s;
-	transition: border-color 0.5s;
+	transition: all 0.1s;
 }
 
 #eventdetails > #tabs > section.active {
-	border-bottom: 4px solid #c41e3a;
-	transition: border-width 0.5s;
-	transition: border-color 0.5s;
+	border-bottom: 2px solid #c41e3a;
+	transition: all 0.1s;
 }
 
 #eventdetails > #tabs > section > input {
 	display: block;
 	margin: 0 auto;
 	position: relative;
-	font-size: 32px;
+	font-size: 16px;
 	background-color: transparent;
 	outline: none;
 	border: none;
@@ -95,18 +95,12 @@
 
 #eventdetails > #eventinfo {
 	position: absolute;
-	top: 200px;
-	left: 40px;
-	right: 40px;
-	bottom: 20px;
+	top: 100px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
 	background-color: transparent;
-	/*background-color: #fff;*/
-}
-
-#eventdetails > #eventinfo > h3 {
-	margin: 0 auto;
-	text-align: center;
-	font-size: 40px;
+	overflow-y: scroll;
 }
 
 #eventdetails > #eventinfo > input[type=image] {
@@ -118,21 +112,15 @@
 }
 
 #eventdetails > #eventinfo > #details > #map {
-	height: 400px;
-	margin-top: 40px;
+	height: 200px;
 	box-shadow: 0px 0px 20px #AAA;
 }
 
 #eventdetails > #eventinfo > #details > pre {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 200;
-	font-size: 30px;
-	position: absolute;
-	top: 500px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-	overflow-y: scroll;
+	font-size: 16px;
+	margin-top: 20px;
 	white-space: pre-wrap;
 	word-wrap: break-word;
 }
@@ -141,7 +129,7 @@
 	list-style: none;
 	padding: 0px;
 	position: absolute;
-	top: 10px;
+	top: 0px;
 	bottom: 80px;
 	left: 0;
 	right: 0;
@@ -156,13 +144,13 @@
 
 #eventdetails > #eventinfo > #comments > ul > li > #initials {
 	display: inline-block;
-	width: 60px;
-	height: 60px;
+	width: 27px;
+	height: 27px;
 	border: 1px solid black;
-	border-radius: 4px;
+	border-radius: 2px;
 	vertical-align: top;
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 	position: relative;
 }
 
@@ -170,11 +158,11 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	width: 60px;
-	height: 60px;
-	line-height: 60px;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
 	text-align: center;
-	font-size: 40px;
+	font-size: 18px;
 	font-weight: 600;
 	padding: 0px;
 	margin: 0px;
@@ -182,20 +170,23 @@
 }
 
 #eventdetails > #eventinfo > #comments > ul > li > #comment-content {
-	display: inline-block;
-	width: 90%;
-	margin-left: 10px;
+	position: absolute;
+	top: 0;
+	left: 30px;
+	right: 10px;
+	margin-left: 5px;
 }
 
 #eventdetails > #eventinfo > #comments > ul > li > #comment-content > .c-message {
-	font-size: 40px;
+	font-size: 16px;
 	margin: 0px 0px 10px 0px;
 }
 
 #eventdetails > #eventinfo > #comments > ul > li > #comment-content > .c-name {
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 400;
 	margin: 15px 0px 0px 0px;
+	color: #333;
 }
 
 #eventdetails > #eventinfo > #comments > ul + section {
@@ -203,7 +194,7 @@
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-	height: 80px;
+	height: 30px;
 	margin: 0px;
 	padding: 0px;
 	border: 1px solid #AAA;
@@ -221,19 +212,20 @@
 #eventdetails > #eventinfo > #comments > ul + section > section > input {
 	height: 100%;
 	margin: 0px;
-	font-size: 45px;
+	font-size: 18px;
 	border: none;
 }
 
 #eventdetails > #eventinfo > #comments > ul + section > section > input[type="text"] {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
 	outline-color: #c41e3a;
 	flex: 9 0 auto;
 }
 
 #eventdetails > #eventinfo > #comments > ul + section > section > input[type="text"]:focus {
 	border: 1px solid #c41e3a;
+	border-radius: 0;
 }
 
 #eventdetails > #eventinfo > #comments > ul + section > section > input[type="button"] {
@@ -280,6 +272,8 @@
 	position: relative;
 	border: 1px solid #000;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 #eventdetails .popup-content > ul > li input {
@@ -294,15 +288,34 @@
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
-	position: absolute;
+/*	position: absolute;
 	top: 0;
 	bottom: 0;
-	padding-top: 10%;
+	padding-top: 10%;*/
+	flex: 1 0 auto;
+	transition: font-size 0.5s;
+}
+
+#eventdetails .popup-content > ul > li input + label:before {
+	position: absolute;
+	content: "\00bb ";
+	left: -10px;
+	transition: all 0.5s;
+	opacity: 0;
 }
 
 #eventdetails .popup-content > ul > li input:checked + label {
 	color: #c41e3a;
-	font-size: 80px;
+	font-size: 70px;
+	transition: font-size 0.5s;
+}
+
+#eventdetails .popup-content > ul > li input:checked + label:before {
+	display: inline-block;
+	content: "\00bb ";
+	left: 50px;
+	opacity: 1;
+	transition: all 0.5s;
 }
 
 #eventdetails .popup-content > input:active {
@@ -322,11 +335,11 @@
 	width: 50%;
 	font-size: 35px;
 	height: 100px;
-	border: 1px solid black;
+	border: 1px solid #000;
 	background-color: transparent;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
 	#eventdetails > header {
 		height: 50px;
 	}
@@ -447,10 +460,12 @@
 
 	#eventdetails .popup-content > ul > li label {
 		font-size: 30px;
+		transition: font-size 0.5s;
 	}
 
 	#eventdetails .popup-content > ul > li input:checked + label {
-		font-size: 45px;
+		font-size: 40px;
+		transition: font-size 0.5s;
 	}
 
 	#eventdetails .popup-actions {

@@ -6,7 +6,7 @@
 	</section>
 	<section class="content">
 		<ul>
-			<li ng-repeat="ann in ctrl.announcements" ng-click="ctrl.editIfOfficer(ann)">
+			<li ng-repeat="ann in ctrl.announcements" ng-click="ctrl.editIfOfficer(ann)" ng-bind-html-unsafe="ann.details">
 				<h2>{{ann.name}}</h2>
 				<pre>{{ann.details}}</pre>
 			</li>

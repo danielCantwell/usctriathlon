@@ -52,6 +52,7 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 
 	this.event = this.dash.objectHolder;
 	this.eKey = this.event.key;
+	this.commentsTabTitle = 'Comments (0)';
 
 	// Load RSVP status
 	var attendeesRef = firebase.database().ref('attendees/' + this.eKey);
@@ -117,6 +118,9 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 	var commentsRef = firebase.database().ref('comments/' + this.eKey);
 	commentsRef.on('value', function(snapshot) {
 		this.comments = snapshot.val();
+		if (this.comments) {
+			this.commentsTabTitle = 'Comments (' + Object.keys(this.comments).length + ')';
+		}
 		this.$timeout(function() {
 			this.$scope.$apply();
 		}.bind(this));

@@ -10,57 +10,50 @@
 
 #officers > ul {
 	display: block;
-	width: 724px;
+	width: 100%;
 	list-style: none;
 	padding: 0;
 	padding-bottom: 20px;
 	margin: 0 auto;
-	padding-left: 20px;
-	padding-right: 20px;
+	transition: all 1s;
+	text-align: center;
 }
 
 #officers > ul > li {
-	text-align: center;
 	border: 1px solid #000;
-	width: 320px;
-	height: 400px;
-	margin: 20px;
+	width: 125px;
+	min-height: 165px;
+	margin: 10px;
 	position: relative;
 	display: inline-block;
 	background-color: rgba(255, 255, 255, 0.9);
+	text-align: center;
+	vertical-align: top;
 }
 
 #officers > ul > li > img {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	right: 10px;
-	width: 300px;
-	height: 300px;
+	margin: 8px auto;
+	width: 105px;
+	height: 105px;
 	border: 1px solid #AAA;
 	object-fit: cover;
 }
 
 #officers > ul > li > p {
-	position: absolute;
-	bottom: 10px;
-	left: 0;
-	right: 0;
-	font-size: 24px
+	font-size: 14px;
+	margin-top: 6px;
 }
 
 #officers > ul > li > h2 {
-	position: absolute;
-	bottom: 40px;
-	left: 0;
-	right: 0;
-	font-size: 32px;
+	font-size: 18px;
+	font-weight: 400;
 }
 
-@media (min-width: 1200px) {
+@media only screen and (min-width: 768px) {
 
 	#officers > ul {
-		width: 95%;
+		width: 750px;
+		transition: width 1s;
 	}
 
 	#officers > ul > li {
@@ -75,12 +68,25 @@
 
 	#officers > ul > li > h2 {
 		font-size: 18px;
-		font-weight: 500;
 		bottom: 24px;
 	}
 
 	#officers > ul > li > p {
 		font-size: 16px;
 		bottom: 6px;
+	}
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+	#officers > ul {
+		width: 1000px;
+		transition: width 1s;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	#officers > ul {
+		width: 1200px;
+		transition: width 1s;
 	}
 }
