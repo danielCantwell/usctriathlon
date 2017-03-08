@@ -38,7 +38,7 @@ function EventListCtrl($scope, $timeout) {
 	this.popupDate = '';
 	this.popupPositiveButton = 'Next';
 
-	this.userIsOfficer = true;
+	this.userIsOfficer = false;
 	// Check if user is officer
 	var officerRef = firebase.database().ref('officers/' + this.dash.user.uid);
 	officerRef.once('value', function(snapshot) {

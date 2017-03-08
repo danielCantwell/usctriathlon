@@ -242,4 +242,18 @@ SettingsCtrl.prototype.updateOfficerSettings = function() {
 	}	
 };
 
+SettingsCtrl.prototype.demoteOfficer = function() {
+	var officerRef = firebase.database().ref('officers/' + this.dash.user.uid);
+	officerRef.once('value').then(function(snapshot) {
+	  var imgUrl = snapshot.val().imgUrl;
+	  firebase.storage().refFromURL(imgUrl).delete();
+	});
+	officerRef.remove();
+	this.officerSettings = {
+		isOfficer: false,
+		position: 'none'
+	};
+	this.closePopups();
+}
+
 })();

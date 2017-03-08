@@ -250,7 +250,7 @@
 	border: none;
 	border: 1px solid black;
 	background-color: #fff;
-	font-size: 40px;
+	font-size: 16px;
 	border-radius: 0;
 	-webkit-appearance: none;
 }
@@ -260,40 +260,31 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	display: flex;
-	flex-direction: column;
-	flex: 1 0 auto;
 }
 
 #eventdetails .popup-content > ul > li {
 	margin: 0;
 	padding: 0;
-	flex: 1 0 0;
-	position: relative;
-	border: 1px solid #000;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
+	border-top: 1px solid #000;
+	height: 73.33px;
 }
 
 #eventdetails .popup-content > ul > li input {
-	visibility: hidden;
-	display: block;
+	display: none;
+	margin: 0;
+	padding: 0;
 }
 
 #eventdetails .popup-content > ul > li label {
 	display: block;
 	cursor: pointer;
-	font-size: 60px;
+	font-size: 18px;
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
-/*	position: absolute;
-	top: 0;
-	bottom: 0;
-	padding-top: 10%;*/
-	flex: 1 0 auto;
 	transition: font-size 0.5s;
+	height: 73.33px;
+	line-height: 73.33px;
 }
 
 #eventdetails .popup-content > ul > li input + label:before {
@@ -306,7 +297,7 @@
 
 #eventdetails .popup-content > ul > li input:checked + label {
 	color: #c41e3a;
-	font-size: 70px;
+	font-size: 22px;
 	transition: font-size 0.5s;
 }
 
@@ -315,7 +306,7 @@
 	content: "\00bb ";
 	left: 50px;
 	opacity: 1;
-	transition: all 0.5s;
+	transition: left 0.5s;
 }
 
 #eventdetails .popup-content > input:active {

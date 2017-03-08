@@ -56,7 +56,8 @@
 }
 
 #settings .table > .row > input[type=file] {
-	margin-top: 20px;
+	margin-top: 8px;
+	font-size: 16px;
 }
 
 #settings .table > .row > input[type=button] {
@@ -93,7 +94,7 @@
 }
 
 #settings .loader {
-	position: static;
+	position: absolute;
 	display: block;
 	margin: 80px auto 0 auto;
 }

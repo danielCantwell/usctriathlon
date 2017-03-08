@@ -64,6 +64,10 @@
 					<p>IMAGE</p>
 					<input type="file" accept="image/*" file-input="ctrl.officerSettings.image">
 				</section>
+				<section class="row">
+					<p>STATUS</p>
+					<input type="button" ng-click="ctrl.demoteOfficer()" value="Click if not an Officer">
+				</section>
 				<section class="loader" ng-if="ctrl.loader"></section>
 			</section>
 		</section>
