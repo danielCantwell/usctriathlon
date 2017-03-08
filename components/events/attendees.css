@@ -140,14 +140,18 @@
 	}
 
 	#attendees > .lists > ul {
-		column-count: 3;
-		margin-right: 20px;
+		/*column-count: 3;*/
+		/*margin-right: 20px;*/
+	}
+
+	#attendees > .lists > ul > li {
+		padding-left: 40px;
 	}
 
 	#attendees > .lists > ul > li > label > input[type=checkbox] {
 		width: auto;
 		height: auto;
-		margin-left: 10px;
+		margin-right: 10px;
 	}
 
 	#attendees > .lists > ul > li > section {
@@ -163,7 +167,6 @@
 	#attendees > .lists > ul > li > p,
 	#attendees > .lists > ul > li > label {
 		font-size: 20px;
-		margin-right: 10px;
 		height: 20px;
 		line-height: 20px;
 	}

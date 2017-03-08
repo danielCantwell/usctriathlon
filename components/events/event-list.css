@@ -125,8 +125,7 @@
 @media (min-width: 768px) {
 
 	#eventlist {
-		display: inline-block;
-		width: 300px;
+		width: 50%;
 	}
 
 	#eventlist > section.header {
@@ -177,41 +176,8 @@
 		font-size: 20px;
 	}
 
-	#eventlist .popup-content {
-		top: 60px;
-		bottom: 60px;
-	}
-
-	#eventlist .popup-content > input {
-		top: 0px;
-		height: 60px;
-		line-height: 60px;
-		font-size: 24px;
-		border: none;
-		border-bottom: 1px solid #000;
-		border-radius: 0;
-		background-color: transparent;
-	}
-
-	#eventlist .popup-content > section.detailssection {
-		position: absolute;
-		top: 140px;
-		left: 5%;
-		right: 5%;
-		bottom: 20px;
-	}
-
 	#eventlist .popup-content > section > textarea {
 		font-size: 20px;
-	}
-
-	#eventlist .popup-actions {
-		height: 60px;
-	}
-
-	#eventlist .popup-actions > input {
-		font-size: 20px;
-		height: 60px;
 	}
 
 }

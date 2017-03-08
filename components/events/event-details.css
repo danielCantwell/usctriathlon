@@ -7,6 +7,10 @@
 	background-color: rgba(255, 255, 255, 0.9);
 }
 
+#eventdetails * {
+	transition: all 1s;
+}
+
 #eventdetails > header {
 	position: absolute;
 	top: 0px;
@@ -172,7 +176,7 @@
 #eventdetails > #eventinfo > #comments > ul > li > #comment-content {
 	position: absolute;
 	top: 0;
-	left: 30px;
+	left: 40px;
 	right: 10px;
 	margin-left: 5px;
 }
@@ -338,11 +342,17 @@
 	#eventdetails > header > h1 {
 		font-size: 30px;
 		line-height: 50px;
+		text-align: center;
 	}
 
 	#eventdetails > header > section > input {
 		height: 24px;
 		font-size: 20px;
+		margin-top: 16px;
+	}
+
+	#eventdetails > header > section > input[type=image] {
+		height: 32px;
 	}
 
 	#eventdetails > #tabs {
@@ -368,26 +378,36 @@
 		top: 125px;
 	}
 
+	#eventdetails > #eventinfo > #details {
+		width: 100%;
+		height: 100%;
+	}
+
 	#eventdetails > #eventinfo > #details > #map {
-		position: absolute;
+		/*position: absolute;*/
 		width: 48%;
-		height: auto;
-		top: 0px;
-		left: 0px;
-		bottom: 0px;
-		right: auto;
+		height: 100%;
+		/*top: 0px;*/
+		/*left: 0px;*/
+		/*bottom: 0px;*/
+		/*right: auto;*/
 		display: inline-block;
 		margin-top: 0px
+		vertical-align: top;
+		transition: height 1s;
 	}
 
 	#eventdetails > #eventinfo > #details > pre {
 		display: inline-block;
 		font-size: 20px;
 		width: 50%;
-		top: 20px;
-		right: 0px;
-		bottom: 20px;
-		left: auto;
+		/*top: 20px;*/
+		/*right: 0px;*/
+		/*bottom: 20px;*/
+		/*left: auto;*/
+		vertical-align: top;
+		margin-top: 0;
+		padding-left: 10px;
 	}
 
 	#eventdetails > #eventinfo > #comments > ul {
@@ -439,27 +459,33 @@
 		color: #c41e3a;
 	}
 
-	#eventdetails .popup-content > ul {
+/*	#eventdetails .popup-content > ul {
 		position: absolute;
 		top: 60px;
 		bottom: 60px;
-	}
+	}*/
 
 	#eventdetails .popup-content > input {
 		font-size: 24px;
 	}
 
+	#eventdetails .popup-content > ul > li {
+		height: 93.33px;
+	}
+
 	#eventdetails .popup-content > ul > li label {
-		font-size: 30px;
+		font-size: 28px;
 		transition: font-size 0.5s;
+		height: 93.33px;
+		line-height: 93.33px
 	}
 
 	#eventdetails .popup-content > ul > li input:checked + label {
-		font-size: 40px;
+		font-size: 34px;
 		transition: font-size 0.5s;
 	}
 
-	#eventdetails .popup-actions {
+/*	#eventdetails .popup-actions {
 		width: 100%;
 		height: 60px;
 	}
@@ -467,5 +493,5 @@
 	#eventdetails .popup-actions > input {
 		font-size: 20px;
 		height: 60px;
-	}
+	}*/
 }
