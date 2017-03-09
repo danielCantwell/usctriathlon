@@ -3,7 +3,8 @@
 		<section>
 			<input type="image" src="assets/back.png" ng-click="ctrl.goBack()">
 		</section>
-		<h1>{{ctrl.event.name}}</h1>
+		<h1 ng-click="ctrl.goBack()">{{ctrl.event.name}}</h1>
+		<section class="empty"></section>
 		<section ng-if="ctrl.userIsOfficer">
 			<input type="image" src="assets/options.png" ng-click="ctrl.clickOfficerOptions()">
 		</section>

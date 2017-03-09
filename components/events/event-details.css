@@ -30,6 +30,10 @@
 	line-height: 40px;
 }
 
+#eventdetails > header > empty {
+	flex: 0 0 auto;
+}
+
 #eventdetails > header > section {
 	flex: 1 0 0;
 	margin: 0 auto;

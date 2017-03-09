@@ -126,5 +126,6 @@
 
 	#popup .popup-actions > input {
 		font-size: 20px;
+		height: 60px;
 	}
 }
