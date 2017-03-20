@@ -52,7 +52,7 @@
 		</section>
 
 		<attendees ng-if="ctrl.view == 'attendees'" eventctrl="ctrl"></attendees>
-		<popup ng-if="ctrl.rsvpPopup" ctrl="ctrl" class="small">
+		<popup ng-if="ctrl.rsvpPopup" ctrl="ctrl" class="small not-edit">
 			<section class="popup-header">
 				<h1>If going, how are you getting there?</h1>
 			</section>
@@ -76,15 +76,37 @@
 		</popup>
 	</section>
 
-	<popup ng-if="ctrl.showOfficerOptions" ctrl="ctrl" class="small">
+	<popup ng-if="ctrl.showOfficerOptions" ctrl="ctrl" class="small not-edit">
 		<section class="popup-header">
 			<h1>Officer Options</h1>
 		</section>
 		<section class="popup-content">
 			<input type="button" value="{{ctrl.officerOptionsText.close.display}}" ng-click="ctrl.officerOption('close')">
 			<input type="button" value="{{ctrl.officerOptionsText.export.display}}" ng-click="ctrl.officerOption('export')">
-<!-- 			<input type="button" value="{{ctrl.officerOptionsText.edit.display}}" ng-click="ctrl.officerOption('edit')"> -->
+			<input type="button" value="{{ctrl.officerOptionsText.edit.display}}" ng-click="ctrl.officerOption('edit')">
 			<input type="button" value="{{ctrl.officerOptionsText.delete.display}}" ng-click="ctrl.officerOption('delete')">
+		</section>
+	</popup>
+
+	<popup ng-if="ctrl.editingEvent" ctrl="ctrl" class="large popup-edit-event">
+		<section class="popup-header">
+			<h1>Edit Event</h1>
+		</section>
+		<section class="popup-content" ng-if="ctrl.popupPage == 1">
+			<input type="text" ng-model="ctrl.editPopup.name" placeholder="Name of Workout">
+			<input type="datetime-local" ng-model="ctrl.editPopup.datetime">
+			<section class="detailssection">
+				<textarea name="details" ng-model="ctrl.editPopup.details"  placeholder="Write details about the workout here"></textarea>
+			</section>
+		</section>
+		<section class="popup-content" ng-if="ctrl.popupPage == 2">
+			<section id="edit-map"></section>
+		</section>
+		<section class="popup-actions">
+			<input type="button" value="Cancel" ng-click="ctrl.closePopups()" ng-if="ctrl.popupPage == 1;">
+			<input type="button" value="Back" ng-click="ctrl.backPopup();" ng-if="ctrl.popupPage > 1;">
+			<input type="button" value="Save" ng-click="ctrl.validateAndSave()" ng-if="ctrl.popupPage == 2">
+			<input type="button" value="Next" ng-click="ctrl.validateAndNext()" ng-if="ctrl.popupPage < 2">
 		</section>
 	</popup>
 </section>

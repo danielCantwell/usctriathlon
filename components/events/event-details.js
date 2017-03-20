@@ -53,6 +53,7 @@ function EventDetailsCtrl($scope, $timeout, $q) {
 	this.event = this.dash.objectHolder;
 	this.eKey = this.event.key;
 	this.commentsTabTitle = 'Comments (0)';
+	this.eventdate = new Date(this.event.datetime);
 
 	// Load RSVP status
 	var attendeesRef = firebase.database().ref('attendees/' + this.eKey);
@@ -264,6 +265,7 @@ EventDetailsCtrl.prototype.popupClickOutside = function() {
 EventDetailsCtrl.prototype.closePopups = function() {
 	this.showOfficerOptions = false;
 	this.rsvpPopup = false;
+	this.editingEvent = false;
 	this.$timeout(function() {
 		this.$scope.$apply();
 	}.bind(this));
@@ -291,7 +293,8 @@ EventDetailsCtrl.prototype.officerOption = function(option) {
 			}.bind(this));
 			break;
 		case 'edit':
-			console.log('edit')
+			this.closePopups();
+			this.editEvent();
 			break;
 		case 'delete':
 			this.officerOptionsText.delete.display = 'CONFIRM: Delete Event?';
@@ -319,6 +322,17 @@ EventDetailsCtrl.prototype.openRSVPs = function(openStatus) {
 	var update = {};
 	update[openRSVPref] = openStatus;
 	return dataRef.update(update);
+};
+
+EventDetailsCtrl.prototype.editEvent = function() {
+	this.editPopup = {
+		'name': this.event.name,
+		'datetime': new Date(this.event.datetime),
+		'location': this.event.location,
+		'details': this.event.details,
+	};
+	this.editingEvent = true;
+	this.popupPage = 1;
 };
 
 EventDetailsCtrl.prototype.deleteEvent = function() {
@@ -362,7 +376,7 @@ EventDetailsCtrl.prototype.exportEmails = function() {
 				CSV += '"' + emails[i] + '"\r\n';
 			}
 
-			var filename = this.event.name + '-' + this.event.datetime;
+			var filename = this.event.name + '-' + Date(this.event.datetime).toLocaleString('%d-%b-%Y');
 			filename = filename.replace(/ /g, '-');
 			var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
 
@@ -382,6 +396,80 @@ EventDetailsCtrl.prototype.exportEmails = function() {
 	}.bind(this));
 
 	this.closePopups();
+};
+
+EventDetailsCtrl.prototype.validateAndNext = function() {
+	switch (this.popupPage) {
+		case 1:
+			if (!this.editPopup.name || this.editPopup.name == "Required") {
+				this.editPopup.name = "Required";
+			} else if (!this.editPopup.datetime) {
+				
+			} else {
+				this.popupPage = 2;
+
+				this.$timeout(function() {
+					var eventLocation = new google.maps.LatLng(this.editPopup.location.lat, this.editPopup.location.lon);
+
+					var mapOptions = {
+						zoom: 14,
+						center: eventLocation,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					var map = new google.maps.Map(document.getElementById('edit-map'), mapOptions);
+					var marker = new google.maps.Marker({
+						position: eventLocation,
+						map: map,
+						title: 'Meeting Location'
+					});
+					map.addListener('click', function(event) {
+	          this.editPopup.location = {lat: event.latLng.lat(), lon: event.latLng.lng()};
+	          var position = new google.maps.LatLng(this.editPopup.location.lat, this.editPopup.location.lon);
+	          marker.setPosition(position);
+	          map.setCenter(marker.getPosition());
+	        }.bind(this));
+				}.bind(this));
+			}
+			break;
+		case 2:
+			break;
+	}
+};
+
+EventDetailsCtrl.prototype.validateAndSave = function() {
+	var event = {
+		name: this.editPopup.name,
+		datetime: Date.parse(this.editPopup.datetime),
+		location: this.editPopup.location,
+		details: this.editPopup.details,
+		openRSVP: this.event.openRSVP,
+		key: this.event.key
+	};
+
+	var dataRef = firebase.database().ref();
+	var updates = {};
+	updates['/events/' + this.event.key] = event;
+
+	var eventLocation = new google.maps.LatLng(this.editPopup.location.lat, this.editPopup.location.lon);
+	var mapOptions = {
+		zoom: 14,
+		center: eventLocation,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	var marker = new google.maps.Marker({
+		position: eventLocation,
+		map: map,
+		title: 'Meeting Location'
+	});
+
+	dataRef.update(updates).then(function() {
+		this.closePopups();
+	}.bind(this));
+};
+
+EventDetailsCtrl.prototype.backPopup = function() {
+	this.popupPage -= 1;
 };
 
 })();

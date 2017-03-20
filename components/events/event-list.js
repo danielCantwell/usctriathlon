@@ -35,7 +35,10 @@ function EventListCtrl($scope, $timeout) {
 	this.eventPopup = false;
 	this.popupPage = 0;
 	this.popupTitle = 'New Workout';
-	this.popupDate = '';
+	this.popupDate = new Date(Date().toString('DD/MM/YYYY, hh:mm a'));
+	this.popupDate.setSeconds(0);
+	this.popupDate.setHours(7);
+	this.popupDate.setMinutes(0);
 	this.popupPositiveButton = 'Next';
 
 	this.userIsOfficer = false;
@@ -111,10 +114,6 @@ EventListCtrl.prototype.validateAndSave = function() {
 		openRSVP: true
 	};
 	var att = {
-		passengerCount: 0,
-		bikeCount: 0,
-		passengerCapacity: 0,
-		bikeCapacity: 0,
 		driver: {},
 		passenger: {},
 		'not-carpooling': {}
@@ -160,7 +159,7 @@ EventListCtrl.prototype.rsvpText = function(openRSVP) {
 };
 
 EventListCtrl.prototype.eventClass = function(event) {
-	if (event.datetime < (Date.now() - 86400000)) {
+	if (event.datetime < (Date.now())) {
 		return 'old';
 	}
 };

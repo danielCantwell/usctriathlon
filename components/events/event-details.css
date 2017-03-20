@@ -247,12 +247,12 @@
 	flex: 1 0 auto;
 }
 
-#eventdetails .popup-content {
+#eventdetails .not-edit .popup-content {
 	display: flex;
 	flex-direction: column;
 }
 
-#eventdetails .popup-content > input {
+#eventdetails .not-edit .popup-content > input {
 	display: block;
 	flex: 1 0 auto;
 	width: 100%;
@@ -264,27 +264,27 @@
 	-webkit-appearance: none;
 }
 
-#eventdetails .popup-content > ul {
+#eventdetails .not-edit .popup-content > ul {
 	width: 100%;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-#eventdetails .popup-content > ul > li {
+#eventdetails .not-edit .popup-content > ul > li {
 	margin: 0;
 	padding: 0;
 	border-top: 1px solid #000;
 	height: 73.33px;
 }
 
-#eventdetails .popup-content > ul > li input {
+#eventdetails .not-edit .popup-content > ul > li input {
 	display: none;
 	margin: 0;
 	padding: 0;
 }
 
-#eventdetails .popup-content > ul > li label {
+#eventdetails .not-edit .popup-content > ul > li label {
 	display: block;
 	cursor: pointer;
 	font-size: 18px;
@@ -296,7 +296,7 @@
 	line-height: 73.33px;
 }
 
-#eventdetails .popup-content > ul > li input + label:before {
+#eventdetails .not-edit .popup-content > ul > li input + label:before {
 	position: absolute;
 	content: "\00bb ";
 	left: -10px;
@@ -304,13 +304,13 @@
 	opacity: 0;
 }
 
-#eventdetails .popup-content > ul > li input:checked + label {
+#eventdetails .not-edit .popup-content > ul > li input:checked + label {
 	color: #c41e3a;
 	font-size: 22px;
 	transition: font-size 0.5s;
 }
 
-#eventdetails .popup-content > ul > li input:checked + label:before {
+#eventdetails .not-edit .popup-content > ul > li input:checked + label:before {
 	display: inline-block;
 	content: "\00bb ";
 	left: 50px;
@@ -318,7 +318,7 @@
 	transition: left 0.5s;
 }
 
-#eventdetails .popup-content > input:active {
+#eventdetails .not-edit .popup-content > input:active {
 	font-weight: 500;
 	color: #c41e3a;
 }
@@ -337,6 +337,49 @@
 	height: 100px;
 	border: 1px solid #000;
 	background-color: transparent;
+}
+
+
+#eventdetails > .popup-edit-event .popup-content * {
+	display: block;
+}
+
+#eventdetails > .popup-edit-event .popup-content > input {
+	position: relative;
+	top: 0;
+	width: 90%;
+	margin: 0 auto;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	border: none;
+	border-bottom: 1px solid #000;
+	border-radius: 0;
+	background-color: transparent;
+}
+
+#eventdetails > .popup-edit-event .popup-content > section.detailssection {
+	position: absolute;
+	top: 90px;
+	bottom: 0;
+	left: 10px;
+	right: 10px;
+}
+
+#eventdetails > .popup-edit-event .popup-content > section > textarea {
+	resize: none;
+	height: 100%;
+	width: 100%;
+	font-size: 16px;
+	border: none;
+}
+
+#eventdetails > .popup-edit-event .popup-content > #edit-map {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 @media (min-width: 768px) {
@@ -470,22 +513,22 @@
 		bottom: 60px;
 	}*/
 
-	#eventdetails .popup-content > input {
+	#eventdetails .not-edit .popup-content > input {
 		font-size: 24px;
 	}
 
-	#eventdetails .popup-content > ul > li {
+	#eventdetails .not-edit .popup-content > ul > li {
 		height: 93.33px;
 	}
 
-	#eventdetails .popup-content > ul > li label {
+	#eventdetails .not-edit .popup-content > ul > li label {
 		font-size: 28px;
 		transition: font-size 0.5s;
 		height: 93.33px;
 		line-height: 93.33px
 	}
 
-	#eventdetails .popup-content > ul > li input:checked + label {
+	#eventdetails .not-edit .popup-content > ul > li input:checked + label {
 		font-size: 34px;
 		transition: font-size 0.5s;
 	}
